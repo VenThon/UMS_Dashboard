@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page",
+    "titleDashboard": "Admin Dashboard"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "lifeCycle": "Life Cycle",
+    "analytics": "Analytics Data"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "សួរស្តីខ្មែរ",
+    "about": "Go to the about page kherm",
+    "titleDashboard": "ផ្ទាំងគ្រប់គ្រងទិន្ន័យ"
+  },
+  "sidebar": {
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "lifeCycle": "វដ្តជីវិត",
+    "analytics": "វិភាគទិន្នន័យ"
+  }
+}
