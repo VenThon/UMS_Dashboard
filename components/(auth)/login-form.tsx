@@ -37,7 +37,7 @@ export function LoginForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>
-            <CardTitle className="text-xl">Login to your account</CardTitle>
+            <CardTitle className="text-xl">System login</CardTitle>
             <CardDescription>
               Enter your email below to login to your account
             </CardDescription>
