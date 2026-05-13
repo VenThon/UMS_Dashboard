@@ -1,10 +1,13 @@
-import { useTranslations } from "next-intl";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
-  const t = useTranslations("HomePage");
-  return (
-    <div>
-      <h1>{t("title")}</h1>
-    </div>
-  );
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+
+  redirect(`/${locale}/login`);
 }
