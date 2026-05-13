@@ -1,8 +1,7 @@
 import Image from "next/image";
 
 import LocaleSwitcher from "@/components/lang/local-switcher";
-import LoginForm from "@/components/(auth)/login-form";
-
+import { LoginForm } from "@/components/(auth)/login-form";
 export default function Page() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -22,7 +21,7 @@ export default function Page() {
           </p>
 
           <h1 className="mt-6 text-3xl font-semibold text-white">
-            ប្រព័ន្ធគ្រប់គ្រងបញ្ជីរសារពើភ័ណ្ឌ
+            ប្រព័ន្ធគ្រប់គ្រងបុគ្គលិក
           </h1>
         </div>
       </div>
