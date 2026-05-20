@@ -21,7 +21,8 @@ export const USER_ROLE = {
     SECURITY_ENGINEER: "security_engineer",
     QUALITY_ASSURANCE: "quality_assurance",
     IT_SUPPORT: "it_support",
-    HELPDESK_OFFICER: "helpdesk_officer"
+    HELPDESK_OFFICER: "helpdesk_officer",
+    ADMIN: "admin"
 } as const;
 
 export type UserRole =(typeof USER_ROLE)[keyof typeof USER_ROLE]
@@ -47,7 +48,8 @@ export const UserRoleEnum = z.enum([
     USER_ROLE.SECURITY_ENGINEER,
     USER_ROLE.QUALITY_ASSURANCE,
     USER_ROLE.IT_SUPPORT,
-    USER_ROLE.HELPDESK_OFFICER
+    USER_ROLE.HELPDESK_OFFICER,
+    USER_ROLE.ADMIN
 ])
 
 export const UserRoleLabels: Record<UserRole, string> = {
@@ -71,5 +73,6 @@ export const UserRoleLabels: Record<UserRole, string> = {
 [USER_ROLE.SECURITY_ENGINEER]: "Security Engineer",
 [USER_ROLE.QUALITY_ASSURANCE]: "Quality Assurance",
 [USER_ROLE.IT_SUPPORT]: "IT Support",
-[USER_ROLE.HELPDESK_OFFICER]: "HelpDesk Officer"
+[USER_ROLE.HELPDESK_OFFICER]: "HelpDesk Officer",
+[USER_ROLE.ADMIN]: "Admin"
 }
