@@ -49,3 +49,27 @@ export const UserRoleEnum = z.enum([
     USER_ROLE.IT_SUPPORT,
     USER_ROLE.HELPDESK_OFFICER
 ])
+
+export const UserRoleLabels: Record<UserRole, string> = {
+[USER_ROLE.IT_MANAGER]: "IT Management",
+[USER_ROLE.PROJECT_MANAGER]: "Project Manager",
+[USER_ROLE.BUSINESS_ANALYSIS]: "Business Analysis",
+[USER_ROLE.SYSTEM_ANALYSIS]: "System Analysis",
+[USER_ROLE.PRODUCT_OWNER]: "Product Owner",
+[USER_ROLE.UX_UI_DESIGNER]: "UX UI Designer",
+[USER_ROLE.GRAPHIC_DESIGNER]: "Graphic Designer",
+[USER_ROLE.TEAM_LEAD_FRONTEND]: "Team Lead Frontend",
+[USER_ROLE.TEAM_LEAD_BACKEND]: "Team Lead Backend",
+[USER_ROLE.FRONTEND_DEVELOPER]: "Frontend Developer",
+[USER_ROLE.BACKEND_DEVELOPER]: "Backend Developer",
+[USER_ROLE.FULLSTACK_DEVELOPER]: "FullStack Developer",
+[USER_ROLE.MOBILE_DEVELOPER]: "Mobile Developer",
+[USER_ROLE.DEVEOPS_ENGINEER]: "Deveops Engineer",
+[USER_ROLE.CLOUD_ENGINEER]: "Cloud Engineer",
+[USER_ROLE.DATABASE_ADMINISTRARION]: "Database Administration",
+[USER_ROLE.NETWORK_ENGINEER]: "Network Engineer",
+[USER_ROLE.SECURITY_ENGINEER]: "Security Engineer",
+[USER_ROLE.QUALITY_ASSURANCE]: "Quality Assurance",
+[USER_ROLE.IT_SUPPORT]: "IT Support",
+[USER_ROLE.HELPDESK_OFFICER]: "HelpDesk Officer"
+}
