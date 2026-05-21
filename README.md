@@ -50,3 +50,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 ## Integrate with DB
+- install and create file index.ts on folder db
+npm install drizzle-orm pg dotenv
+npm install -D drizzle-kit @types/pg
+- create file drizzle.config.ts write connect to database URL
+- Below for run generate and migrate
+npm run db:generate
+npm run db:migrate

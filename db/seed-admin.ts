@@ -1,10 +1,11 @@
-// src/db/seed-admin.ts
+
+import "dotenv/config";
 
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
-import { db } from "@/db";
-import { usersTable } from "@/db/schema";
+import { db } from "./index";
+import { usersTable } from "./schema";
 import { USER_ROLE } from "./types/user.type";
 
 async function seedAdmin() {
