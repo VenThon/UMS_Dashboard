@@ -57,3 +57,5 @@ npm install -D drizzle-kit @types/pg
 - Below for run generate and migrate
 npm run db:generate
 npm run db:migrate
+###Run database on terminal
+psql -U postgres -d ums_dashboard
