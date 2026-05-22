@@ -1,15 +1,11 @@
-// src/app/api/admin/users/route.ts
-
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-// import { USER_ROLE } from "@/constants/role";
 import { requireRole } from "@/lib/auth/require-role";
 import { USER_ROLE } from "@/db/types/user.type";
 import { createUserSchema } from "@/db/validation/users";
-// import { createUserSchema } from "@/lib/validation/user";
 
 export async function GET() {
   const { error } = await requireRole([USER_ROLE.ADMIN]);
