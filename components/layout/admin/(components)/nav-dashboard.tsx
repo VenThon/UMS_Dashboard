@@ -3,16 +3,15 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, PanelsTopLeft } from "lucide-react";
-import { useLocale } from "next-intl";
-
+import { BarChart2, Database, LucideIcon, PanelsTopLeft } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
+} from "@/components/ui/sidebar";
 
 interface SideBarMenuBtnProps {
   href: string | string[];
@@ -64,8 +63,8 @@ const SideBarMenuBtn = ({
   );
 };
 
-export default function NavBarDashboard() {
-  // const sidebarT = useTranslations("sidebar");
+export default function NavBarDashboardAdmin() {
+  const sidebarT = useTranslations("sidebar");
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -85,6 +84,12 @@ export default function NavBarDashboard() {
                 "/dashboard/admin/users/[id]",
               ]}
               title="Users"
+            />
+
+            <SideBarMenuBtn
+              icon={BarChart2}
+              href={"/dashboard/analytic"}
+              title={sidebarT("analytics")}
             />
           </SidebarMenuItem>
         </SidebarMenu>

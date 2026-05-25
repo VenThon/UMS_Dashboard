@@ -20,8 +20,16 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { useRouter } from "next/navigation";
+import { createElement, useState } from "react";
+import { LoginService } from "@/service/auth/auth.service";
+import { roleRoutes } from "@/lib/validation/route-by-role";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export function LoginForm() {
+  const router = useRouter();
+  const [, setError] = useState("");
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm<LogInInput>({
     resolver: zodResolver(logInSchema),
     defaultValues: {
@@ -29,8 +37,19 @@ export function LoginForm() {
       password: "",
     },
   });
-  function onSubmit(values: LogInInput) {
-    console.log(values);
+
+  async function onSubmit(values: LogInInput) {
+    try {
+      setError("");
+
+      const result = await LoginService(values);
+
+      const redirectPath = roleRoutes[result.user.role] ?? "/dashboard";
+
+      router.push(redirectPath);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Login failed");
+    }
   }
   return (
     <Card className="w-full max-w-md ">
@@ -65,11 +84,33 @@ export function LoginForm() {
                   <FormLabel>Password</FormLabel>
 
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Enter your password"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        type={passwordVisibility ? "text" : "password"}
+                        placeholder="Enter password"
+                        autoComplete="current-password"
+                        aria-invalid={!!form.formState.errors.password}
+                        {...form.register("password")}
+                        {...field}
+                      />
+
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 flex items-center p-3"
+                        onClick={() => setPasswordVisibility((prev) => !prev)}
+                        aria-label={
+                          passwordVisibility ? "Hide password" : "Show password"
+                        }
+                      >
+                        {createElement(
+                          passwordVisibility ? EyeOffIcon : EyeIcon,
+                          {
+                            className: "h-4 w-4",
+                          },
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

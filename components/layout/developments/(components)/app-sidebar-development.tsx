@@ -14,10 +14,9 @@ import {
 } from "@/components/ui/sidebar";
 
 import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
-
-import NavBarDashboard from "./nav-dashboard";
-import { NavDocuments } from "./nav-document";
-import { NavUser } from "./nav-user";
+import { NavDocuments } from "@/components/nav-document";
+import { NavUser } from "@/components/nav-user";
+import NavBarDashboardDevelopment from "./nav-dashboard-development";
 
 const data = {
   documents: [
@@ -39,7 +38,9 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebarDevelopment({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
       collapsible="offcanvas"
@@ -78,7 +79,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent className="font-bold">
-        <NavBarDashboard />
+        <NavBarDashboardDevelopment />
         <NavDocuments items={data.documents} />
       </SidebarContent>
 

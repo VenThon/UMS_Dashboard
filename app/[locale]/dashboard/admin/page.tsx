@@ -1,7 +1,11 @@
-export default function Page() {
+"use client";
+
+// import DashboardLayout from "@/components/layout/dashboard-layout";
+
+export default function Admin() {
   return (
-    <div>
-      <p>Admin page</p>
-    </div>
+    // <DashboardLayout>
+    <p>Admin Layout</p>
+    // </DashboardLayout>
   );
 }

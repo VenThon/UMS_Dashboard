@@ -3,16 +3,15 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, PanelsTopLeft } from "lucide-react";
+import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
 import { useLocale } from "next-intl";
-
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
+} from "@/components/ui/sidebar";
 
 interface SideBarMenuBtnProps {
   href: string | string[];
@@ -64,7 +63,7 @@ const SideBarMenuBtn = ({
   );
 };
 
-export default function NavBarDashboard() {
+export default function NavBarDashboardDevelopment() {
   // const sidebarT = useTranslations("sidebar");
   return (
     <SidebarGroup>
@@ -73,18 +72,27 @@ export default function NavBarDashboard() {
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={Database}
-              href={"/dashboard/admin/statistics"}
+              href={"/dashboard/developments/statistics"}
               title="Statistics"
             />
 
             <SideBarMenuBtn
-              icon={PanelsTopLeft}
+              icon={Repeat}
               href={[
-                "/dashboard/admin/users",
-                "/dashboard/admin/users/create",
-                "/dashboard/admin/users/[id]",
+                "/dashboard/developments/request",
+                "/dashboard/developments/request/create",
+                "/dashboard/developments/request/[id]",
               ]}
-              title="Users"
+              title="Request"
+            />
+            <SideBarMenuBtn
+              icon={NotebookPen}
+              href={[
+                "/dashboard/developments/report",
+                "/dashboard/developments/report/create",
+                "/dashboard/developments/report/[id]",
+              ]}
+              title="Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>
