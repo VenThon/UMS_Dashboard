@@ -14,10 +14,9 @@ import {
 } from "@/components/ui/sidebar";
 
 import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
-
-import NavBarDashboard from "./nav-dashboard";
-import { NavDocuments } from "./nav-document";
-import { NavUser } from "./nav-user";
+import { NavDocuments } from "@/components/nav-document";
+import { NavUser } from "@/components/nav-user";
+import NavBarDashboardAdmin from "./nav-dashboard";
 
 const data = {
   documents: [
@@ -39,7 +38,9 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebarAdmin({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
       collapsible="offcanvas"
@@ -56,7 +57,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     >
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem className="p-1 group-data-[collapsible=icon]:sm:flex lg:flex group-data-[collapsible=icon]:lg:hidden">
+          <SidebarMenuItem className="p-1 group-data-[collapsible=icon]:sm:flex  gap-2 lg:flex group-data-[collapsible=icon]:lg:hidden">
             <Image
               src="/images/logo.png"
               alt="logo"
@@ -78,7 +79,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent className="font-bold">
-        <NavBarDashboard />
+        <NavBarDashboardAdmin />
         <NavDocuments items={data.documents} />
       </SidebarContent>
 
