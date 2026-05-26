@@ -57,7 +57,7 @@ export function AppSidebarDevelopment({
     >
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem className="p-1 group-data-[collapsible=icon]:sm:flex lg:flex group-data-[collapsible=icon]:lg:hidden">
+          <SidebarMenuItem className="p-1 group-data-[collapsible=icon]:sm:flex lg:flex gap-2 group-data-[collapsible=icon]:lg:hidden">
             <Image
               src="/images/logo.png"
               alt="logo"
