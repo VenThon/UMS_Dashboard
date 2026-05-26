@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-} from "lucide-react";
+import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -25,10 +18,41 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useEffect, useState } from "react";
+import { UserProfileService } from "@/service/auth/auth.service";
+import { Badge } from "./ui/badge";
+
+type ProfileUser = {
+  username: string;
+  email: string;
+  role: string;
+};
 
 export function NavUser() {
   const { isMobile } = useSidebar();
+  const [user, setUser] = useState<ProfileUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        const res = await UserProfileService();
+        setUser(res.user);
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProfile();
+  }, []);
+
+  const displayName = loading ? "Loading..." : (user?.username ?? "Guest");
+  const displayEmail = loading ? "..." : (user?.email ?? "Email");
+  const avatarFallback = user?.username?.charAt(0).toUpperCase() ?? "U";
+  const displayRole = loading ? "..." : (user?.role ?? "Role");
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -40,11 +64,13 @@ export function NavUser() {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src="" alt="Your name" />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">
+                  {avatarFallback}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Name...</span>
-                <span className="truncate text-xs">email here...</span>
+                <span className="truncate font-medium">{displayName}</span>
+                <span className="truncate text-xs">{displayEmail}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -57,36 +83,23 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+                <Avatar className="h-9 w-9 rounded-lg">
                   <AvatarImage src="" alt="Your name" />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Your name</span>
-                  <span className="truncate text-xs">Your email</span>
+                  <span className="truncate font-medium">{displayName}</span>
+                  <span className="truncate text-sm">{displayEmail}</span>
+                  <Badge variant="destructive">{displayRole}</Badge>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
                 Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

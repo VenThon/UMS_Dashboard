@@ -8,7 +8,7 @@ export async function LoginService(data:LoginProps) {
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify(data)
+        body:JSON.stringify(data),
     } );
     
     const result = await response.json();
@@ -18,4 +18,27 @@ export async function LoginService(data:LoginProps) {
     };
 
     return result ;
+}
+
+export async function UserProfileService() {
+  const response = await fetch("/api/auth/profile", {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.message ||
+      data.error ||
+      "Failed to fetch user profile"
+    );
+  }
+
+  return data;
 }
