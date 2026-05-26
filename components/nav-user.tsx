@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react";
+import { BadgeCheck, ChevronsUpDown, LogOut, Settings } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { UserProfileService } from "@/service/auth/auth.service";
 import { Badge } from "./ui/badge";
+import LogoutButton from "@/app/[locale]/(auth)/(components)/logout-Btn";
 
 type ProfileUser = {
   username: string;
@@ -49,10 +50,11 @@ export function NavUser() {
     getProfile();
   }, []);
 
-  const displayName = loading ? "Loading..." : (user?.username ?? "Guest");
-  const displayEmail = loading ? "..." : (user?.email ?? "Email");
-  const avatarFallback = user?.username?.charAt(0).toUpperCase() ?? "U";
-  const displayRole = loading ? "..." : (user?.role ?? "Role");
+  const displayName = loading ? "Loading..." : (user?.username ?? "Guest?");
+  const displayEmail = loading ? "..." : (user?.email ?? "Email?");
+  // const avatarFallback = user?.username?.charAt(0).toUpperCase() ?? "U?";
+  const avatarFallback = user?.username?.slice(0, 2).toUpperCase() ?? "U?";
+  const displayRole = loading ? "..." : (user?.role ?? "Role?");
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -62,9 +64,9 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-9 w-9 rounded-full">
                 <AvatarImage src="" alt="Your name" />
-                <AvatarFallback className="rounded-lg">
+                <AvatarFallback className="rounded-full">
                   {avatarFallback}
                 </AvatarFallback>
               </Avatar>
@@ -83,9 +85,11 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-lg">
+                <Avatar className="h-8 w-8 rounded-full">
                   <AvatarImage src="" alt="Your name" />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarFallback className="rounded-full">
+                    {avatarFallback}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{displayName}</span>
@@ -103,9 +107,16 @@ export function NavUser() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <Settings />
+                Setting
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Log out
+              <LogoutButton />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
