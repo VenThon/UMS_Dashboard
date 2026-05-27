@@ -66,9 +66,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               priority
             />
             <div className="mt-0.5">
-              <p className="text-xl font-semibold text-white">
-                Setting Dashboard
-              </p>
+              <p className="text-xl font-semibold text-white">Dashboard</p>
               <p className="text-md font-semibold text-white">
                 ផ្ទាំងគ្រប់គ្រងការកំណត់
               </p>

@@ -22,6 +22,8 @@ import { useEffect, useState } from "react";
 import { UserProfileService } from "@/service/auth/auth.service";
 import { Badge } from "./ui/badge";
 import LogoutButton from "@/app/[locale]/(auth)/(components)/logout-Btn";
+import { Link } from "@/i18n/navigation";
+import { roleSettingRoutes } from "@/lib/validation/route-by-role";
 
 type ProfileUser = {
   username: string;
@@ -103,17 +105,20 @@ export function NavUser() {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
-                Account
+                Sessions
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Settings />
-                Setting
+              <DropdownMenuItem asChild>
+                {user && (
+                  <Link href={roleSettingRoutes[user.role]}>
+                    <Settings className=" h-4 w-4" />
+                    Settings
+                  </Link>
+                )}
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
               <LogoutButton />
