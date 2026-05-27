@@ -67,9 +67,11 @@ export function AppSidebarAdmin({
               priority
             />
             <div className="mt-0.5">
-              <p className="text-xl font-semibold text-white">Dashboard</p>
+              <p className="text-xl font-semibold text-white">
+                Staff Management
+              </p>
               <p className="text-md font-semibold text-white">
-                ផ្ទាំងគ្រប់គ្រងការកំណត់
+                ប្រព័ន្ធគ្រប់គ្រងបុគ្គលិក
               </p>
             </div>
           </SidebarMenuItem>

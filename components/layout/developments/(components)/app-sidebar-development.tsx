@@ -68,10 +68,10 @@ export function AppSidebarDevelopment({
             />
             <div className="mt-1">
               <p className="text-md font-semibold text-white">
-                Development Dashboard
+                Staff Management
               </p>
               <p className="text-md font-semibold text-white">
-                ផ្ទាំងគ្រប់គ្រងការអភិវឌ្ឍន៍
+                ប្រព័ន្ធគ្រប់គ្រងបុគ្គលិក
               </p>
             </div>
           </SidebarMenuItem>
