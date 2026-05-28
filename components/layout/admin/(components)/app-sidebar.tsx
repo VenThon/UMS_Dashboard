@@ -13,30 +13,30 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
-import { NavDocuments } from "@/components/nav-document";
+// import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
+// import { NavDocuments } from "@/components/nav-document";
 import { NavUser } from "@/components/nav-user";
 import NavBarDashboardAdmin from "./nav-dashboard";
 
-const data = {
-  documents: [
-    {
-      name: "Data Library",
-      href: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      href: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      href: "#",
-      icon: IconFileWord,
-    },
-  ],
-};
+// const data = {
+//   documents: [
+//     {
+//       name: "Data Library",
+//       href: "#",
+//       icon: IconDatabase,
+//     },
+//     {
+//       name: "Reports",
+//       href: "#",
+//       icon: IconReport,
+//     },
+//     {
+//       name: "Word Assistant",
+//       href: "#",
+//       icon: IconFileWord,
+//     },
+//   ],
+// };
 
 export function AppSidebarAdmin({
   ...props
@@ -80,7 +80,7 @@ export function AppSidebarAdmin({
 
       <SidebarContent className="font-bold">
         <NavBarDashboardAdmin />
-        <NavDocuments items={data.documents} />
+        {/* <NavDocuments items={data.documents} /> */}
       </SidebarContent>
 
       <SidebarFooter>

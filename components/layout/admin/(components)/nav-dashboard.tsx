@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { BarChart2, Database, LucideIcon, PanelsTopLeft } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { Database, LucideIcon, PanelsTopLeft } from "lucide-react";
+import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -64,7 +64,7 @@ const SideBarMenuBtn = ({
 };
 
 export default function NavBarDashboardAdmin() {
-  const sidebarT = useTranslations("sidebar");
+  // const sidebarT = useTranslations("sidebar");
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -84,12 +84,6 @@ export default function NavBarDashboardAdmin() {
                 "/dashboard/admin/users/[id]",
               ]}
               title="Users"
-            />
-
-            <SideBarMenuBtn
-              icon={BarChart2}
-              href={"/dashboard/analytic"}
-              title={sidebarT("analytics")}
             />
           </SidebarMenuItem>
         </SidebarMenu>

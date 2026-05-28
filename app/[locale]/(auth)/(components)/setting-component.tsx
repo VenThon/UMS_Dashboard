@@ -3,9 +3,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileUser, ImagePlus, MonitorSmartphone, Repeat } from "lucide-react";
 import { UserInformation } from "./user-information";
-import { UploadImage } from "./upload-image";
 import { ChangePWD } from "./change-pwd";
 import { Devices } from "./devices";
+import ImageUpload from "./uploadProfile";
 
 export function SettingComponent() {
   return (
@@ -26,7 +26,7 @@ export function SettingComponent() {
           <TabsTrigger value="profilepic">
             {" "}
             <ImagePlus />
-            Profile Picture
+            Image
           </TabsTrigger>
           <TabsTrigger value="changepwd">
             <Repeat />
@@ -42,7 +42,7 @@ export function SettingComponent() {
           <UserInformation />
         </TabsContent>
         <TabsContent value="profilepic">
-          <UploadImage />
+          <ImageUpload />
         </TabsContent>
         <TabsContent value="changepwd">
           <ChangePWD />
