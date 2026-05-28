@@ -13,30 +13,30 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
-import { NavDocuments } from "@/components/nav-document";
+// import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
+// import { NavDocuments } from "@/components/nav-document";
 import { NavUser } from "@/components/nav-user";
 import NavBarDashboardDevelopment from "./nav-dashboard-development";
 
-const data = {
-  documents: [
-    {
-      name: "Data Library",
-      href: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      href: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      href: "#",
-      icon: IconFileWord,
-    },
-  ],
-};
+// const data = {
+//   documents: [
+//     {
+//       name: "Data Library",
+//       href: "#",
+//       icon: IconDatabase,
+//     },
+//     {
+//       name: "Reports",
+//       href: "#",
+//       icon: IconReport,
+//     },
+//     {
+//       name: "Word Assistant",
+//       href: "#",
+//       icon: IconFileWord,
+//     },
+//   ],
+// };
 
 export function AppSidebarDevelopment({
   ...props
@@ -44,7 +44,7 @@ export function AppSidebarDevelopment({
   return (
     <Sidebar
       collapsible="offcanvas"
-      className="text-white"
+      className="text-white "
       style={
         {
           "--sidebar": "#058248",
@@ -57,7 +57,7 @@ export function AppSidebarDevelopment({
     >
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem className="p-1 group-data-[collapsible=icon]:sm:flex lg:flex gap-2 group-data-[collapsible=icon]:lg:hidden">
+          <SidebarMenuItem className="p-1  group-data-[collapsible=icon]:sm:flex lg:flex gap-2 group-data-[collapsible=icon]:lg:hidden">
             <Image
               src="/images/logo.png"
               alt="logo"
@@ -66,12 +66,12 @@ export function AppSidebarDevelopment({
               className="rounded-full"
               priority
             />
-            <div className="mt-0.5">
-              <p className="text-xl font-semibold text-white">
-                Setting Dashboard
+            <div className="mt-1">
+              <p className="text-md font-semibold text-white">
+                Staff Management
               </p>
               <p className="text-md font-semibold text-white">
-                ផ្ទាំងគ្រប់គ្រងការកំណត់
+                ប្រព័ន្ធគ្រប់គ្រងបុគ្គលិក
               </p>
             </div>
           </SidebarMenuItem>
@@ -80,7 +80,7 @@ export function AppSidebarDevelopment({
 
       <SidebarContent className="font-bold">
         <NavBarDashboardDevelopment />
-        <NavDocuments items={data.documents} />
+        {/* <NavDocuments items={data.documents} /> */}
       </SidebarContent>
 
       <SidebarFooter>
