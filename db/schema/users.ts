@@ -1,13 +1,16 @@
+import { pgTable, text, boolean, timestamp, uuid } from "drizzle-orm/pg-core";
+import { USER_ROLE } from "../types/user.type";
 
-import { pgTable, text, timestamp,  uuid, varchar } from "drizzle-orm/pg-core";
 
-export const users = pgTable("users", {
-    id: uuid("id").defaultRandom().primaryKey(),
-    username:varchar ("username", {length: 100}).notNull(),
-    email: varchar("email", {length: 150}).notNull().unique(),
-    password: text("password").notNull(),
-    status: varchar("status", {length: 20}).notNull(),
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow().notNull(),
-    createBy: uuid("create_by")
-})
+export const usersTable = pgTable("users", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  username: text("username").notNull().unique(),
+  email: text("email").notNull(),
+  password: text("password").notNull(),
+
+  role: text("role").notNull().default(USER_ROLE.IT_SUPPORT),
+  isActive: boolean("is_active").notNull().default(true),
+
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});

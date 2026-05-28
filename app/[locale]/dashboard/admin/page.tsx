@@ -1,9 +1,11 @@
-import React from "react";
+"use client";
 
-export default function Page() {
+// import DashboardLayout from "@/components/layout/dashboard-layout";
+
+export default function Admin() {
   return (
-    <div>
-      <p>Admin page</p>
-    </div>
+    // <DashboardLayout>
+    <p>Admin Layout</p>
+    // </DashboardLayout>
   );
 }

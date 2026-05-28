@@ -48,3 +48,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
  ├ 📜 package.json
  └ 📜 tsconfig.json
 
+
+## Integrate with DB
+- install and create file index.ts on folder db
+npm install drizzle-orm pg dotenv
+npm install -D drizzle-kit @types/pg
+- create file drizzle.config.ts write connect to database URL
+- Below for run generate and migrate
+npm run db:generate
+npm run db:migrate
+###Run database on terminal
+psql -U postgres -d ums_dashboard
+
+
+### Responsive for display gride-cols-4
+grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
