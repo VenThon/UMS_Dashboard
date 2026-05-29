@@ -63,3 +63,7 @@ psql -U postgres -d ums_dashboard
 
 ### Responsive for display gride-cols-4
 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+
+### After updated on db have to run
+npx drizzle-kit generate
+npx drizzle-kit migrate

@@ -24,7 +24,7 @@ export function Devices() {
         </CardDescription>
       </CardHeader>
       <CardContent className="text-sm space-y-4  text-muted-foreground">
-        <div className="">
+        <div className="space-y-2">
           <h3 className="text-md font-semibold">Current Device</h3>
           <Card className="relative p-4">
             <div className="flex items-center gap-4">
