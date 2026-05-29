@@ -1,9 +1,5 @@
-import React from "react";
+import { UsersListing } from "./users-listing";
 
 export default function page() {
-  return (
-    <div>
-      <h1>User Page</h1>
-    </div>
-  );
+  return <UsersListing />;
 }
