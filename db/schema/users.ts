@@ -1,5 +1,6 @@
-import { pgTable, text, boolean, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, boolean, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { USER_ROLE } from "../types/user.type";
+import { UNDER_TEAM } from "../types/team.type";
 
 
 export const usersTable = pgTable("users", {
@@ -9,6 +10,8 @@ export const usersTable = pgTable("users", {
   password: text("password").notNull(),
 
   role: text("role").notNull().default(USER_ROLE.IT_SUPPORT),
+  team: text("team").notNull().default(UNDER_TEAM.DEVELOPMENT),
+  phoneNumber: varchar("phone_number", { length: 20 }),
   isActive: boolean("is_active").notNull().default(true),
 
   createdAt: timestamp("created_at").defaultNow().notNull(),

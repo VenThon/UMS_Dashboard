@@ -1,15 +1,13 @@
-// src/app/api/admin/users/[id]/route.ts
+
 
 import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-// import { USER_ROLE } from "@/constants/role";
 import { requireRole } from "@/lib/auth/require-role";
 import { USER_ROLE } from "@/db/types/user.type";
 import { updateUserSchema } from "@/db/validation/users";
-// import { updateUserSchema } from "@/lib/validation/user";
 
 export async function PATCH(
   req: Request,
@@ -43,6 +41,8 @@ export async function PATCH(
       username: usersTable.username,
       email: usersTable.email,
       role: usersTable.role,
+      team: usersTable.team,
+      phoneNumber: usersTable.phoneNumber,
       isActive: usersTable.isActive,
     });
 

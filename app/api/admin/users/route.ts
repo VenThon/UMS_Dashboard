@@ -49,6 +49,8 @@ export async function POST(req: Request) {
       email: parsed.data.email,
       password: hashedPassword,
       role: parsed.data.role,
+      team: parsed.data.team,
+      phoneNumber:parsed.data.phoneNumber,
       isActive: true,
     })
     .returning({
@@ -56,6 +58,8 @@ export async function POST(req: Request) {
       username: usersTable.username,
       email: usersTable.email,
       role: usersTable.role,
+      team: usersTable.team,
+      phoneNumber: usersTable.phoneNumber,
       isActive: usersTable.isActive,
     });
 
