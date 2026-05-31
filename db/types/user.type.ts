@@ -8,12 +8,13 @@ export const USER_ROLE = {
     PRODUCT_OWNER: "product_owner",
     UX_UI_DESIGNER: "ux_ui_designer",
     GRAPHIC_DESIGNER: "graphic_designer",
-    TEAM_LEAD_FRONTEND: "team_lead_frontend",
-    TEAM_LEAD_BACKEND: "team_lead_backend",
+    LEAD_FRONTEND: "lead_frontend",
+    LEAD_BACKEND: "lead_backend",
     FRONTEND_DEVELOPER: "frontend_developer",
     BACKEND_DEVELOPER: "backend_developer",
     FULLSTACK_DEVELOPER: "fullstack_developer",
     MOBILE_DEVELOPER: "mobile_developer",
+    LEAD_INFRASTRUCTUR: "lead_infrastructure",
     DEVOPS_ENGINEER: "devops_engineer",
     CLOUD_ENGINEER: "cloud_engineer",
     DATABASE_ADMINISTRARION: "database_administrator",
@@ -22,7 +23,8 @@ export const USER_ROLE = {
     QUALITY_ASSURANCE: "quality_assurance",
     IT_SUPPORT: "it_support",
     HELPDESK_OFFICER: "helpdesk_officer",
-    ADMIN: "admin"
+    ADMIN: "admin",
+    CTO: "cto"
 } as const;
 
 export type UserRole =(typeof USER_ROLE)[keyof typeof USER_ROLE]
@@ -35,12 +37,13 @@ export const UserRoleEnum = z.enum([
     USER_ROLE.PRODUCT_OWNER,
     USER_ROLE.UX_UI_DESIGNER,
     USER_ROLE.GRAPHIC_DESIGNER,
-    USER_ROLE.TEAM_LEAD_FRONTEND,
-    USER_ROLE.TEAM_LEAD_BACKEND,
+    USER_ROLE.LEAD_FRONTEND,
+    USER_ROLE.LEAD_BACKEND,
     USER_ROLE.FRONTEND_DEVELOPER,
     USER_ROLE.BACKEND_DEVELOPER,
     USER_ROLE.MOBILE_DEVELOPER,
     USER_ROLE.FULLSTACK_DEVELOPER,
+    USER_ROLE.LEAD_INFRASTRUCTUR,
     USER_ROLE.DEVOPS_ENGINEER,
     USER_ROLE.CLOUD_ENGINEER,
     USER_ROLE.DATABASE_ADMINISTRARION,
@@ -49,7 +52,8 @@ export const UserRoleEnum = z.enum([
     USER_ROLE.QUALITY_ASSURANCE,
     USER_ROLE.IT_SUPPORT,
     USER_ROLE.HELPDESK_OFFICER,
-    USER_ROLE.ADMIN
+    USER_ROLE.ADMIN,
+    USER_ROLE.CTO
 ])
 
 export const UserRoleLabels: Record<UserRole, string> = {
@@ -60,12 +64,13 @@ export const UserRoleLabels: Record<UserRole, string> = {
 [USER_ROLE.PRODUCT_OWNER]: "Product Owner",
 [USER_ROLE.UX_UI_DESIGNER]: "UX UI Designer",
 [USER_ROLE.GRAPHIC_DESIGNER]: "Graphic Designer",
-[USER_ROLE.TEAM_LEAD_FRONTEND]: "Team Lead Frontend",
-[USER_ROLE.TEAM_LEAD_BACKEND]: "Team Lead Backend",
+[USER_ROLE.LEAD_FRONTEND]: "Lead Frontend",
+[USER_ROLE.LEAD_BACKEND]: "Lead Backend",
 [USER_ROLE.FRONTEND_DEVELOPER]: "Frontend Developer",
 [USER_ROLE.BACKEND_DEVELOPER]: "Backend Developer",
 [USER_ROLE.FULLSTACK_DEVELOPER]: "FullStack Developer",
 [USER_ROLE.MOBILE_DEVELOPER]: "Mobile Developer",
+[USER_ROLE.LEAD_INFRASTRUCTUR]: "Lead Infrastructure",
 [USER_ROLE.DEVOPS_ENGINEER]: "Devops Engineer",
 [USER_ROLE.CLOUD_ENGINEER]: "Cloud Engineer",
 [USER_ROLE.DATABASE_ADMINISTRARION]: "Database Administration",
@@ -74,5 +79,6 @@ export const UserRoleLabels: Record<UserRole, string> = {
 [USER_ROLE.QUALITY_ASSURANCE]: "Quality Assurance",
 [USER_ROLE.IT_SUPPORT]: "IT Support",
 [USER_ROLE.HELPDESK_OFFICER]: "HelpDesk Officer",
-[USER_ROLE.ADMIN]: "Admin"
+[USER_ROLE.ADMIN]: "Admin",
+[USER_ROLE.CTO]: "CTO"
 }
