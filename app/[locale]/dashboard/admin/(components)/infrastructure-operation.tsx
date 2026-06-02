@@ -49,7 +49,7 @@ export function InfrastructureOperation() {
             accessibilityLayer
             data={chartData}
             margin={{
-              top: 20,
+              top: 22,
               left: 30,
               right: 20,
             }}
