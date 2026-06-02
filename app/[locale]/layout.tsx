@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
+import QueryProvider from "@/providers/react-query";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +47,9 @@ export default async function LocaleLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <QueryProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
