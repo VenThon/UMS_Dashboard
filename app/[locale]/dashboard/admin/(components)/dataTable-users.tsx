@@ -9,10 +9,8 @@ import { User } from "@/db/schema";
 import { Link } from "@/i18n/navigation";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, SquarePen, Trash2 } from "lucide-react";
-
-// import { StaffDeleteAlertDialog } from "../staff/delete/staff-delete-dialog";
-// import { StaffViewDetailDialog } from "../staff/view/staff-view-dialog";
+import { SquarePen } from "lucide-react";
+import { DeleteUserDialog } from "./delete-user-dialog";
 
 export const columnsDataTableUsers: ColumnDef<User>[] = [
   {
@@ -71,7 +69,7 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
     cell: ({ row }) => {
       return (
         <section className="flex items-center gap-1.5 justify-center">
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 asChild
@@ -79,16 +77,15 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
                 aria-label="View User"
                 className="bg-blue-600 text-white hover:bg-blue-500"
               >
-                <Link href={`/dashboard/staff/view/${row.original.id}`}>
+                <Link href={`/dashboard/admin/users/${row.original.id}`}>
                   <Eye className="h-4 w-4" />
                 </Link>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              {/* <Link href={`/dashboard/admin/users/view/${row.original.id}`}></Link> */}
               <p>View User</p>
             </TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -97,13 +94,12 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
                 aria-label="Edit User"
                 className="bg-[#058248] text-white hover:bg-green-600"
               >
-                <Link href={`/dashboard/staff/edit/${row.original.id}`}>
+                <Link href={`/dashboard/admin/users/${row.original.id}`}>
                   <SquarePen className="h-4 w-4" />
                 </Link>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              {/* <Link href={`/dashboard/admin/users/edit/${row.original.id}`}></Link> */}
               <p>Edit User</p>
             </TooltipContent>
           </Tooltip>
@@ -115,16 +111,13 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
                 aria-label="Delete User"
                 variant="destructive"
               >
-                <Trash2 className="h-4 w-4" />
+                <DeleteUserDialog id={row.original.id} />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
               <p>Delete User</p>
             </TooltipContent>
           </Tooltip>
-
-          <div>{/* <StaffViewDetailDialog data={row.original} /> */}</div>
-          <div>{/* <StaffDeleteAlertDialog /> */}</div>
         </section>
       );
     },

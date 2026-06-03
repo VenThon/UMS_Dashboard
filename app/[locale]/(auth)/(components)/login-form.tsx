@@ -2,6 +2,12 @@
 import { LogInInput, logInSchema } from "@/db/validation/auth";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useRouter } from "next/navigation";
+import { createElement, useState } from "react";
+import { LoginService } from "@/service/auth/auth.service";
+import { roleRoutes } from "@/lib/validation/route-by-role";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -9,9 +15,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -19,12 +23,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { useRouter } from "next/navigation";
-import { createElement, useState } from "react";
-import { LoginService } from "@/service/auth/auth.service";
-import { roleRoutes } from "@/lib/validation/route-by-role";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
   const router = useRouter();

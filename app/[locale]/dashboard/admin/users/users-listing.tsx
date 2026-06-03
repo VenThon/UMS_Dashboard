@@ -98,7 +98,7 @@ export function UsersListing() {
           <DataTable columns={columnsDataTableUsers} data={users} />
         </div>
         <div className="mt-5 flex justify-between">
-          <div className="text-md font-semibold text-gray-700">
+          <div className="text-md  text-gray-700">
             Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of{" "}
             {totalItems} Items
           </div>

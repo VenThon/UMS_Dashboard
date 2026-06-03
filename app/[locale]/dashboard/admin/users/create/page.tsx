@@ -1,3 +1,5 @@
+import { UsersCreation } from "../../(components)/users-creation";
+
 export default function Page() {
-  return <div>Pgae create User</div>;
+  return <UsersCreation />;
 }

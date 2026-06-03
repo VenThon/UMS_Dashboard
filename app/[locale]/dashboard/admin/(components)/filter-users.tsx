@@ -13,15 +13,7 @@ import {
 import { useRouter } from "@/i18n/navigation";
 
 import { Check, ListFilter } from "lucide-react";
-import { USER_ROLE, UserRole } from "@/db/types/user.type";
-
-export const Gender = {
-  Male: "Male",
-  Female: "Female",
-  Other: "Other",
-} as const;
-
-export type GenderType = (typeof Gender)[keyof typeof Gender];
+import { USER_ROLE, UserRole, UserRoleLabels } from "@/db/types/user.type";
 
 export function FilterUsers() {
   const router = useRouter();
@@ -60,16 +52,19 @@ export function FilterUsers() {
             <span>All</span>
           </DropdownMenuItem>
 
-          {Object.values(USER_ROLE).map((role) => (
-            <DropdownMenuItem
-              key={role}
-              onClick={() => handleGenderChange(role)}
-              className="flex items-center gap-2"
-            >
-              {currentRole === role && <Check className="h-4 w-4" />}
-              <span>{role}</span>
-            </DropdownMenuItem>
-          ))}
+          {Object.values(USER_ROLE).map((role) => {
+            const labels = UserRoleLabels[role];
+            return (
+              <DropdownMenuItem
+                key={role}
+                onClick={() => handleGenderChange(role)}
+                className="flex items-center gap-2"
+              >
+                {currentRole === role && <Check className="h-4 w-4" />}
+                <span>{labels}</span>
+              </DropdownMenuItem>
+            );
+          })}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
