@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import LocaleSwitcher from "@/components/lang/local-switcher";
-import { LoginForm } from "@/components/(auth)/login-form";
+import { LoginForm } from "../(components)/login-form";
 export default function Page() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">

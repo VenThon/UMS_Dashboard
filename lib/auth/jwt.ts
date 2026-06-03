@@ -1,4 +1,3 @@
-
 import { UserRole } from "@/db/types/user.type";
 import jwt from "jsonwebtoken";
 
@@ -11,6 +10,6 @@ type TokenPayload = {
 
 export function generateAccessToken(payload: TokenPayload) {
   return jwt.sign(payload, process.env.JWT_SECRET!, {
-    expiresIn: "7day",
+    expiresIn: "7d",
   });
 }

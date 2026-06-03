@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, PanelsTopLeft } from "lucide-react";
+import { Database, LucideIcon, UsersRound } from "lucide-react";
 import { useLocale } from "next-intl";
 import {
   SidebarGroup,
@@ -77,7 +77,7 @@ export default function NavBarDashboardAdmin() {
             />
 
             <SideBarMenuBtn
-              icon={PanelsTopLeft}
+              icon={UsersRound}
               href={[
                 "/dashboard/admin/users",
                 "/dashboard/admin/users/create",
