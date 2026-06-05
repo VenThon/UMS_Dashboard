@@ -54,7 +54,6 @@ export function UsersUpdateInformation({ id, user }: UpdateUserFormProps) {
       role: user.role as UserRole,
       team: user.team as UnderTeam,
       phoneNumber: user.phoneNumber ?? "",
-      // isActive: true,
     },
   });
 
@@ -80,7 +79,7 @@ export function UsersUpdateInformation({ id, user }: UpdateUserFormProps) {
     },
     [mutate],
   );
-  // console.log("Values", form.watch());
+
   return (
     <div className="mt-4">
       <h1 className="text-2xl font-semibold ">Update User Information</h1>

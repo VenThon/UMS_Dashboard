@@ -46,24 +46,12 @@ export async function CreateUserService(values: createUserInput) {
   return data;
 }
 
-// export async function UpdateUserService({ id, values }: userupdateProp) {
-//   return apiFetcher(`/api/admin/users/${id}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(values),
-//   });
-// }
-
-// export async function GetUserByIdService(id: string) {
-//   const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-
-//   return apiFetcher<User>(`${baseUrl}/api/admin/users/${id}`);
-// }
 export async function GetUserByIdService(id: string) {
   return apiFetcher<User>(`/api/admin/users/${id}`, {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 }
 export async function UpdateUserService(id: string, values: updateUserInput) {
@@ -73,5 +61,11 @@ export async function UpdateUserService(id: string, values: updateUserInput) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(values),
+  });
+}
+
+export async function DeleteUserService(id: string) {
+  return apiFetcher<User>(`/api/admin/users/${id}`, {
+    method: "DELETE",
   });
 }

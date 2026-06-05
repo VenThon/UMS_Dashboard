@@ -15,6 +15,7 @@ import { USER_ROLE, UserRole } from "@/db/types/user.type";
 import { UserRoleSwitch } from "./user-role-switch";
 import { UserTeamSwitch } from "./user-team-switch";
 import { UnderTeam } from "@/db/types/team.type";
+import { ViewDetailUserDialog } from "./user-view-detail-dialog";
 
 export const columnsDataTableUsers: ColumnDef<User>[] = [
   {
@@ -81,25 +82,24 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
     cell: ({ row }) => {
       return (
         <section className="flex items-center gap-1.5 justify-center">
-          {/* <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                asChild
-                size="icon"
-                aria-label="View User"
-                className="bg-blue-600 text-white hover:bg-blue-500"
-              >
-                <Link href={`/dashboard/admin/users/${row.original.id}`}>
-                  <Eye className="h-4 w-4" />
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>View User</p>
-            </TooltipContent>
-          </Tooltip> */}
           {row.original.role !== USER_ROLE.ADMIN && (
             <>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    // asChild
+                    size="icon"
+                    aria-label="View User"
+                    className="bg-blue-600 text-white hover:bg-blue-500"
+                  >
+                    <ViewDetailUserDialog id={row.original.id} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>View User</p>
+                </TooltipContent>
+              </Tooltip>
+
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
