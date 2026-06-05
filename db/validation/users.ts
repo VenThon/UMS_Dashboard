@@ -30,3 +30,4 @@ export const updateUserSchema = z.object({
 });
 
 export type createUserInput = z.infer<typeof createUserSchema>;
+export type updateUserInput = z.infer<typeof updateUserSchema>;

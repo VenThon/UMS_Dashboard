@@ -8,7 +8,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { USER_ROLE } from "../types/user.type";
 import { UNDER_TEAM } from "../types/team.type";
-import { createInsertSchema } from "drizzle-zod";
+// import { createInsertSchema } from "drizzle-zod";
 
 export const usersTable = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -25,6 +25,6 @@ export const usersTable = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const createUserSchema = createInsertSchema(usersTable);
+// export const createUserSchema = createInsertSchema(usersTable);
 
 export type User = typeof usersTable.$inferSelect;

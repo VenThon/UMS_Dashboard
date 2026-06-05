@@ -68,8 +68,9 @@ export function UsersCreation() {
       router.push("/dashboard/admin/users");
     },
     onError: (error) => {
-      console.log("Failed to create user", error);
-      toast.error("Failed to create user");
+      toast.error(
+        error instanceof Error ? error.message : "Failed to create user",
+      );
     },
   });
 
@@ -91,7 +92,7 @@ export function UsersCreation() {
       </p>
       <Card className="my-5">
         <Form {...form}>
-          <form onClick={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <CardHeader>
               <CardTitle>Account Information</CardTitle>
               <CardDescription>
@@ -154,13 +155,11 @@ export function UsersCreation() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {Object.values(UNDER_TEAM)
-                          // .filter((role) => role !== USER_ROLE.ADMIN)
-                          .map((team) => (
-                            <SelectItem value={team} key={team}>
-                              {`${UnderTeamLabel[team]}`}
-                            </SelectItem>
-                          ))}
+                        {Object.values(UNDER_TEAM).map((team) => (
+                          <SelectItem value={team} key={team}>
+                            {`${UnderTeamLabel[team]}`}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
