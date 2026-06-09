@@ -1,3 +1,4 @@
+"use clientt";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -6,14 +7,22 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useDeleteUser } from "@/hooks/admin/users.hook";
 import { ShieldQuestionMark, Trash2 } from "lucide-react";
+import { useCallback } from "react";
 type DeleteProps = {
   id: string;
 };
 
-export function DeleteUserDialog({}: DeleteProps) {
+export function DeleteUserDialog({ id }: DeleteProps) {
+  const deleteUserMutation = useDeleteUser();
+  const handleDelete = useCallback(() => {
+    deleteUserMutation.mutate(id);
+  }, [deleteUserMutation, id]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -28,6 +37,7 @@ export function DeleteUserDialog({}: DeleteProps) {
               <ShieldQuestionMark size={32} className="text-amber-600" />
             </div>
           </div>
+          <DialogTitle className="text-center mt-4">Delete User</DialogTitle>
           <DialogDescription className="text-center mt-2">
             Are you sure you want to delete this user? This action cannot be
             undone.
@@ -37,8 +47,13 @@ export function DeleteUserDialog({}: DeleteProps) {
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button variant="destructive" type="submit">
-            Delete
+          <Button
+            variant="destructive"
+            type="submit"
+            onClick={handleDelete}
+            disabled={deleteUserMutation.isPending}
+          >
+            {deleteUserMutation.isPending ? "Deleting..." : "Delete"}
           </Button>
         </DialogFooter>
       </DialogContent>

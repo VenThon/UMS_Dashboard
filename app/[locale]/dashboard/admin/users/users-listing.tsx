@@ -17,6 +17,7 @@ import { FilterUsers } from "../(components)/filter-users";
 import { ButtonCreateUser } from "../(components)/button-create-user";
 import { ListAllUsersService } from "@/service/user/user.service";
 import { Loader2 } from "lucide-react";
+import { FilterByTeam } from "../(components)/filter-team";
 
 export function UsersListing() {
   const searchParam = useSearchParams();
@@ -29,7 +30,6 @@ export function UsersListing() {
     data: apiResponse,
     isLoading,
     isFetching,
-    error,
   } = useQuery({
     queryKey: ["user"],
     queryFn: ListAllUsersService,
@@ -37,9 +37,6 @@ export function UsersListing() {
   });
 
   const users = apiResponse?.data ?? [];
-
-  console.log("users data:", apiResponse);
-  console.log("users error:", error);
   if (isLoading || isFetching) {
     return (
       <section className="flex h-[80vh] flex-col items-center justify-center space-y-2">
@@ -61,7 +58,8 @@ export function UsersListing() {
           </CardHeader>
           <CardContent className="mt-4 flex justify-between">
             <SearchAllUsers />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <FilterByTeam />
               <FilterUsers />
               <ButtonCreateUser />
             </div>
@@ -87,7 +85,8 @@ export function UsersListing() {
         </CardHeader>
         <CardContent className="mt-4 flex justify-between">
           <SearchAllUsers />
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <FilterByTeam />
             <FilterUsers />
             <ButtonCreateUser />
           </div>

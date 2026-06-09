@@ -50,7 +50,7 @@ export async function POST(req: Request) {
       password: hashedPassword,
       role: parsed.data.role,
       team: parsed.data.team,
-      phoneNumber:parsed.data.phoneNumber,
+      phoneNumber: parsed.data.phoneNumber,
       isActive: true,
     })
     .returning({

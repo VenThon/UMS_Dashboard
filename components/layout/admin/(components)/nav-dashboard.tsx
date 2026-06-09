@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, UsersRound } from "lucide-react";
+import { ChartNoAxesCombined, LucideIcon, UsersRound } from "lucide-react";
 import { useLocale } from "next-intl";
 import {
   SidebarGroup,
@@ -71,7 +71,7 @@ export default function NavBarDashboardAdmin() {
         <SidebarMenu key="lifecycle">
           <SidebarMenuItem>
             <SideBarMenuBtn
-              icon={Database}
+              icon={ChartNoAxesCombined}
               href={"/dashboard/admin/statistics"}
               title="Statistics"
             />
