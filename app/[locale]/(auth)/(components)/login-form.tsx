@@ -2,6 +2,12 @@
 import { LogInInput, logInSchema } from "@/db/validation/auth";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useRouter } from "next/navigation";
+import { createElement, useCallback, useState } from "react";
+import { LoginService } from "@/service/auth/auth.service";
+import { roleRoutes } from "@/lib/validation/route-by-role";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -9,9 +15,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -19,16 +23,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { useRouter } from "next/navigation";
-import { createElement, useState } from "react";
-import { LoginService } from "@/service/auth/auth.service";
-import { roleRoutes } from "@/lib/validation/route-by-role";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export function LoginForm() {
   const router = useRouter();
-  const [, setError] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm<LogInInput>({
     resolver: zodResolver(logInSchema),
@@ -38,19 +40,29 @@ export function LoginForm() {
     },
   });
 
-  async function onSubmit(values: LogInInput) {
-    try {
-      setError("");
-
-      const result = await LoginService(values);
-
-      const redirectPath = roleRoutes[result.user.role] ?? "/dashboard";
-
+  const createLoginMutate = useMutation({
+    mutationFn: LoginService,
+    onSuccess: (data) => {
+      const redirectPath = roleRoutes[data.user.role] ?? "/dashboard";
+      toast.success("Logged in successfully");
+      form.reset();
       router.push(redirectPath);
-    } catch (error) {
-      setError(error instanceof Error ? error.message : "Login failed");
-    }
-  }
+    },
+    onError: (error) => {
+      console.log("Failed to log in", error);
+      toast.error("Failed log in");
+    },
+  });
+
+  const { mutate } = createLoginMutate;
+
+  const onSubmit = useCallback(
+    (values: LogInInput) => {
+      mutate(values);
+    },
+    [mutate],
+  );
+
   return (
     <Card className="w-full max-w-md ">
       <Form {...form}>

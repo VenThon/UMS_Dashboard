@@ -80,7 +80,6 @@ export function AppSidebarDevelopment({
 
       <SidebarContent className="font-bold">
         <NavBarDashboardDevelopment />
-        {/* <NavDocuments items={data.documents} /> */}
       </SidebarContent>
 
       <SidebarFooter>

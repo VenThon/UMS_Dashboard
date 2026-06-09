@@ -8,6 +8,7 @@ import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -67,6 +68,9 @@ export default function NavBarDashboardInfrastructureAndOperation() {
   // const sidebarT = useTranslations("sidebar");
   return (
     <SidebarGroup>
+      <SidebarGroupLabel className="font-semibold">
+        Dashboard Infrastructure Operation Team
+      </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu key="lifecycle">
           <SidebarMenuItem>

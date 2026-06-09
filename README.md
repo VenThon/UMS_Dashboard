@@ -67,3 +67,7 @@ grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
 ### After updated on db have to run
 npx drizzle-kit generate
 npx drizzle-kit migrate
+
+### Show alert message using sonner 
+For Install => npx shadcn@latest add sonner
+After install add <Toaster /> on default Layout

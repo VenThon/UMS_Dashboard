@@ -7,6 +7,9 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
+import QueryProvider from "@/providers/react-query";
+import { getMessages } from "next-intl/server";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +38,8 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  const messages = await getMessages();
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
@@ -46,7 +51,12 @@ export default async function LocaleLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <QueryProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+            <Toaster />
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
