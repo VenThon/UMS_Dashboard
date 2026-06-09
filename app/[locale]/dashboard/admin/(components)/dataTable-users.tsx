@@ -1,17 +1,26 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { User } from "@/db/schema";
 import { Link } from "@/i18n/navigation";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { SquarePen } from "lucide-react";
-
-// import { StaffDeleteAlertDialog } from "../staff/delete/staff-delete-dialog";
-// import { StaffViewDetailDialog } from "../staff/view/staff-view-dialog";
+import { DeleteUserDialog } from "./delete-user-dialog";
+import { USER_ROLE, UserRole } from "@/db/types/user.type";
+import { UserRoleSwitch } from "./user-role-switch";
+import { UserTeamSwitch } from "./user-team-switch";
+import { UnderTeam } from "@/db/types/team.type";
+import { ViewDetailUserDialog } from "./user-view-detail-dialog";
 
 export const columnsDataTableUsers: ColumnDef<User>[] = [
   {
     accessorKey: "id",
-    header: "Nº",
+    header: () => <div className="ml-2">Nº</div>,
     enableHiding: false,
     cell: ({ row, table }) => {
       return (
@@ -25,7 +34,7 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
   },
   {
     accessorKey: "username",
-    header: "Full Name",
+    header: "Username",
     cell: ({ row }) => {
       return <section>{row.original.username}</section>;
     },
@@ -46,16 +55,24 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
   },
   {
     accessorKey: "team",
-    header: "Position",
+    header: "Team",
     cell: ({ row }) => {
-      return <section>{row.original.team}</section>;
+      return (
+        <section>
+          {<UserTeamSwitch team={row.original.team as UnderTeam} />}
+        </section>
+      );
     },
   },
   {
     accessorKey: "role",
-    header: "Image",
+    header: "Position",
     cell: ({ row }) => {
-      return <section>{row.original.role}</section>;
+      return (
+        <section>
+          {<UserRoleSwitch role={row.original.role as UserRole} />}
+        </section>
+      );
     },
   },
   {
@@ -64,19 +81,59 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       return (
-        <section className="flex items-center justify-center">
-          <Link href={`/dashboard/staff/edit/${row.original.id}`}>
-            <Button
-              asChild
-              className="h-10 w-10 rounded-full bg-[#058248] hover:bg-green-600 sm:w-auto dark:text-white"
-            >
-              <span className="flex items-center gap-2">
-                <SquarePen className="font-bold text-white" />
-              </span>
-            </Button>
-          </Link>
-          <div>{/* <StaffViewDetailDialog data={row.original} /> */}</div>
-          <div>{/* <StaffDeleteAlertDialog /> */}</div>
+        <section className="flex items-center gap-1.5 justify-center">
+          {row.original.role !== USER_ROLE.ADMIN && (
+            <>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    // asChild
+                    size="icon"
+                    aria-label="View User"
+                    className="bg-blue-600 text-white hover:bg-blue-500"
+                  >
+                    <ViewDetailUserDialog id={row.original.id} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>View User</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    asChild
+                    size="icon"
+                    aria-label="Edit User"
+                    className="bg-[#058248] text-white hover:bg-green-600"
+                  >
+                    <Link href={`/dashboard/admin/users/${row.original.id}`}>
+                      <SquarePen className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Edit info</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="icon"
+                    aria-label="Delete User"
+                    variant="destructive"
+                  >
+                    <DeleteUserDialog id={row.original.id} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Delete User</p>
+                </TooltipContent>
+              </Tooltip>
+            </>
+          )}
         </section>
       );
     },

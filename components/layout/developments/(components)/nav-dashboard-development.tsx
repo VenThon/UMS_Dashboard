@@ -3,11 +3,18 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
+import {
+  AudioWaveform,
+  ChartNoAxesCombined,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+} from "lucide-react";
 import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -67,11 +74,14 @@ export default function NavBarDashboardDevelopment() {
   // const sidebarT = useTranslations("sidebar");
   return (
     <SidebarGroup>
+      <SidebarGroupLabel className="font-semibold">
+        Dashboard Development Team
+      </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu key="lifecycle">
           <SidebarMenuItem>
             <SideBarMenuBtn
-              icon={Database}
+              icon={ChartNoAxesCombined}
               href={"/dashboard/developments/statistics"}
               title="Statistics"
             />
@@ -83,7 +93,16 @@ export default function NavBarDashboardDevelopment() {
                 "/dashboard/developments/request/create",
                 "/dashboard/developments/request/[id]",
               ]}
-              title="Request"
+              title="General Request"
+            />
+            <SideBarMenuBtn
+              icon={AudioWaveform}
+              href={[
+                "/dashboard/developments/request-leave",
+                "/dashboard/developments/request-leave/create",
+                "/dashboard/developments/request-leave/[id]",
+              ]}
+              title="Leave Requeat"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
@@ -92,7 +111,7 @@ export default function NavBarDashboardDevelopment() {
                 "/dashboard/developments/report/create",
                 "/dashboard/developments/report/[id]",
               ]}
-              title="Rport"
+              title="Dialy Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>

@@ -1,6 +1,6 @@
 import React from "react";
-import { SectionCards } from "../../admin/(components)/section-card";
+import { SectionCardsManagementaTeam } from "../(components)/section-management-team";
 
 export default function page() {
-  return <SectionCards />;
+  return <SectionCardsManagementaTeam />;
 }

@@ -3,11 +3,17 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
+import {
+  ChartNoAxesCombined,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+} from "lucide-react";
 import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -67,11 +73,14 @@ export default function NavBarDashboardManagement() {
   // const sidebarT = useTranslations("sidebar");
   return (
     <SidebarGroup>
+      <SidebarGroupLabel className="font-semibold">
+        Dashboard Management Team
+      </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu key="lifecycle">
           <SidebarMenuItem>
             <SideBarMenuBtn
-              icon={Database}
+              icon={ChartNoAxesCombined}
               href={"/dashboard/developments/statistics"}
               title="Statistics"
             />
@@ -83,7 +92,16 @@ export default function NavBarDashboardManagement() {
                 "/dashboard/managements/request/create",
                 "/dashboard/managements/request/[id]",
               ]}
-              title="Request"
+              title="General Request"
+            />
+            <SideBarMenuBtn
+              icon={Repeat}
+              href={[
+                "/dashboard/managements/request",
+                "/dashboard/managements/request/create",
+                "/dashboard/managements/request/[id]",
+              ]}
+              title="Leave Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
@@ -92,7 +110,7 @@ export default function NavBarDashboardManagement() {
                 "/dashboard/managements/report/create",
                 "/dashboard/managements/report/[id]",
               ]}
-              title="Rport"
+              title="Dialy Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>
