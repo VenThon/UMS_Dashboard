@@ -18,6 +18,7 @@ import { ButtonCreateUser } from "../(components)/button-create-user";
 import { ListAllUsersService } from "@/service/user/user.service";
 import { Loader2 } from "lucide-react";
 import { FilterByTeam } from "../(components)/filter-team";
+import { useUserSearchParams } from "../(components)/filters-components";
 
 export function UsersListing() {
   const searchParam = useSearchParams();
@@ -26,13 +27,15 @@ export function UsersListing() {
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
 
+  const params = useUserSearchParams();
+
   const {
     data: apiResponse,
     isLoading,
     isFetching,
   } = useQuery({
-    queryKey: ["user"],
-    queryFn: ListAllUsersService,
+    queryKey: ["user", params.toString()],
+    queryFn: () => ListAllUsersService(params.toString()),
     placeholderData: keepPreviousData,
   });
 

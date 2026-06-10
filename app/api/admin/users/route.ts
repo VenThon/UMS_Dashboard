@@ -1,26 +1,77 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
 import { requireRole } from "@/lib/auth/require-role";
-import { USER_ROLE } from "@/db/types/user.type";
+import { USER_ROLE, UserRoleEnum } from "@/db/types/user.type";
 import { createUserSchema } from "@/db/validation/users";
+import z from "zod";
+import { UnderTeamEnum } from "@/db/types/team.type";
+import { and, eq, ilike, or } from "drizzle-orm";
 
-export async function GET() {
+const UserSearchParamSchema = z.object({
+  page: z.coerce.number().int().positive().default(1),
+  pageSize: z.coerce.number().int().positive().max(30).default(10),
+  nameSearch: z.string().default(""),
+  role: UserRoleEnum.optional().catch(undefined),
+  team: UnderTeamEnum.optional().catch(undefined),
+});
+
+export async function GET(request: NextRequest) {
   const { error } = await requireRole([USER_ROLE.ADMIN]);
-
   if (error) return error;
+
+  const searchParams = Object.fromEntries(request.nextUrl.searchParams);
+
+  const validationInput = UserSearchParamSchema.safeParse(searchParams);
+
+  if (!validationInput.success) {
+    return NextResponse.json(
+      { error: validationInput.error.flatten() },
+      { status: 400 },
+    );
+  }
+
+  const { page, pageSize, nameSearch, role, team } = validationInput.data;
+
+  const conditions = [];
+
+  if (nameSearch) {
+    conditions.push(
+      or(
+        ilike(usersTable.username, `%${nameSearch}%`),
+        ilike(usersTable.email, `%${nameSearch}%`),
+      ),
+    );
+  }
+
+  if (role) {
+    conditions.push(eq(usersTable.role, role));
+  }
+
+  if (team) {
+    conditions.push(eq(usersTable.team, team));
+  }
+
+  const whereCondition = conditions.length > 0 ? and(...conditions) : undefined;
 
   const users = await db.query.usersTable.findMany({
     columns: {
       password: false,
     },
+    where: whereCondition,
+    limit: pageSize,
+    offset: (page - 1) * pageSize,
   });
 
   return NextResponse.json({
     message: "Users fetched successfully",
     data: users,
+    pagination: {
+      page,
+      pageSize,
+    },
   });
 }
 

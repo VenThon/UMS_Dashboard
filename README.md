@@ -71,3 +71,10 @@ npx drizzle-kit migrate
 ### Show alert message using sonner 
 For Install => npx shadcn@latest add sonner
 After install add <Toaster /> on default Layout
+
+### Phone number field
+Install 
+```bash
+npm install react-phone-number-input
+
+```
