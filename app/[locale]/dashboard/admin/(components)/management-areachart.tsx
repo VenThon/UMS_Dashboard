@@ -35,7 +35,7 @@ export function ManagementChartArea() {
     <Card>
       <CardHeader>
         <CardTitle>Management Team Roles</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-xs">
           Overview of management roles, including IT Managers and Project
           Managers, leading operations and project delivery.
         </CardDescription>

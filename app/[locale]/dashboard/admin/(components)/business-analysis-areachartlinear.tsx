@@ -36,10 +36,9 @@ export function BusinessAnalysisChartAreaLinear() {
     <Card>
       <CardHeader>
         <CardTitle>Business Analysis Team Roles</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-xs">
           Displays the distribution of Business Analysts and System Analysts
-          responsible for gathering requirements, analyzing business processes,
-          and supporting system development.
+          responsible for gathering requirements.
         </CardDescription>
       </CardHeader>
       <CardContent>

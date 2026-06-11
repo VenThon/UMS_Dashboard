@@ -37,10 +37,9 @@ export function InfrastructureOperation() {
     <Card>
       <CardHeader>
         <CardTitle>Infrastructure Operation Team</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-xs">
           Displays the distribution of infrastructure personnel across key
-          operational roles, including Network Engineers and System
-          Administrators.
+          operational roles.
         </CardDescription>
       </CardHeader>
       <CardContent>

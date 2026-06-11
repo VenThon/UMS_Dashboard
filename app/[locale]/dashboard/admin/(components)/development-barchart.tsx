@@ -15,16 +15,23 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-export const description = "A bar chart";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const chartData = [
-  { development: "Lead Frontend", total: 50, fill: "#6366f1" },
-  { development: "Lead Backend", total: 40, fill: "#ec4899" },
-  { development: "Frontend", total: 100, fill: "#06b6d4" },
-  { development: "Backend", total: 73, fill: "#22c55e" },
-  { development: "Full Stack", total: 10, fill: "#f59e0b" },
-  { development: "Mobile", total: 6, fill: "#ef4444" },
+  { development: "Lead Frontend", total: 50, fill: "#93C5FD" }, // blue-300
+  { development: "Lead Backend", total: 40, fill: "#F9A8D4" }, // pink-300
+  { development: "Frontend", total: 100, fill: "#67E8F9" }, // cyan-300
+  { development: "Backend", total: 73, fill: "#86EFAC" }, // green-300
+  { development: "Full Stack", total: 10, fill: "#FCD34D" }, // amber-300
+  { development: "Mobile", total: 6, fill: "#FCA5A5" }, // red-300
 ];
 
 const chartConfig = {
@@ -36,15 +43,29 @@ const chartConfig = {
 export function DevelopmentChartBar() {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Development Team Roles</CardTitle>
-        <CardDescription>
-          Displays the distribution of team members across development roles,
-          including Senior, Team Lead, Full Stack Developers, Frontend
-          Developers, Backend Developers, and Mobile Developers.
-        </CardDescription>
+      <CardHeader className="flex flex-row items-center-safe justify-between">
+        <div>
+          <CardTitle>Development Team Roles</CardTitle>
+          <CardDescription className="text-xs">
+            Displays the number distribution of team members across development
+            roles.
+          </CardDescription>
+        </div>
+        <div>
+          <Select>
+            <SelectTrigger className="w-full max-w-48 text-xs">
+              <SelectValue placeholder="Select a yearly" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Years</SelectLabel>
+                <SelectItem value="2025">2025</SelectItem>
+                <SelectItem value="2026">2026</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </CardHeader>
-
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
