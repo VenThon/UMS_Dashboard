@@ -59,9 +59,9 @@ export function UsersListing() {
               Manage user access, account settings, and organizational roles.
             </CardDescription>
           </CardHeader>
-          <CardContent className="mt-4 flex justify-between">
+          <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
             <SearchAllUsers />
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 lg:grid-cols-3">
               <FilterByTeam />
               <FilterUsers />
               <ButtonCreateUser />
@@ -86,9 +86,9 @@ export function UsersListing() {
             Manage user access, account settings, and organizational roles.
           </CardDescription>
         </CardHeader>
-        <CardContent className="mt-4 flex justify-between">
+        <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
           <SearchAllUsers />
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 lg:grid-cols-3">
             <FilterByTeam />
             <FilterUsers />
             <ButtonCreateUser />

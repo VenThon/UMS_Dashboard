@@ -36,7 +36,7 @@ export function FilterByTeam() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="gap-2">
+        <Button variant="outline" className="w-full sm:w-auto ">
           <ArrowDownToLine className="w-4 h-4" />
           <span>Filter by Team</span>
         </Button>

@@ -23,6 +23,8 @@ import {
   Phone,
   UsersRound,
 } from "lucide-react";
+import { getCountryCode } from "./get-country-code";
+import ReactCountryFlag from "react-country-flag";
 type ViewDetailProps = {
   id: string;
 };
@@ -46,6 +48,31 @@ export function ViewDetailUserDialog({ id }: ViewDetailProps) {
     );
   }
   const user = apiResponse;
+
+  const displayPhoneNumber = () => {
+    const phoneNumber = user?.phoneNumber;
+    if (!phoneNumber) {
+      return "-";
+    }
+    const phone = getCountryCode(phoneNumber);
+    return (
+      <div>
+        <div className="flex items-center gap-2">
+          {phone?.country && (
+            <ReactCountryFlag
+              countryCode={phone?.country}
+              svg
+              style={{
+                width: "1.25rem",
+                height: "1.25rem",
+              }}
+            />
+          )}
+          <span>{phone?.formatInternational()}</span>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Dialog>
@@ -105,7 +132,7 @@ export function ViewDetailUserDialog({ id }: ViewDetailProps) {
                 <Phone className="mt-0.5" size={14} />
                 <p className="text-muted-foreground text-md">Phone Number</p>
               </div>
-              <span className="font-medium">{user?.phoneNumber || "-"}</span>
+              <span className="font-medium">{displayPhoneNumber()}</span>
             </div>
           </div>
           <DialogFooter>

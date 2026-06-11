@@ -88,11 +88,10 @@ export function QualityAssuranceChartRadial() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      <CardFooter className="flex-col gap-2 text-xs text-center">
         <div className="leading-none text-muted-foreground">
           Shows the number of QA professionals responsible for manual testing,
-          automated testing, and defect management throughout the software
-          development lifecycle.
+          automated testing.
         </div>
       </CardFooter>
     </Card>

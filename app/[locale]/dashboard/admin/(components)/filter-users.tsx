@@ -36,7 +36,7 @@ export function FilterUsers() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="gap-2">
+        <Button variant="outline" className="w-full sm:w-auto">
           <ListFilter className="h-4 w-4" />
           <span>Filter by Role</span>
         </Button>

@@ -78,3 +78,9 @@ Install
 npm install react-phone-number-input
 
 ```
+
+###For display flag icon
+```bash
+npm install libphonenumber-js react-country-flag
+
+```
