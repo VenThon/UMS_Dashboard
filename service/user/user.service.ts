@@ -2,13 +2,8 @@ import { createUserInput, updateUserInput } from "@/db/validation/users";
 import { apiFetcher } from "../fetcher";
 import { User } from "@/db/schema";
 
-// type userupdateProp = {
-//   id: string;
-//   values: updateUserInput;
-// };
-
-export async function ListAllUsersService() {
-  const response = await fetch("/api/admin/users", {
+export async function ListAllUsersService(params: string) {
+  const response = await fetch(`/api/admin/users?${params}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
