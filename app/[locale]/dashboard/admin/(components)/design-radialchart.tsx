@@ -95,10 +95,10 @@ export function DesignChartRadial() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      <CardFooter className="flex-col gap-2 text-xs text-center">
         <div className="leading-none text-muted-foreground">
           Shows the number of team members responsible for interface design,
-          user experience optimization, and product usability improvements.
+          user experience optimization.
         </div>
       </CardFooter>
     </Card>

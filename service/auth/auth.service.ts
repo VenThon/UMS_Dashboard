@@ -41,21 +41,6 @@ export async function UserProfileService() {
   return data;
 }
 
-// export async function LogoutService() {
-//   const response = await fetch("/api/auth/logout",
-//     {
-//       method: "POST"
-//     }
-//   );
-
-//   const data = await response.json();
-
-//   if(!response.ok){
-//     throw new Error(data.error || "Failed to logout")
-//   }
-
-//   return  data;
-// }
 export async function LogoutService() {
   const response = await fetch("/api/auth/logout", {
     method: "POST",

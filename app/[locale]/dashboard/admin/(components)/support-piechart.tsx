@@ -46,7 +46,6 @@ export function SupportChartPie() {
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Support Team Roles</CardTitle>
-        {/* <CardDescription>January - June 2024</CardDescription> */}
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -59,10 +58,10 @@ export function SupportChartPie() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      <CardFooter className="flex-col gap-2 text-center text-xs">
         <div className="leading-none text-muted-foreground">
           Shows the number of support team members responsible for help desk
-          services, incident management, and user assistance.
+          services.
         </div>
       </CardFooter>
     </Card>

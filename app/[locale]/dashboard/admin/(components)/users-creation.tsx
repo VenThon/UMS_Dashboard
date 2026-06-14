@@ -43,6 +43,8 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { PhoneNumberInput } from "./field-phone-number";
+import { cn } from "@/lib/utils";
 
 export function UsersCreation() {
   const router = useRouter();
@@ -209,7 +211,20 @@ export function UsersCreation() {
                       <FormLabel className="mt-0.5">Phone Number</FormLabel>
                     </div>
                     <FormControl>
-                      <Input placeholder="Enter your phone number" {...field} />
+                      <div
+                        className={cn(
+                          "border-input bg-background flex h-8 w-full items-center rounded-md border",
+                          "px-3 py-2 text-sm",
+                          "ring-offset-background",
+                          "focus-within:ring-ring focus-within:ring-2 focus-within:ring-offset-2 focus-within:outline-none",
+                        )}
+                      >
+                        <PhoneNumberInput
+                          value={field.value}
+                          onChange={field.onChange}
+                          defaultCountry="KH"
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

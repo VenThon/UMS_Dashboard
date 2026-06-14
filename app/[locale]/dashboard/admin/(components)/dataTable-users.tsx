@@ -16,6 +16,8 @@ import { UserRoleSwitch } from "./user-role-switch";
 import { UserTeamSwitch } from "./user-team-switch";
 import { UnderTeam } from "@/db/types/team.type";
 import { ViewDetailUserDialog } from "./user-view-detail-dialog";
+import ReactCountryFlag from "react-country-flag";
+import { getCountryCode } from "./get-country-code";
 
 export const columnsDataTableUsers: ColumnDef<User>[] = [
   {
@@ -50,7 +52,27 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
     accessorKey: "phoneNumber",
     header: "Phone Number",
     cell: ({ row }) => {
-      return <section>{row.original.phoneNumber}</section>;
+      const phoneNumber = row.original.phoneNumber;
+      if (!phoneNumber) {
+        return "-";
+      }
+      const countryCode = getCountryCode(phoneNumber);
+
+      return (
+        <div className="flex items-center gap-2">
+          {countryCode?.country && (
+            <ReactCountryFlag
+              countryCode={countryCode?.country}
+              svg
+              style={{
+                width: "1.25rem",
+                height: "1.25rem",
+              }}
+            />
+          )}
+          <span>{countryCode?.formatInternational()}</span>
+        </div>
+      );
     },
   },
   {
@@ -87,7 +109,6 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    // asChild
                     size="icon"
                     aria-label="View User"
                     className="bg-blue-600 text-white hover:bg-blue-500"
