@@ -102,7 +102,7 @@ export function SectionCards() {
           <CardHeader>
             <CardDescription>Development Team</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              40
+              {isLoading ? ".." : data?.totalDevelopmentTeam}
             </CardTitle>
             <CardAction>
               <Badge className="bg-blue-100 text-blue-700">
@@ -115,7 +115,7 @@ export function SectionCards() {
           <CardHeader>
             <CardDescription>Business Analysis Team</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              10
+              {isLoading ? ".." : data?.totalBusinessAnalysisTeam}
             </CardTitle>
             <CardAction>
               <Badge className="bg-pink-100 text-pink-600">
@@ -128,7 +128,7 @@ export function SectionCards() {
           <CardHeader>
             <CardDescription>Infrastructure Teams</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              15
+              {isLoading ? ".." : data?.totalInfrastructureTeam}
             </CardTitle>
             <CardAction>
               <Badge className="bg-indigo-100 text-indigo-700">
