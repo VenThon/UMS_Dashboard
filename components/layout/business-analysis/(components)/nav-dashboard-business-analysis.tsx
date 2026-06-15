@@ -72,7 +72,7 @@ export default function NavBarDashboardBusinessAndAnalysis() {
         Dashboard Business Analysis Team
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="businessAnalysis">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={Database}
@@ -82,20 +82,12 @@ export default function NavBarDashboardBusinessAndAnalysis() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={[
-                "/dashboard/business-analysis/request",
-                // "/dashboard/managements/request/create",
-                // "/dashboard/managements/request/[id]",
-              ]}
+              href={["/dashboard/business-analysis/request"]}
               title="Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={[
-                "/dashboard/business-analysis/report",
-                // "/dashboard/managements/report/create",
-                // "/dashboard/managements/report/[id]",
-              ]}
+              href={["/dashboard/business-analysis/report"]}
               title="Rport"
             />
           </SidebarMenuItem>

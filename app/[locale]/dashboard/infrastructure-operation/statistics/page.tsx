@@ -1,5 +1,3 @@
-import { SectionCards } from "../../admin/(components)/section-card";
-
 export default function page() {
-  return <SectionCards />;
+  return <div>Statistics Page Infr Team</div>;
 }

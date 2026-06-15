@@ -72,7 +72,7 @@ export default function NavBarDashboardCTO() {
         Dashboard CTO
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="cto">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={Database}
@@ -82,20 +82,12 @@ export default function NavBarDashboardCTO() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={[
-                "/dashboard/cto/request",
-                // "/dashboard/managements/request/create",
-                // "/dashboard/managements/request/[id]",
-              ]}
+              href={["/dashboard/cto/request"]}
               title="Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={[
-                "/dashboard/cto/report",
-                // "/dashboard/managements/report/create",
-                // "/dashboard/managements/report/[id]",
-              ]}
+              href={["/dashboard/cto/report"]}
               title="Rport"
             />
           </SidebarMenuItem>

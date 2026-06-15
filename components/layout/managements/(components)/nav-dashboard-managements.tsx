@@ -77,11 +77,11 @@ export default function NavBarDashboardManagement() {
         Dashboard Management Team
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="managements">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={ChartNoAxesCombined}
-              href={"/dashboard/developments/statistics"}
+              href={"/dashboard/managements/statistics"}
               title="Statistics"
             />
 
