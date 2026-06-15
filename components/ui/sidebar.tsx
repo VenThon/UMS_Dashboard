@@ -152,9 +152,10 @@ function Sidebar({
   side = "left",
   variant = "sidebar",
   collapsible = "offcanvas",
-  className,
+  className = "bg-sidebar text-sidebar-foreground",
   children,
   dir,
+
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right";

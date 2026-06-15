@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { NavUser } from "@/components/nav-user";
-import NavBarDashboardDesign from "./nav-dashboard-support";
+import NavBarDashboardSupport from "./nav-dashboard-support";
 
 export function AppSidebarSupport({
   ...props
@@ -22,15 +22,7 @@ export function AppSidebarSupport({
   return (
     <Sidebar
       collapsible="offcanvas"
-      className="text-white "
-      style={
-        {
-          "--sidebar": "#058248",
-          "--sidebar-foreground": "#ffffff",
-          "--sidebar-accent": "#f3f4f6",
-          "--sidebar-accent-foreground": "#172554",
-        } as React.CSSProperties
-      }
+      className="text-sidebar-foreground"
       {...props}
     >
       <SidebarHeader>
@@ -57,7 +49,7 @@ export function AppSidebarSupport({
       </SidebarHeader>
 
       <SidebarContent className="font-bold">
-        <NavBarDashboardDesign />
+        <NavBarDashboardSupport />
       </SidebarContent>
 
       <SidebarFooter>

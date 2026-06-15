@@ -72,7 +72,7 @@ export default function NavBarDashboardSupport() {
         Dashboard Spport Team
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="support">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={Database}
@@ -82,20 +82,12 @@ export default function NavBarDashboardSupport() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={[
-                "/dashboard/support/request",
-                // "/dashboard/managements/request/create",
-                // "/dashboard/managements/request/[id]",
-              ]}
+              href={["/dashboard/support/request"]}
               title="Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={[
-                "/dashboard/support/report",
-                // "/dashboard/managements/report/create",
-                // "/dashboard/managements/report/[id]",
-              ]}
+              href={["/dashboard/support/report"]}
               title="Rport"
             />
           </SidebarMenuItem>

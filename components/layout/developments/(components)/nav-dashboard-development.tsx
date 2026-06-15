@@ -78,7 +78,7 @@ export default function NavBarDashboardDevelopment() {
         Dashboard Development Team
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="developments">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={ChartNoAxesCombined}
