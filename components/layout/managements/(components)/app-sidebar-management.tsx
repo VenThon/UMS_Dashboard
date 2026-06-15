@@ -22,15 +22,7 @@ export function AppSidebarManagement({
   return (
     <Sidebar
       collapsible="offcanvas"
-      className="text-white "
-      style={
-        {
-          "--sidebar": "#058248",
-          "--sidebar-foreground": "#ffffff",
-          "--sidebar-accent": "#f3f4f6",
-          "--sidebar-accent-foreground": "#172554",
-        } as React.CSSProperties
-      }
+      className="text-sidebar-foreground"
       {...props}
     >
       <SidebarHeader>

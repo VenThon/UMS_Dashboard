@@ -72,7 +72,7 @@ export default function NavBarDashboardInfrastructureAndOperation() {
         Dashboard Infrastructure Operation Team
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="infrastructure">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={Database}
@@ -82,20 +82,12 @@ export default function NavBarDashboardInfrastructureAndOperation() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={[
-                "/dashboard/infrastructure-operation/request",
-                // "/dashboard/managements/request/create",
-                // "/dashboard/managements/request/[id]",
-              ]}
+              href={["/dashboard/infrastructure-operation/request"]}
               title="Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={[
-                "/dashboard/infrastructure-operation/report",
-                // "/dashboard/managements/report/create",
-                // "/dashboard/managements/report/[id]",
-              ]}
+              href={["/dashboard/infrastructure-operation/report"]}
               title="Rport"
             />
           </SidebarMenuItem>

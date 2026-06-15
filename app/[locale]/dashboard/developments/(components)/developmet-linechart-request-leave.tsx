@@ -75,13 +75,6 @@ export function RequestLeaveChartLineByEachRoles() {
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}
             />
-            {/* <Line
-              dataKey="approved"
-              type="natural"
-              stroke="var(--color-approved)"
-              strokeWidth={2}
-              dot={false}
-            /> */}
             <Line
               dataKey="approved"
               type="natural"
@@ -120,13 +113,6 @@ export function RequestLeaveChartLineByEachRoles() {
                 fontSize={12}
               />
             </Line>
-            {/* <Line
-              dataKey="rejected"
-              type="monotone"
-              stroke="var(--color-rejected)"
-              strokeWidth={2}
-              dot={false}
-            /> */}
           </LineChart>
         </ChartContainer>
       </CardContent>

@@ -13,30 +13,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-// import { IconDatabase, IconFileWord, IconReport } from "@tabler/icons-react";
-// import { NavDocuments } from "@/components/nav-document";
 import { NavUser } from "@/components/nav-user";
 import NavBarDashboardDevelopment from "./nav-dashboard-development";
-
-// const data = {
-//   documents: [
-//     {
-//       name: "Data Library",
-//       href: "#",
-//       icon: IconDatabase,
-//     },
-//     {
-//       name: "Reports",
-//       href: "#",
-//       icon: IconReport,
-//     },
-//     {
-//       name: "Word Assistant",
-//       href: "#",
-//       icon: IconFileWord,
-//     },
-//   ],
-// };
 
 export function AppSidebarDevelopment({
   ...props
@@ -44,15 +22,7 @@ export function AppSidebarDevelopment({
   return (
     <Sidebar
       collapsible="offcanvas"
-      className="text-white "
-      style={
-        {
-          "--sidebar": "#058248",
-          "--sidebar-foreground": "#ffffff",
-          "--sidebar-accent": "#f3f4f6",
-          "--sidebar-accent-foreground": "#172554",
-        } as React.CSSProperties
-      }
+      className="text-sidebar-foreground"
       {...props}
     >
       <SidebarHeader>
