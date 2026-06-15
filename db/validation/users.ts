@@ -1,6 +1,7 @@
 import z from "zod";
-import { UserRoleEnum } from "../types/user.type";
+
 import { UnderTeamEnum } from "../types/team.type";
+import { UserRoleEnum } from "../types/user.type";
 
 export const createUserSchema = z.object({
   username: z.string().min(2, "username is required"),

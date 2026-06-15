@@ -1,7 +1,5 @@
-
-import "dotenv/config";
-
 import bcrypt from "bcryptjs";
+import "dotenv/config";
 import { eq } from "drizzle-orm";
 
 import { db } from "./index";

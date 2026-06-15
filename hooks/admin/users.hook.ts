@@ -1,6 +1,8 @@
-import { DeleteUserService } from "@/service/user/user.service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+
+import { DeleteUserService } from "@/service/user/user.service";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export function useDeleteUser() {

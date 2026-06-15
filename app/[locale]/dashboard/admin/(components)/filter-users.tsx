@@ -10,10 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { USER_ROLE, UserRole, UserRoleLabels } from "@/db/types/user.type";
 import { useRouter } from "@/i18n/navigation";
 
 import { Check, ListFilter } from "lucide-react";
-import { USER_ROLE, UserRole, UserRoleLabels } from "@/db/types/user.type";
 
 export function FilterUsers() {
   const router = useRouter();
@@ -43,10 +43,10 @@ export function FilterUsers() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuGroup className="overflow-y-auto h-100">
+        <DropdownMenuGroup className="h-100 overflow-y-auto">
           <DropdownMenuItem
             onClick={() => handleGenderChange("")}
-            className="flex items-center gap-2 "
+            className="flex items-center gap-2"
           >
             {currentRole === null && <Check className="h-4 w-4" />}
             <span>All</span>

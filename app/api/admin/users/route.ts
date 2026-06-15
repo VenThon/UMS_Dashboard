@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import { requireRole } from "@/lib/auth/require-role";
+import { UnderTeamEnum } from "@/db/types/team.type";
 import { USER_ROLE, UserRoleEnum } from "@/db/types/user.type";
 import { createUserSchema } from "@/db/validation/users";
-import z from "zod";
-import { UnderTeamEnum } from "@/db/types/team.type";
+import { requireRole } from "@/lib/auth/require-role";
+
+import bcrypt from "bcryptjs";
 import { and, eq, ilike, or } from "drizzle-orm";
+import z from "zod";
 
 const UserSearchParamSchema = z.object({
   page: z.coerce.number().int().positive().default(1),

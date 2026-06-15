@@ -1,6 +1,6 @@
 "use client";
 
-import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
+import { useState } from "react";
 
 import {
   Card,
@@ -10,13 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
-import { useState } from "react";
-import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
 import {
   Select,
   SelectContent,
@@ -24,6 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
+
+import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
 export function DesignChartRadial() {
   const currentYear = new Date().getFullYear();
@@ -139,8 +140,8 @@ export function DesignChartRadial() {
           </ChartContainer>
         )}
       </CardContent>
-      <CardFooter className=" text-xs text-center">
-        <div className="leading-none text-muted-foreground">
+      <CardFooter className="text-center text-xs">
+        <div className="text-muted-foreground leading-none">
           Shows the number of team members responsible for interface design,
           user experience optimization.
         </div>

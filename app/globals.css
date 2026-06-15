@@ -113,10 +113,10 @@
   --sidebar-foreground: #ffffff;
   --sidebar-accent: #166534;
   --sidebar-accent-foreground: #ffffff;
-  
+
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  
+
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }

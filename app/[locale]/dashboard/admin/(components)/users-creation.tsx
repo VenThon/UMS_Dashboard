@@ -1,5 +1,9 @@
 "use client";
 
+import { useCallback } from "react";
+
+import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,7 +32,9 @@ import {
 import { UNDER_TEAM, UnderTeamLabel } from "@/db/types/team.type";
 import { USER_ROLE, UserRoleLabels } from "@/db/types/user.type";
 import { createUserInput, createUserSchema } from "@/db/validation/users";
+import { cn } from "@/lib/utils";
 import { CreateUserService } from "@/service/user/user.service";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -39,12 +45,10 @@ import {
   Phone,
   UsersRound,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+
 import { PhoneNumberInput } from "./field-phone-number";
-import { cn } from "@/lib/utils";
 
 export function UsersCreation() {
   const router = useRouter();
@@ -102,7 +106,7 @@ export function UsersCreation() {
                 details.
               </CardDescription>
             </CardHeader>
-            <CardContent className="text-sm my-5 space-y-1.5 text-muted-foreground grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+            <CardContent className="text-muted-foreground my-5 grid grid-cols-1 gap-4 space-y-1.5 text-sm sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
               <FormField
                 control={form.control}
                 name="username"

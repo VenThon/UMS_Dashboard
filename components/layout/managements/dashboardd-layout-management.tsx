@@ -3,6 +3,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+
 import { AppSidebarManagement } from "./(components)/app-sidebar-management";
 
 export function DashboardLayoutManagement({

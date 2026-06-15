@@ -1,7 +1,8 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { DataTable } from "@/components/data-table";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   Card,
   CardContent,
@@ -9,16 +10,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { columnsDataTableUsers } from "../(components)/dataTable-users";
-import { useSearchParams } from "next/navigation";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
-import { SearchAllUsers } from "../(components)/search-users";
-import { FilterUsers } from "../(components)/filter-users";
-import { ButtonCreateUser } from "../(components)/button-create-user";
 import { ListAllUsersService } from "@/service/user/user.service";
+
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+
+import { ButtonCreateUser } from "../(components)/button-create-user";
+import { columnsDataTableUsers } from "../(components)/dataTable-users";
 import { FilterByTeam } from "../(components)/filter-team";
+import { FilterUsers } from "../(components)/filter-users";
 import { useUserSearchParams } from "../(components)/filters-components";
+import { SearchAllUsers } from "../(components)/search-users";
 
 export function UsersListing() {
   const searchParam = useSearchParams();
@@ -100,7 +103,7 @@ export function UsersListing() {
           <DataTable columns={columnsDataTableUsers} data={users} />
         </div>
         <div className="mt-5 flex justify-between">
-          <div className="text-md  text-gray-700">
+          <div className="text-md text-gray-700">
             Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of{" "}
             {totalItems} Items
           </div>

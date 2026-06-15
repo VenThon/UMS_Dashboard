@@ -4,6 +4,7 @@ import * as React from "react";
 
 import Image from "next/image";
 
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -13,7 +14,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import { NavUser } from "@/components/nav-user";
 import NavBarDashboardInfrastructureAndOperation from "./nav-dashboard-infrastructure-operation";
 
 export function AppSidebarInfrastructureAndOperation({
@@ -27,7 +27,7 @@ export function AppSidebarInfrastructureAndOperation({
     >
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem className="p-1  group-data-[collapsible=icon]:sm:flex lg:flex gap-2 group-data-[collapsible=icon]:lg:hidden">
+          <SidebarMenuItem className="gap-2 p-1 group-data-[collapsible=icon]:sm:flex lg:flex group-data-[collapsible=icon]:lg:hidden">
             <Image
               src="/images/logo.png"
               alt="logo"

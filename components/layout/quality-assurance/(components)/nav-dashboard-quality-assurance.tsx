@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
-import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -13,6 +11,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface SideBarMenuBtnProps {
   href: string | string[];

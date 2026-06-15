@@ -1,11 +1,13 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { FileUser, ImagePlus, MonitorSmartphone, Repeat } from "lucide-react";
-import { UserInformation } from "./user-information";
+
 import { ChangePWD } from "./change-pwd";
 import { Devices } from "./devices";
 import ImageUpload from "./uploadProfile";
+import { UserInformation } from "./user-information";
 
 export function SettingComponent() {
   return (
@@ -17,7 +19,7 @@ export function SettingComponent() {
           experience.
         </p>
       </div>
-      <Tabs defaultValue="profile" className="w-full mt-6">
+      <Tabs defaultValue="profile" className="mt-6 w-full">
         <TabsList>
           <TabsTrigger value="profile">
             <FileUser />

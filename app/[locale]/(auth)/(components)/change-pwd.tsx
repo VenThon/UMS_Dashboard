@@ -1,5 +1,7 @@
 "use client";
 
+import { createElement, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
 import {
   EyeIcon,
   EyeOffIcon,
@@ -25,7 +28,6 @@ import {
   LockKeyholeOpen,
   LockOpen,
 } from "lucide-react";
-import { createElement, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export function ChangePWD() {
@@ -44,7 +46,7 @@ export function ChangePWD() {
             information
           </CardDescription>
         </CardHeader>
-        <CardContent className="text-sm text-muted-foreground space-y-4">
+        <CardContent className="text-muted-foreground space-y-4 text-sm">
           <FormField
             control={form.control}
             name="password"

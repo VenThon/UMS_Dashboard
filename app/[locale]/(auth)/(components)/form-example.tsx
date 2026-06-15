@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
 import { BookUser, CircleUser, Mail, Phone, UsersRound } from "lucide-react";
 import { useForm } from "react-hook-form";
 
@@ -33,7 +34,7 @@ export function FormForExample() {
             information.
           </CardDescription>
         </CardHeader>
-        <CardContent className="text-sm text-muted-foreground grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+        <CardContent className="text-muted-foreground grid grid-cols-1 gap-4 text-sm sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           <FormField
             control={form.control}
             name="username"

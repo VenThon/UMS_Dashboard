@@ -3,6 +3,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+
 import { AppSidebarBusinessAndAnalysis } from "./(components)/app-sidebar-business-analysis";
 
 export function DashboardLayoutBusinessAndAnalysis({

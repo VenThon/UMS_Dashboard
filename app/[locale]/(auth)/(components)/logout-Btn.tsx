@@ -14,6 +14,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+
 import { useLogout } from "./logout";
 
 export default function LogoutButton() {

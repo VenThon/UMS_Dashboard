@@ -2,14 +2,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { routing } from "@/i18n/routing";
+import QueryProvider from "@/providers/react-query";
 
 import "../globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import QueryProvider from "@/providers/react-query";
 import { getMessages } from "next-intl/server";
-import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

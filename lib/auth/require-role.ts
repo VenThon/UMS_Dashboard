@@ -1,8 +1,8 @@
-
 import { NextResponse } from "next/server";
-import { getUserFromRequest } from "./verify";
+
 import { UserRole } from "@/db/types/user.type";
 
+import { getUserFromRequest } from "./verify";
 
 export async function requireRole(roles: UserRole[]) {
   const user = await getUserFromRequest();

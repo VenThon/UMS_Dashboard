@@ -1,4 +1,5 @@
 import { UserRole } from "@/db/types/user.type";
+
 import jwt from "jsonwebtoken";
 
 type TokenPayload = {

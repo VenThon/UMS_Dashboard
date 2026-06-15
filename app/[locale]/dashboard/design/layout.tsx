@@ -1,5 +1,7 @@
-import { DashboardLayoutDesign } from "@/components/layout/design/dashboardd-layout-design";
 import { ReactNode } from "react";
+
+import { DashboardLayoutDesign } from "@/components/layout/design/dashboardd-layout-design";
+
 interface LayoutProps {
   children: ReactNode;
 }

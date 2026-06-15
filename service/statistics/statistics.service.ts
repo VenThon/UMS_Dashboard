@@ -1,4 +1,5 @@
 import { apiFetcher } from "../fetcher";
+
 type AdminStatistics = {
   totalUsers: number;
   totalRoles: number;

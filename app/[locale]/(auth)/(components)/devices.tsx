@@ -8,7 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { LaptopMinimal } from "lucide-react";
+
 import { TerminateAllsDeviceDialog } from "./terminate-all-device-dialog";
 import { TerminateSingleDeviceDialog } from "./terminate-single-device-dialog";
 
@@ -23,7 +25,7 @@ export function Devices() {
           device or log out everywhere.
         </CardDescription>
       </CardHeader>
-      <CardContent className="text-sm space-y-4  text-muted-foreground">
+      <CardContent className="text-muted-foreground space-y-4 text-sm">
         <div className="space-y-2">
           <h3 className="text-md font-semibold">Current Device</h3>
           <Card className="relative p-4">
@@ -40,7 +42,7 @@ export function Devices() {
           <h3 className="text-md font-semibold">Other Devices</h3>
           <Card className="relative p-4">
             {/* <X className="absolute right-4 top-4 cursor-pointer w-4 h-4" /> */}
-            <div className="absolute right-4 top-4 cursor-pointer">
+            <div className="absolute top-4 right-4 cursor-pointer">
               <TerminateSingleDeviceDialog />
             </div>
             <div className="flex items-center gap-4">
