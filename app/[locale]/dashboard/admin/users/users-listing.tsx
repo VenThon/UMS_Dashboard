@@ -21,6 +21,7 @@ import { columnsDataTableUsers } from "../(components)/dataTable-users";
 import { FilterByTeam } from "../(components)/filter-team";
 import { FilterUsers } from "../(components)/filter-users";
 import { useUserSearchParams } from "../(components)/filters-components";
+import { ImportUsersExcel } from "../(components)/import-users";
 import { SearchAllUsers } from "../(components)/search-users";
 
 export function UsersListing() {
@@ -37,7 +38,7 @@ export function UsersListing() {
     isLoading,
     isFetching,
   } = useQuery({
-    queryKey: ["user", params.toString()],
+    queryKey: ["user", params.toString(), { page, pageSize }],
     queryFn: () => ListAllUsersService(params.toString()),
     placeholderData: keepPreviousData,
   });
@@ -64,9 +65,10 @@ export function UsersListing() {
           </CardHeader>
           <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
             <SearchAllUsers />
-            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 lg:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
               <FilterByTeam />
               <FilterUsers />
+              <ImportUsersExcel />
               <ButtonCreateUser />
             </div>
           </CardContent>
@@ -78,7 +80,7 @@ export function UsersListing() {
     );
   }
 
-  const totalItems = users.length;
+  const totalItems = apiResponse?.pagination?.total ?? 0;
 
   return (
     <section>
@@ -91,16 +93,17 @@ export function UsersListing() {
         </CardHeader>
         <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
           <SearchAllUsers />
-          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
             <FilterByTeam />
             <FilterUsers />
+            <ImportUsersExcel />
             <ButtonCreateUser />
           </div>
         </CardContent>
       </Card>
       <div className="mt-8">
         <div>
-          <DataTable columns={columnsDataTableUsers} data={users} />
+          <DataTable data={users} columns={columnsDataTableUsers} />
         </div>
         <div className="mt-5 flex justify-between">
           <div className="text-md text-gray-700">

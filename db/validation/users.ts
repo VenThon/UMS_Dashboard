@@ -30,5 +30,18 @@ export const updateUserSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
+export const importUserSchema = z.object({
+  username: z.string().min(2, "username is required"),
+  email: z.string().email({ pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }),
+  password: z.string().min(6),
+  role: UserRoleEnum,
+  team: UnderTeamEnum,
+  phoneNumber: z
+    .string()
+    .regex(/^[0-9+]+$/, "Invalid phone number")
+    .max(20),
+});
+
 export type createUserInput = z.infer<typeof createUserSchema>;
 export type updateUserInput = z.infer<typeof updateUserSchema>;
+export type importUserInput = z.infer<typeof importUserSchema>;

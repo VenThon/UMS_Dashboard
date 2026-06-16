@@ -8,7 +8,7 @@ import { createUserSchema } from "@/db/validation/users";
 import { requireRole } from "@/lib/auth/require-role";
 
 import bcrypt from "bcryptjs";
-import { and, eq, ilike, or } from "drizzle-orm";
+import { and, count, eq, ilike, or } from "drizzle-orm";
 import z from "zod";
 
 const UserSearchParamSchema = z.object({
@@ -66,12 +66,20 @@ export async function GET(request: NextRequest) {
     offset: (page - 1) * pageSize,
   });
 
+  const [{ total }] = await db
+    .select({
+      total: count(),
+    })
+    .from(usersTable);
+
   return NextResponse.json({
     message: "Users fetched successfully",
     data: users,
     pagination: {
       page,
       pageSize,
+      total,
+      totalPages: Math.ceil(total / pageSize),
     },
   });
 }
