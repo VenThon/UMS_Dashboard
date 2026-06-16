@@ -21,7 +21,7 @@ import { columnsDataTableUsers } from "../(components)/dataTable-users";
 import { FilterByTeam } from "../(components)/filter-team";
 import { FilterUsers } from "../(components)/filter-users";
 import { useUserSearchParams } from "../(components)/filters-components";
-import { ImportUsersExcel } from "../(components)/import-users";
+import { ImportUsersDialog } from "../(components)/import-users-dialog";
 import { SearchAllUsers } from "../(components)/search-users";
 
 export function UsersListing() {
@@ -68,7 +68,8 @@ export function UsersListing() {
             <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
               <FilterByTeam />
               <FilterUsers />
-              <ImportUsersExcel />
+              <ImportUsersDialog />
+              {/* <ImportUsersExcel /> */}
               <ButtonCreateUser />
             </div>
           </CardContent>
@@ -96,7 +97,8 @@ export function UsersListing() {
           <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
             <FilterByTeam />
             <FilterUsers />
-            <ImportUsersExcel />
+            <ImportUsersDialog />
+            {/* <ImportUsersExcel /> */}
             <ButtonCreateUser />
           </div>
         </CardContent>
