@@ -72,7 +72,7 @@ export default function NavBarDashboardQualityAndAssurance() {
         Dashboard Quality Assurance Team
       </SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="lifecycle">
+        <SidebarMenu key="quality">
           <SidebarMenuItem>
             <SideBarMenuBtn
               icon={Database}
@@ -82,20 +82,12 @@ export default function NavBarDashboardQualityAndAssurance() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={[
-                "/dashboard/quality-assurance/request",
-                // "/dashboard/managements/request/create",
-                // "/dashboard/managements/request/[id]",
-              ]}
+              href={["/dashboard/quality-assurance/request"]}
               title="Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={[
-                "/dashboard/quality-assurance/report",
-                // "/dashboard/managements/report/create",
-                // "/dashboard/managements/report/[id]",
-              ]}
+              href={["/dashboard/quality-assurance/report"]}
               title="Rport"
             />
           </SidebarMenuItem>

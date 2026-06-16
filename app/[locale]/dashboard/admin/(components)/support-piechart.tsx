@@ -15,48 +15,93 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-
-export const description = "A pie chart with a label";
-
-const chartData = [
-  { supportTeam: "itSupport", total: 10, fill: "var(--color-itSupport)" },
-  {
-    supportTeam: "helpdeskOfficer",
-    total: 6,
-    fill: "var(--color-helpdeskOfficer)",
-  },
-];
-
-const chartConfig = {
-  total: {
-    label: "Totals",
-  },
-  itSupport: {
-    label: "It Support",
-    color: "#1c4fce",
-  },
-  helpdeskOfficer: {
-    label: "Helpdesk Officer",
-    color: "#6366f1",
-  },
-} satisfies ChartConfig;
+import { useState } from "react";
+import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function SupportChartPie() {
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 5 }, (_, index) =>
+    String(currentYear - index),
+  );
+
+  const [year, setYear] = useState(String(new Date().getFullYear()));
+
+  const { data, isLoading } = useAdminStatisticsDisplayRolesByYearHook(year);
+
+  const getRoleTotal = (role: string) =>
+    data?.data?.find((item) => item.role === role)?.total ?? 0;
+
+  const chartData = [
+    {
+      supportTeam: "itSupport",
+      total: getRoleTotal("it_support"),
+      fill: "var(--color-itSupport)",
+    },
+    {
+      supportTeam: "helpdeskOfficer",
+      total: getRoleTotal("helpdesk_officer"),
+      fill: "var(--color-helpdeskOfficer)",
+    },
+  ];
+
+  const chartConfig = {
+    total: {
+      label: "Totals",
+    },
+    itSupport: {
+      label: "IT Support",
+      color: "#1c4fce",
+    },
+    helpdeskOfficer: {
+      label: "Helpdesk Officer",
+      color: "#6366f1",
+    },
+  } satisfies ChartConfig;
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
+    <Card>
+      <CardHeader className="flex flex-row items-center-safe justify-between">
         <CardTitle>Support Team Roles</CardTitle>
+        <div>
+          <Select value={year} onValueChange={setYear}>
+            <SelectTrigger className="text-xs">
+              <SelectValue placeholder="Select year" />
+            </SelectTrigger>
+            <SelectContent className="text-xs">
+              {years.map((year) => (
+                <SelectItem key={year} value={String(year)}>
+                  {year}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-62.5 pb-0 [&_.recharts-pie-label-text]:fill-foreground"
-        >
-          <PieChart>
-            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-            <Pie data={chartData} dataKey="total" label nameKey="supportTeam" />
-          </PieChart>
-        </ChartContainer>
+        {isLoading ? (
+          "..."
+        ) : (
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-62.5 pb-0 [&_.recharts-pie-label-text]:fill-foreground"
+          >
+            <PieChart>
+              <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+              <Pie
+                data={chartData}
+                dataKey="total"
+                label
+                nameKey="supportTeam"
+              />
+            </PieChart>
+          </ChartContainer>
+        )}
       </CardContent>
       <CardFooter className="flex-col gap-2 text-center text-xs">
         <div className="leading-none text-muted-foreground">

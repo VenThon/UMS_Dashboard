@@ -1,6 +1,5 @@
-import React from "react";
-import { SectionCardsManagementaTeam } from "../(components)/section-management-team";
+import { SectionCardsManagementsTeam } from "../(components)/section-management-team";
 
 export default function page() {
-  return <SectionCardsManagementaTeam />;
+  return <SectionCardsManagementsTeam />;
 }
