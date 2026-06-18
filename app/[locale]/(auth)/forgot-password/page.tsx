@@ -4,9 +4,9 @@ import LocaleSwitcher from "@/components/lang/local-switcher";
 import SiteFooter from "@/components/site-footer";
 import { ModeToggle } from "@/components/theme/theme-toggle";
 
-import { LoginForm } from "../(components)/login-form";
+import { ForgotPasswordForm } from "../(components)/forgot-password-form";
 
-export default function LogInPage() {
+export default function ForgotPasswordPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="dark:bg-accent hidden items-center justify-center bg-[#058248] lg:flex">
@@ -19,6 +19,7 @@ export default function LogInPage() {
             className="rounded-full"
             priority
           />
+
           <p className="mt-3 text-2xl font-semibold text-white">
             សូមស្វាគមន៍មកកាន់
           </p>
@@ -35,7 +36,7 @@ export default function LogInPage() {
         </div>
         <main className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-sm sm:max-w-md">
-            <LoginForm />
+            <ForgotPasswordForm />
           </div>
         </main>
         <footer className="flex justify-center pb-2">

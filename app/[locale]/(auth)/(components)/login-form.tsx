@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LogInInput, logInSchema } from "@/db/validation/auth";
+import { Link } from "@/i18n/navigation";
 import { roleRoutes } from "@/lib/validation/route-by-role";
 import { LoginService } from "@/service/auth/auth.service";
 
@@ -95,7 +96,15 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <div className="flex justify-between">
+                    <FormLabel>Password</FormLabel>
+                    <Link
+                      href={`/forgot-password`}
+                      className="ml-auto text-sm underline-offset-4 hover:underline"
+                    >
+                      Forgot Password ?
+                    </Link>
+                  </div>
 
                   <FormControl>
                     <div className="relative">
