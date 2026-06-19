@@ -43,6 +43,11 @@ export function UserTeamSwitch({ team }: UserTeamSwitchProps) {
         {UnderTeamLabel[UNDER_TEAM.SUPPORT]}
       </span>
     ))
+    .with(UNDER_TEAM.HIGH_LEVEL, () => (
+      <span className="inline-flex items-center justify-center">
+        {UnderTeamLabel[UNDER_TEAM.HIGH_LEVEL]}
+      </span>
+    ))
 
     .exhaustive();
 }

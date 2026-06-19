@@ -8,6 +8,7 @@ export const UNDER_TEAM = {
   INFRASTRUCTUR_OPERATION: "infrastructure_operation",
   QUALITY_ASSURANCE: "quality_assurance",
   SUPPORT: "support",
+  HIGH_LEVEL: "high_level",
 } as const;
 
 export type UnderTeam = (typeof UNDER_TEAM)[keyof typeof UNDER_TEAM];
@@ -19,6 +20,7 @@ export const UnderTeamEnum = z.enum([
   UNDER_TEAM.INFRASTRUCTUR_OPERATION,
   UNDER_TEAM.QUALITY_ASSURANCE,
   UNDER_TEAM.SUPPORT,
+  UNDER_TEAM.HIGH_LEVEL,
 ]);
 
 export const UnderTeamLabel: Record<UnderTeam, string> = {
@@ -29,4 +31,5 @@ export const UnderTeamLabel: Record<UnderTeam, string> = {
   [UNDER_TEAM.INFRASTRUCTUR_OPERATION]: "Infrastructure Operation",
   [UNDER_TEAM.QUALITY_ASSURANCE]: "Quality Assurance",
   [UNDER_TEAM.SUPPORT]: "Support",
+  [UNDER_TEAM.HIGH_LEVEL]: "High Level",
 };

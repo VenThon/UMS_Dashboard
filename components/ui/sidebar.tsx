@@ -153,7 +153,7 @@ function Sidebar({
   side = "left",
   variant = "sidebar",
   collapsible = "offcanvas",
-  className = "bg-sidebar text-sidebar-foreground",
+  className = "",
   children,
   dir,
 

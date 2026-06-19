@@ -4,15 +4,33 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
+import {
+  AudioWaveform,
+  ChevronRight,
+  Database,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+  SquareTerminal,
+  User2,
+  UserCheckIcon,
+} from "lucide-react";
 import { useLocale } from "next-intl";
 
 interface SideBarMenuBtnProps {
@@ -66,34 +84,133 @@ const SideBarMenuBtn = ({
 };
 
 export default function NavBarDashboardCTO() {
-  // const sidebarT = useTranslations("sidebar");
+  const items = [
+    {
+      title: "Management",
+      url: "#",
+      icon: SquareTerminal,
+      isActive: true,
+      items: [
+        {
+          title: "General Request",
+          url: "#",
+          icon: User2,
+        },
+        {
+          title: "Leave Request",
+          url: "#",
+          icon: UserCheckIcon,
+        },
+        {
+          title: "Dialy Report",
+          url: "#",
+          icon: UserCheckIcon,
+        },
+      ],
+    },
+  ];
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel className="font-semibold">
-        Dashboard CTO
-      </SidebarGroupLabel>
-      <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu key="cto">
-          <SidebarMenuItem>
-            <SideBarMenuBtn
-              icon={Database}
-              href={"/dashboard/cto/statistics"}
-              title="Statistics"
-            />
-
-            <SideBarMenuBtn
-              icon={Repeat}
-              href={["/dashboard/cto/request"]}
-              title="Request"
-            />
-            <SideBarMenuBtn
-              icon={NotebookPen}
-              href={["/dashboard/cto/report"]}
-              title="Rport"
-            />
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
+    <>
+      <SidebarGroup>
+        <SidebarGroupLabel className="font-semibold">
+          Dashboard CTO
+        </SidebarGroupLabel>
+        <SidebarGroupContent className="flex flex-col gap-2">
+          <SidebarMenu key="cto">
+            <SidebarMenuItem>
+              <SideBarMenuBtn
+                icon={Database}
+                href={"/dashboard/cto/statistics"}
+                title="Statistics"
+              />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+        <SidebarContent>
+          <SidebarMenu>
+            {items.map((item) => (
+              <Collapsible
+                key={item.title}
+                asChild
+                defaultOpen={item.isActive}
+                className="group/collapsible rounded transition-colors data-[state=open]:bg-black/35"
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip={item.title}
+                      className="text-white"
+                    >
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {item.items?.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SideBarMenuBtn
+                            title={subItem.title}
+                            href={subItem.url}
+                            icon={subItem.icon}
+                          />
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            ))}
+          </SidebarMenu>
+        </SidebarContent>
+      </SidebarGroup>
+      <SidebarGroup>
+        <SidebarGroupLabel className="font-semibold">
+          Data From Management Team
+        </SidebarGroupLabel>
+        <SidebarGroupContent className="flex flex-col gap-2">
+          <SidebarMenu key="approved">
+            <SidebarMenuItem>
+              <SideBarMenuBtn
+                icon={Database}
+                href={"/dashboard/cto/report"}
+                title="Report"
+              />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+      <SidebarGroup>
+        <SidebarGroupLabel className="font-semibold">
+          Overall Overview
+        </SidebarGroupLabel>
+        <SidebarGroupContent className="flex flex-col gap-2">
+          <SidebarMenu>
+            <SidebarMenuItem key="report">
+              <SideBarMenuBtn
+                icon={NotebookPen}
+                href={"/dashboard/cto/report"}
+                title="Dialy Report"
+              />
+            </SidebarMenuItem>
+            <SidebarMenuItem key="request">
+              <SideBarMenuBtn
+                icon={AudioWaveform}
+                href={"/dashboard/cto/leave-request"}
+                title="Leave Request"
+              />
+            </SidebarMenuItem>
+            <SidebarMenuItem key="genrequest">
+              <SideBarMenuBtn
+                icon={Repeat}
+                href={"/dashboard/cto/general-request"}
+                title="General Request"
+              />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </>
   );
 }
