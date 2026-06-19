@@ -112,7 +112,7 @@ export default function NavBarDashboardDevelopment() {
                 "/dashboard/developments/report/create",
                 "/dashboard/developments/report/[id]",
               ]}
-              title="Dialy Rport"
+              title="Daily Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>
