@@ -9,8 +9,7 @@ import {
 } from "@/components/ui/card";
 
 import { ButtonCreateUser } from "../../../admin/(components)/button-create-user";
-import { FilterUsers } from "../../../admin/(components)/filter-users";
-import { SearchAllUsers } from "../../../admin/(components)/search-users";
+import { FilterReportDevelopmentTeam } from "./filter-report";
 
 export function DialyReportListingPage() {
   return (
@@ -23,12 +22,9 @@ export function DialyReportListingPage() {
             ensure project progress and team alignment.
           </CardDescription>
         </CardHeader>
-        <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
-          <SearchAllUsers />
-          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-            <FilterUsers />
-            <ButtonCreateUser />
-          </div>
+        <CardContent className="mt-4 flex gap-2">
+          <FilterReportDevelopmentTeam />
+          <ButtonCreateUser />
         </CardContent>
       </Card>
     </section>
