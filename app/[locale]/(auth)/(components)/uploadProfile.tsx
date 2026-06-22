@@ -3,6 +3,7 @@
 import { ChangeEvent, DragEvent, useRef, useState } from "react";
 
 import Image from "next/image";
+
 import { Card } from "@/components/ui/card";
 
 interface UploadResult {
@@ -127,7 +128,7 @@ export default function ImageUpload() {
   return (
     <Card>
       <div className="from-blue-50 to-indigo-100 px-4 py-4">
-        <h1 className="mb-2 text-xl font-bold ">Upload Profile Picture</h1>
+        <h1 className="mb-2 text-xl font-bold">Upload Profile Picture</h1>
         <p className="mb-8 text-gray-600">
           Select an image to upload and preview
         </p>

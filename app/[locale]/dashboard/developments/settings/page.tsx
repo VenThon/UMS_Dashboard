@@ -1,5 +1,6 @@
-import { SettingComponent } from "@/app/[locale]/(auth)/(components)/setting-component";
 import React from "react";
+
+import { SettingComponent } from "@/app/[locale]/(auth)/(components)/setting-component";
 
 export default function Page() {
   return <SettingComponent />;

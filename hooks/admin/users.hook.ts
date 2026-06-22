@@ -1,6 +1,12 @@
-import { DeleteUserService } from "@/service/user/user.service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+
+import {
+  ConfirmImportUsersService,
+  PreviewImportUsersService,
+} from "@/service/user/import-users.service";
+import { DeleteUserService } from "@/service/user/user.service";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export function useDeleteUser() {
@@ -21,6 +27,35 @@ export function useDeleteUser() {
   });
 
   return deleteUserMutation;
+}
+
+export function usePreviewImportUsers() {
+  return useMutation({
+    mutationFn: PreviewImportUsersService,
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to preview users",
+      );
+    },
+  });
+}
+
+export function useConfirmImportUsers() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ConfirmImportUsersService,
+    onSuccess: () => {
+      toast.success("Users imported successfully");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      router.push("/dashboard/admin/users");
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to import users",
+      );
+    },
+  });
 }
 
 // export function useViewDetailsUser() {

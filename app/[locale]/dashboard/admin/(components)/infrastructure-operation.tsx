@@ -1,6 +1,6 @@
 "use client";
 
-import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
+import { useState } from "react";
 
 import {
   Card,
@@ -10,13 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
-import { useState } from "react";
-import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
 import {
   Select,
   SelectContent,
@@ -24,6 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
+
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 
 export function InfrastructureOperation() {
   const currentYear = new Date().getFullYear();

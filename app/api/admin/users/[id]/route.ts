@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import { requireRole } from "@/lib/auth/require-role";
 import { USER_ROLE } from "@/db/types/user.type";
 import { updateUserSchema } from "@/db/validation/users";
+import { requireRole } from "@/lib/auth/require-role";
+
+import { eq } from "drizzle-orm";
 
 export async function GET(
   req: Request,

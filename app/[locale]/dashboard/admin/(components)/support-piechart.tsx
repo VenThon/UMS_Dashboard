@@ -1,6 +1,6 @@
 "use client";
 
-import { Pie, PieChart } from "recharts";
+import { useState } from "react";
 
 import {
   Card,
@@ -10,13 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
-import { useState } from "react";
-import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
 import {
   Select,
   SelectContent,
@@ -24,6 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
+
+import { Pie, PieChart } from "recharts";
 
 export function SupportChartPie() {
   const currentYear = new Date().getFullYear();
@@ -89,7 +90,7 @@ export function SupportChartPie() {
         ) : (
           <ChartContainer
             config={chartConfig}
-            className="mx-auto aspect-square max-h-62.5 pb-0 [&_.recharts-pie-label-text]:fill-foreground"
+            className="[&_.recharts-pie-label-text]:fill-foreground mx-auto aspect-square max-h-62.5 pb-0"
           >
             <PieChart>
               <ChartTooltip content={<ChartTooltipContent hideLabel />} />
@@ -104,7 +105,7 @@ export function SupportChartPie() {
         )}
       </CardContent>
       <CardFooter className="flex-col gap-2 text-center text-xs">
-        <div className="leading-none text-muted-foreground">
+        <div className="text-muted-foreground leading-none">
           Shows the number of support team members responsible for help desk
           services.
         </div>

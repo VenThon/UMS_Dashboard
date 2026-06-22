@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import { X } from "lucide-react";
 
 export function TerminateSingleDeviceDialog() {

@@ -1,5 +1,9 @@
 "use client";
 
+import { useCallback } from "react";
+
+import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,19 +29,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { User } from "@/db/schema";
 import { UNDER_TEAM, UnderTeam, UnderTeamLabel } from "@/db/types/team.type";
 import { USER_ROLE, UserRole, UserRoleLabels } from "@/db/types/user.type";
 import { updateUserInput, updateUserSchema } from "@/db/validation/users";
+import { cn } from "@/lib/utils";
 import { UpdateUserService } from "@/service/user/user.service";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BookUser, CircleUser, Mail, Phone, UsersRound } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@/db/schema";
-import { cn } from "@/lib/utils";
+
 import { PhoneNumberInput } from "./field-phone-number";
 
 type UpdateUserFormProps = {
@@ -84,7 +88,7 @@ export function UsersUpdateInformation({ id, user }: UpdateUserFormProps) {
 
   return (
     <div className="mt-4">
-      <h1 className="text-2xl font-semibold ">Update User Information</h1>
+      <h1 className="text-2xl font-semibold">Update User Information</h1>
       <p className="text-muted-foreground">
         Review and update user account information, permissions, and
         organizational assignments.
@@ -99,7 +103,7 @@ export function UsersUpdateInformation({ id, user }: UpdateUserFormProps) {
                 assignments, and account status.
               </CardDescription>
             </CardHeader>
-            <CardContent className="text-sm space-y-2 py-6 text-muted-foreground grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+            <CardContent className="text-muted-foreground grid grid-cols-1 gap-4 space-y-2 py-6 text-sm sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
               <FormField
                 control={form.control}
                 name="username"

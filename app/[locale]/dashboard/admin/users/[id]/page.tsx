@@ -1,5 +1,6 @@
-import { UsersUpdateInformation } from "../../(components)/users-update";
 import { getUserById } from "@/lib/repositories/user.repository";
+
+import { UsersUpdateInformation } from "../../(components)/users-update";
 
 type PageProps = {
   params: Promise<{

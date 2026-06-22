@@ -10,10 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { UNDER_TEAM, UnderTeam, UnderTeamLabel } from "@/db/types/team.type";
 import { useRouter } from "@/i18n/navigation";
 
 import { ArrowDownToLine, Check } from "lucide-react";
-import { UNDER_TEAM, UnderTeam, UnderTeamLabel } from "@/db/types/team.type";
 
 export function FilterByTeam() {
   const router = useRouter();
@@ -36,8 +36,8 @@ export function FilterByTeam() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="w-full sm:w-auto ">
-          <ArrowDownToLine className="w-4 h-4" />
+        <Button variant="outline" className="w-full sm:w-auto">
+          <ArrowDownToLine className="h-4 w-4" />
           <span>Filter by Team</span>
         </Button>
       </DropdownMenuTrigger>
@@ -46,7 +46,7 @@ export function FilterByTeam() {
         <DropdownMenuGroup>
           <DropdownMenuItem
             onClick={() => handleGenderChange("")}
-            className="flex items-center gap-2 "
+            className="flex items-center gap-2"
           >
             {currentTeam === null && <Check className="h-4 w-4" />}
             <span>All</span>

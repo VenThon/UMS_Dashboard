@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
-import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -13,6 +11,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import {
+  AudioWaveform,
+  Database,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+} from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface SideBarMenuBtnProps {
   href: string | string[];
@@ -82,13 +89,30 @@ export default function NavBarDashboardQualityAndAssurance() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={["/dashboard/quality-assurance/request"]}
-              title="Request"
+              href={[
+                "/dashboard/quality-assurance/general-request",
+                "/dashboard/quality-assurance/general-request/create",
+                "/dashboard/quality-assurance/general-request/[id]",
+              ]}
+              title="General Request"
+            />
+            <SideBarMenuBtn
+              icon={AudioWaveform}
+              href={[
+                "/dashboard/quality-assurance/leave-request",
+                "/dashboard/quality-assurance/leave-request/create",
+                "/dashboard/quality-assurance/leave-request/[id]",
+              ]}
+              title="Leave Requeat"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={["/dashboard/quality-assurance/report"]}
-              title="Rport"
+              href={[
+                "/dashboard/quality-assurance/report",
+                "/dashboard/quality-assurance/report/create",
+                "/dashboard/quality-assurance/report/[id]",
+              ]}
+              title="Dialy Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>

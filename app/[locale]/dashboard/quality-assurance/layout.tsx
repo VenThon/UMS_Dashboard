@@ -1,5 +1,7 @@
-import { DashboardLayoutQualityAndAssurance } from "@/components/layout/quality-assurance/dashboardd-layout-quality-assurance";
 import { ReactNode } from "react";
+
+import { DashboardLayoutQualityAndAssurance } from "@/components/layout/quality-assurance/dashboardd-layout-quality-assurance";
+
 interface LayoutProps {
   children: ReactNode;
 }

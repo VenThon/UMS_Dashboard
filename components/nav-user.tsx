@@ -1,7 +1,8 @@
 "use client";
 
-import { ChevronsUpDown, LogOut, Settings } from "lucide-react";
+import { useEffect, useState } from "react";
 
+import LogoutButton from "@/app/[locale]/(auth)/(components)/logout-Btn";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -18,12 +19,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useEffect, useState } from "react";
-import { UserProfileService } from "@/service/auth/auth.service";
-import { Badge } from "./ui/badge";
-import LogoutButton from "@/app/[locale]/(auth)/(components)/logout-Btn";
 import { Link } from "@/i18n/navigation";
 import { roleSettingRoutes } from "@/lib/validation/route-by-role";
+import { UserProfileService } from "@/service/auth/auth.service";
+
+import { ChevronsUpDown, LogOut, Settings } from "lucide-react";
+
+import { Badge } from "./ui/badge";
 
 type ProfileUser = {
   username: string;
@@ -105,7 +107,7 @@ export function NavUser() {
               <DropdownMenuItem asChild>
                 {user && (
                   <Link href={roleSettingRoutes[user.role]}>
-                    <Settings className=" h-4 w-4" />
+                    <Settings className="h-4 w-4" />
                     Settings
                   </Link>
                 )}

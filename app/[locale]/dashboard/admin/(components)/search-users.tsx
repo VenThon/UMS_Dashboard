@@ -48,18 +48,18 @@ export function SearchAllUsers() {
   };
   return (
     <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <div className="relative w-full  lg:max-w-sm">
+      <div className="relative w-full lg:max-w-sm">
         <Input
           placeholder="Search by username"
           onChange={onSearch}
           defaultValue={searchParams.get("nameSearch") ?? ""}
-          className=" w-full pr-10"
+          className="w-full pr-10"
         />
         <Button
           type="button"
           variant="ghost"
           size="icon"
-          className="absolute right-1 top-1/2  h-8 w-8 -translate-y-1/2"
+          className="absolute top-1/2 right-1 h-8 w-8 -translate-y-1/2"
           onClick={clearSearch}
         >
           <XIcon className="h-4 w-4" />

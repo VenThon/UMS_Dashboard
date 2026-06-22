@@ -1,7 +1,8 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { DataTable } from "@/components/data-table";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   Card,
   CardContent,
@@ -9,16 +10,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { columnsDataTableUsers } from "../(components)/dataTable-users";
-import { useSearchParams } from "next/navigation";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
-import { SearchAllUsers } from "../(components)/search-users";
-import { FilterUsers } from "../(components)/filter-users";
-import { ButtonCreateUser } from "../(components)/button-create-user";
 import { ListAllUsersService } from "@/service/user/user.service";
+
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+
+import { ButtonCreateUser } from "../(components)/button-create-user";
+import { columnsDataTableUsers } from "../(components)/dataTable-users";
 import { FilterByTeam } from "../(components)/filter-team";
+import { FilterUsers } from "../(components)/filter-users";
 import { useUserSearchParams } from "../(components)/filters-components";
+import { ImportUsersDialog } from "../(components)/import-users-dialog";
+import { SearchAllUsers } from "../(components)/search-users";
 
 export function UsersListing() {
   const searchParam = useSearchParams();
@@ -34,7 +38,7 @@ export function UsersListing() {
     isLoading,
     isFetching,
   } = useQuery({
-    queryKey: ["user", params.toString()],
+    queryKey: ["user", params.toString(), { page, pageSize }],
     queryFn: () => ListAllUsersService(params.toString()),
     placeholderData: keepPreviousData,
   });
@@ -61,9 +65,11 @@ export function UsersListing() {
           </CardHeader>
           <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
             <SearchAllUsers />
-            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 lg:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
               <FilterByTeam />
               <FilterUsers />
+              <ImportUsersDialog />
+              {/* <ImportUsersExcel /> */}
               <ButtonCreateUser />
             </div>
           </CardContent>
@@ -75,7 +81,7 @@ export function UsersListing() {
     );
   }
 
-  const totalItems = users.length;
+  const totalItems = apiResponse?.pagination?.total ?? 0;
 
   return (
     <section>
@@ -88,19 +94,21 @@ export function UsersListing() {
         </CardHeader>
         <CardContent className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
           <SearchAllUsers />
-          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
             <FilterByTeam />
             <FilterUsers />
+            <ImportUsersDialog />
+            {/* <ImportUsersExcel /> */}
             <ButtonCreateUser />
           </div>
         </CardContent>
       </Card>
       <div className="mt-8">
         <div>
-          <DataTable columns={columnsDataTableUsers} data={users} />
+          <DataTable data={users} columns={columnsDataTableUsers} />
         </div>
         <div className="mt-5 flex justify-between">
-          <div className="text-md  text-gray-700">
+          <div className="text-md text-gray-700">
             Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of{" "}
             {totalItems} Items
           </div>

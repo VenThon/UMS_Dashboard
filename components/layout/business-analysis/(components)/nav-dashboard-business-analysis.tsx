@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
-import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -13,6 +11,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import {
+  AudioWaveform,
+  Database,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+} from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface SideBarMenuBtnProps {
   href: string | string[];
@@ -82,13 +89,30 @@ export default function NavBarDashboardBusinessAndAnalysis() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={["/dashboard/business-analysis/request"]}
-              title="Request"
+              href={[
+                "/dashboard/business-analysis/general-request",
+                "/dashboard/business-analysis/general-request/create",
+                "/dashboard/business-analysis/general-request/[id]",
+              ]}
+              title="General Request"
+            />
+            <SideBarMenuBtn
+              icon={AudioWaveform}
+              href={[
+                "/dashboard/business-analysis/leave-request",
+                "/dashboard/business-analysis/leave-request/create",
+                "/dashboard/business-analysis/leave-request/[id]",
+              ]}
+              title="Leave Requeat"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={["/dashboard/business-analysis/report"]}
-              title="Rport"
+              href={[
+                "/dashboard/business-analysis/report",
+                "/dashboard/business-analysis/report/create",
+                "/dashboard/business-analysis/report/[id]",
+              ]}
+              title="Dialy Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>

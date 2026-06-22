@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
+import { useState } from "react";
 
 import {
   Card,
@@ -23,7 +23,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
-import { useState } from "react";
+
+import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
 
 export function DevelopmentChartBar() {
   const currentYear = new Date().getFullYear();
@@ -104,7 +105,7 @@ export function DevelopmentChartBar() {
       </CardHeader>
       <CardContent>
         {isLoading ? (
-          <p className="text-sm text-muted-foreground">Loading...</p>
+          <p className="text-muted-foreground text-sm">Loading...</p>
         ) : (
           <ChartContainer config={chartConfig}>
             <BarChart accessibilityLayer data={chartData}>

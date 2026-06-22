@@ -4,13 +4,6 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
 import {
-  ChartNoAxesCombined,
-  LucideIcon,
-  NotebookPen,
-  Repeat,
-} from "lucide-react";
-import { useLocale } from "next-intl";
-import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -18,6 +11,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import {
+  AudioWaveform,
+  ChartNoAxesCombined,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+} from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface SideBarMenuBtnProps {
   href: string | string[];
@@ -88,20 +90,20 @@ export default function NavBarDashboardManagement() {
             <SideBarMenuBtn
               icon={Repeat}
               href={[
-                "/dashboard/managements/request",
-                "/dashboard/managements/request/create",
-                "/dashboard/managements/request/[id]",
+                "/dashboard/managements/general-request",
+                "/dashboard/managements/general-request/create",
+                "/dashboard/managements/general-request/[id]",
               ]}
               title="General Request"
             />
             <SideBarMenuBtn
-              icon={Repeat}
+              icon={AudioWaveform}
               href={[
-                "/dashboard/managements/request",
-                "/dashboard/managements/request/create",
-                "/dashboard/managements/request/[id]",
+                "/dashboard/managements/leave-request",
+                "/dashboard/managements/leave-request/create",
+                "/dashboard/managements/leave-request/[id]",
               ]}
-              title="Leave Request"
+              title="Leave Requeat"
             />
             <SideBarMenuBtn
               icon={NotebookPen}

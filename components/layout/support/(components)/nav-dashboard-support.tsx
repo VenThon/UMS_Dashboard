@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { Database, LucideIcon, NotebookPen, Repeat } from "lucide-react";
-import { useLocale } from "next-intl";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -13,6 +11,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import {
+  AudioWaveform,
+  Database,
+  LucideIcon,
+  NotebookPen,
+  Repeat,
+} from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface SideBarMenuBtnProps {
   href: string | string[];
@@ -82,13 +89,30 @@ export default function NavBarDashboardSupport() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={["/dashboard/support/request"]}
-              title="Request"
+              href={[
+                "/dashboard/support/general-request",
+                "/dashboard/support/general-request/create",
+                "/dashboard/support/general-request/[id]",
+              ]}
+              title="General Request"
+            />
+            <SideBarMenuBtn
+              icon={AudioWaveform}
+              href={[
+                "/dashboard/support/leave-request",
+                "/dashboard/support/leave-request/create",
+                "/dashboard/support/leave-request/[id]",
+              ]}
+              title="Leave Requeat"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={["/dashboard/support/report"]}
-              title="Rport"
+              href={[
+                "/dashboard/support/report",
+                "/dashboard/support/report/create",
+                "/dashboard/support/report/[id]",
+              ]}
+              title="Dialy Rport"
             />
           </SidebarMenuItem>
         </SidebarMenu>
