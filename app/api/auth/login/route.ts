@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import { generateAccessToken } from "@/lib/auth/jwt";
-import { logInSchema } from "@/db/validation/auth";
 import { UserRole } from "@/db/types/user.type";
+import { logInSchema } from "@/db/validation/auth";
+import { generateAccessToken } from "@/lib/auth/jwt";
+
+import bcrypt from "bcryptjs";
+import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   try {

@@ -1,7 +1,5 @@
 "use client";
 
-import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -11,11 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
+
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 
 export const description = "A multiple line chart";
 
@@ -119,7 +119,7 @@ export function RequestLeaveChartLineByEachRoles() {
       <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
+            <div className="text-muted-foreground flex items-center gap-2 leading-none">
               Track the approval and rejection status of leave requests.
             </div>
           </div>

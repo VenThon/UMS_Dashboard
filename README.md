@@ -36,51 +36,64 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Basic file structure of drizzle ORM
+
 [Drizzle Document](https://orm.drizzle.team/docs/get-started/postgresql-new)
 📦 <project root>
- ├ 📂 drizzle
- ├ 📂 src
- │   ├ 📂 db
- │   │  └ 📜 schema.ts
- │   └ 📜 index.ts
- ├ 📜 .env
- ├ 📜 drizzle.config.ts
- ├ 📜 package.json
- └ 📜 tsconfig.json
-
+├ 📂 drizzle
+├ 📂 src
+│ ├ 📂 db
+│ │ └ 📜 schema.ts
+│ └ 📜 index.ts
+├ 📜 .env
+├ 📜 drizzle.config.ts
+├ 📜 package.json
+└ 📜 tsconfig.json
 
 ## Integrate with DB
+
 - install and create file index.ts on folder db
-npm install drizzle-orm pg dotenv
-npm install -D drizzle-kit @types/pg
+  npm install drizzle-orm pg dotenv
+  npm install -D drizzle-kit @types/pg
 - create file drizzle.config.ts write connect to database URL
 - Below for run generate and migrate
-npm run db:generate
-npm run db:migrate
-###Run database on terminal
-psql -U postgres -d ums_dashboard
-
+  npm run db:generate
+  npm run db:migrate
+  ###Run database on terminal
+  psql -U postgres -d ums_dashboard
 
 ### Responsive for display gride-cols-4
+
 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
 
 ### After updated on db have to run
+
 npx drizzle-kit generate
 npx drizzle-kit migrate
 
-### Show alert message using sonner 
+### Show alert message using sonner
+
 For Install => npx shadcn@latest add sonner
 After install add <Toaster /> on default Layout
 
 ### Phone number field
-Install 
+
+Install
+
 ```bash
 npm install react-phone-number-input
 
 ```
 
-###For display flag icon
+### For display flag icon
+
 ```bash
 npm install libphonenumber-js react-country-flag
+
+```
+
+### Config Prettier
+
+```bash
+npm i prettier-plugin-tailwindcss
 
 ```

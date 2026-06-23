@@ -1,6 +1,7 @@
-import { createUserInput, updateUserInput } from "@/db/validation/users";
-import { apiFetcher } from "../fetcher";
 import { User } from "@/db/schema";
+import { createUserInput, updateUserInput } from "@/db/validation/users";
+
+import { apiFetcher } from "../fetcher";
 
 export async function ListAllUsersService(params: string) {
   const response = await fetch(`/api/admin/users?${params}`, {

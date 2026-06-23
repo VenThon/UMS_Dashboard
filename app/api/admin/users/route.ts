@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import { requireRole } from "@/lib/auth/require-role";
+import { UnderTeamEnum } from "@/db/types/team.type";
 import { USER_ROLE, UserRoleEnum } from "@/db/types/user.type";
 import { createUserSchema } from "@/db/validation/users";
+import { requireRole } from "@/lib/auth/require-role";
+
+import bcrypt from "bcryptjs";
+import { and, count, eq, ilike, or } from "drizzle-orm";
 import z from "zod";
-import { UnderTeamEnum } from "@/db/types/team.type";
-import { and, eq, ilike, or } from "drizzle-orm";
 
 const UserSearchParamSchema = z.object({
   page: z.coerce.number().int().positive().default(1),
@@ -65,12 +66,20 @@ export async function GET(request: NextRequest) {
     offset: (page - 1) * pageSize,
   });
 
+  const [{ total }] = await db
+    .select({
+      total: count(),
+    })
+    .from(usersTable);
+
   return NextResponse.json({
     message: "Users fetched successfully",
     data: users,
     pagination: {
       page,
       pageSize,
+      total,
+      totalPages: Math.ceil(total / pageSize),
     },
   });
 }

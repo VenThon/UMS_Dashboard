@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { count, eq, inArray } from "drizzle-orm";
 
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import { requireRole } from "@/lib/auth/require-role";
 import { USER_ROLE } from "@/db/types/user.type";
+import { requireRole } from "@/lib/auth/require-role";
+
+import { count, eq, inArray } from "drizzle-orm";
 
 export async function GET() {
   const { error } = await requireRole([USER_ROLE.ADMIN]);

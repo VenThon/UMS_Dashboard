@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+
 import { Plus } from "lucide-react";
 
 export function ButtonCreateUser() {
   return (
     <Button
       asChild
-      className="w-full bg-green-600 hover:bg-green-600 text-white sm:w-auto"
+      className="w-full bg-green-600 text-white hover:bg-green-600 sm:w-auto"
     >
       <Link
         href="/dashboard/admin/users/create"

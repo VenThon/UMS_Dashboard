@@ -1,13 +1,15 @@
 import {
+  boolean,
   pgTable,
   text,
-  boolean,
   timestamp,
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
-import { USER_ROLE } from "../types/user.type";
+
 import { UNDER_TEAM } from "../types/team.type";
+import { USER_ROLE } from "../types/user.type";
+
 // import { createInsertSchema } from "drizzle-zod";
 
 export const usersTable = pgTable("users", {

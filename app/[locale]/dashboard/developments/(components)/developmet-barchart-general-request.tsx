@@ -1,7 +1,5 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -11,11 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
+
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 export const description = "A multiple bar chart";
 
@@ -73,7 +73,7 @@ export function GeneralRequestChartBarByEachRoles() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start text-sm">
-        <div className="leading-none text-muted-foreground">
+        <div className="text-muted-foreground leading-none">
           Displays the total number of approved and rejected requests for quick
           monitoring.
         </div>

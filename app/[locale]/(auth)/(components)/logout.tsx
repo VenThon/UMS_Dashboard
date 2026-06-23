@@ -27,10 +27,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 import { LogoutService } from "@/service/auth/auth.service";
+
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export function useLogout(locale: string) {
   const router = useRouter();

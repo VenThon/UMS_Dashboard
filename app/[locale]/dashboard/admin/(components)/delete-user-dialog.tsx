@@ -1,4 +1,6 @@
 "use clientt";
+import { useCallback } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,8 +13,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDeleteUser } from "@/hooks/admin/users.hook";
+
 import { ShieldQuestionMark, Trash2 } from "lucide-react";
-import { useCallback } from "react";
+
 type DeleteProps = {
   id: string;
 };
@@ -37,8 +40,8 @@ export function DeleteUserDialog({ id }: DeleteProps) {
               <ShieldQuestionMark size={32} className="text-amber-600" />
             </div>
           </div>
-          <DialogTitle className="text-center mt-4">Delete User</DialogTitle>
-          <DialogDescription className="text-center mt-2">
+          <DialogTitle className="mt-4 text-center">Delete User</DialogTitle>
+          <DialogDescription className="mt-2 text-center">
             Are you sure you want to delete this user? This action cannot be
             undone.
           </DialogDescription>

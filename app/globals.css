@@ -109,14 +109,14 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: #14532d;
+  --sidebar: #2b2c2b;
   --sidebar-foreground: #ffffff;
-  --sidebar-accent: #166534;
+  --sidebar-accent: #4e5353;
   --sidebar-accent-foreground: #ffffff;
-  
+
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  
+
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }

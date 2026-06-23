@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Label,
-  PolarGrid,
-  PolarRadiusAxis,
-  RadialBar,
-  RadialBarChart,
-} from "recharts";
+import { useState } from "react";
 
 import {
   Card,
@@ -15,9 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
-import { useState } from "react";
-import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
+import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import {
   Select,
   SelectContent,
@@ -25,6 +17,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAdminStatisticsDisplayRolesByYearHook } from "@/hooks/admin/statistics.hook";
+
+import {
+  Label,
+  PolarGrid,
+  PolarRadiusAxis,
+  RadialBar,
+  RadialBarChart,
+} from "recharts";
 
 export function QualityAssuranceChartRadial() {
   const currentYear = new Date().getFullYear();
@@ -133,8 +134,8 @@ export function QualityAssuranceChartRadial() {
           </ChartContainer>
         )}
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-xs text-center">
-        <div className="leading-none text-muted-foreground">
+      <CardFooter className="flex-col gap-2 text-center text-xs">
+        <div className="text-muted-foreground leading-none">
           Shows the number of QA professionals responsible for manual testing,
           automated testing.
         </div>

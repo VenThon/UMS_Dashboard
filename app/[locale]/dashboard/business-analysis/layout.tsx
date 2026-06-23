@@ -1,5 +1,7 @@
-import { DashboardLayoutBusinessAndAnalysis } from "@/components/layout/business-analysis/dashboardd-layout-business-analysis";
 import { ReactNode } from "react";
+
+import { DashboardLayoutBusinessAndAnalysis } from "@/components/layout/business-analysis/dashboardd-layout-business-analysis";
+
 interface LayoutProps {
   children: ReactNode;
 }

@@ -12,8 +12,8 @@ import {
 import { UnderTeam, UnderTeamLabel } from "@/db/types/team.type";
 import { UserRole, UserRoleLabels } from "@/db/types/user.type";
 import { GetUserByIdService } from "@/service/user/user.service";
-import { useQuery } from "@tanstack/react-query";
 
+import { useQuery } from "@tanstack/react-query";
 import {
   BookUser,
   CircleUser,
@@ -23,8 +23,10 @@ import {
   Phone,
   UsersRound,
 } from "lucide-react";
-import { getCountryCode } from "./get-country-code";
 import ReactCountryFlag from "react-country-flag";
+
+import { getCountryCode } from "./get-country-code";
+
 type ViewDetailProps = {
   id: string;
 };
@@ -84,7 +86,7 @@ export function ViewDetailUserDialog({ id }: ViewDetailProps) {
         </DialogTrigger>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle className="font-medium text-xl">
+            <DialogTitle className="text-xl font-medium">
               User Details
             </DialogTitle>
             <DialogDescription>

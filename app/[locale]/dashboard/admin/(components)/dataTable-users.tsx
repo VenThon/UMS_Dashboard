@@ -6,18 +6,19 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { User } from "@/db/schema";
+import { UnderTeam } from "@/db/types/team.type";
+import { USER_ROLE, UserRole } from "@/db/types/user.type";
 import { Link } from "@/i18n/navigation";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { SquarePen } from "lucide-react";
+import ReactCountryFlag from "react-country-flag";
+
 import { DeleteUserDialog } from "./delete-user-dialog";
-import { USER_ROLE, UserRole } from "@/db/types/user.type";
+import { getCountryCode } from "./get-country-code";
 import { UserRoleSwitch } from "./user-role-switch";
 import { UserTeamSwitch } from "./user-team-switch";
-import { UnderTeam } from "@/db/types/team.type";
 import { ViewDetailUserDialog } from "./user-view-detail-dialog";
-import ReactCountryFlag from "react-country-flag";
-import { getCountryCode } from "./get-country-code";
 
 export const columnsDataTableUsers: ColumnDef<User>[] = [
   {
@@ -103,7 +104,7 @@ export const columnsDataTableUsers: ColumnDef<User>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       return (
-        <section className="flex items-center gap-1.5 justify-center">
+        <section className="flex items-center justify-center gap-1.5">
           {row.original.role !== USER_ROLE.ADMIN && (
             <>
               <Tooltip>
