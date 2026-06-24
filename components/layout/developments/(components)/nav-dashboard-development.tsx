@@ -103,7 +103,7 @@ export default function NavBarDashboardDevelopment() {
                 "/dashboard/developments/leave-request/create",
                 "/dashboard/developments/leave-request/[id]",
               ]}
-              title="Leave Requeat"
+              title="Leave Request"
             />
             <SideBarMenuBtn
               icon={NotebookPen}

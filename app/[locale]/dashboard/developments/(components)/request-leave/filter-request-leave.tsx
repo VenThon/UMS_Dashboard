@@ -11,21 +11,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  REQUEST_STATUS,
-  Requeststatus,
-  Requeststatuslabel,
-} from "@/db/types/status.type";
+  REQUEST_LEAVE_STATUS,
+  REQUEST_LEAVE_STATUS_LABELS,
+  RequestLeaveStatus,
+} from "@/db/constants/request-leave-status";
 import { useRouter } from "@/i18n/navigation";
 
 import { Check, ListFilter } from "lucide-react";
 
-export function FilterReportDevelopmentTeam() {
+export function FilterRequestLeaveDevelopmentTeam() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const currentStatus = searchParams.get("status") as Requeststatus | null;
+  const currentStatus = searchParams.get("status") as RequestLeaveStatus | null;
 
-  const handleGenderChange = (status: Requeststatus | "") => {
+  const handleGenderChange = (status: RequestLeaveStatus | "") => {
     const params = new URLSearchParams(searchParams);
 
     if (status) {
@@ -55,8 +55,8 @@ export function FilterReportDevelopmentTeam() {
             <span>All</span>
           </DropdownMenuItem>
 
-          {Object.values(REQUEST_STATUS).map((status) => {
-            const labels = Requeststatuslabel[status];
+          {Object.values(REQUEST_LEAVE_STATUS).map((status) => {
+            const labels = REQUEST_LEAVE_STATUS_LABELS[status];
             return (
               <DropdownMenuItem
                 key={status}

@@ -1,8 +1,7 @@
 "use client";
-
 import { useSearchParams } from "next/navigation";
 
-import { MockDataDevelopmentTeam } from "@/app/[locale]/mock/development-team";
+import { MockDataRequestLeave } from "@/app/[locale]/mock/development-team";
 import { DataTable } from "@/components/data-table";
 import {
   Card,
@@ -13,11 +12,11 @@ import {
 } from "@/components/ui/card";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
 
-import { ButtonCreateUser } from "../../../admin/(components)/button-create-user";
-import { columnsDataTableDevelopmentTeam } from "./data-table-developement";
-import { FilterReportDevelopmentTeam } from "./filter-report";
+import { ButtonSubmitRequestLeave } from "./button-submit-request-leave";
+import { columnsDataTableRequestLeaveDevelopmentTeam } from "./data-table-request-leave-development";
+import { FilterRequestLeaveDevelopmentTeam } from "./filter-request-leave";
 
-export function DialyReportListingPage() {
+export function RequestLeaveListing() {
   const searchParam = useSearchParams();
   const page = Number.parseInt(searchParam.get("page") || "1");
   const pageSize = Number.parseInt(searchParam.get("pageSize") || "10");
@@ -28,22 +27,22 @@ export function DialyReportListingPage() {
     <section>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Daily Development Reports</CardTitle>
+          <CardTitle className="text-2xl">Request Leave</CardTitle>
           <CardDescription>
             Monitor, review, and manage daily reports submitted by developers to
             ensure project progress and team alignment.
           </CardDescription>
         </CardHeader>
         <CardContent className="mt-4 flex gap-2">
-          <FilterReportDevelopmentTeam />
-          <ButtonCreateUser />
+          <FilterRequestLeaveDevelopmentTeam />
+          <ButtonSubmitRequestLeave />
         </CardContent>
       </Card>
       <div className="mt-8">
         <div>
           <DataTable
-            data={MockDataDevelopmentTeam}
-            columns={columnsDataTableDevelopmentTeam}
+            data={MockDataRequestLeave}
+            columns={columnsDataTableRequestLeaveDevelopmentTeam}
           />
         </div>
         <div className="mt-5 flex justify-between">
