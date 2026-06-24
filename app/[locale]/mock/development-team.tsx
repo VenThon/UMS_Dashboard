@@ -3,6 +3,14 @@ import {
   DailyReportTypes,
 } from "@/db/constants/daily-report-status";
 import {
+  GENERAL_REQUEST_STATUSES,
+  GENERAL_REQUEST_TYPES,
+  GeneralRequestStatus,
+  GeneralRequestType,
+  REQUEST_PRIORITIES,
+  StatusRequestPriority,
+} from "@/db/constants/general-request";
+import {
   LEAVE_TYPES,
   LeaveTypes,
   REQUEST_LEAVE_STATUS,
@@ -30,6 +38,20 @@ export type RequestLeaveProps = {
   durationDays: string;
   reason: string;
   status: RequestLeaveStatus;
+};
+
+export type GeneralRequestProps = {
+  id: number;
+  requestType: GeneralRequestType;
+  title: string;
+  description: string;
+  reason: string;
+  expectedBenefit?: string;
+  priority: StatusRequestPriority;
+  requiredDate?: string;
+  estimatedCost?: number;
+  currency?: "USD" | "KHR";
+  status: GeneralRequestStatus;
 };
 
 export const MockDataDevelopmentTeam: dataProps[] = [
@@ -68,5 +90,40 @@ export const MockDataRequestLeave: RequestLeaveProps[] = [
     durationDays: "1 day",
     reason: "Sick ",
     status: REQUEST_LEAVE_STATUS.PENDING,
+  },
+];
+
+export const mockDataGeneralRequests: GeneralRequestProps[] = [
+  {
+    id: 1,
+    requestType: GENERAL_REQUEST_TYPES.EQUIPMENT,
+    title: "Request for a new development laptop",
+    description:
+      "Requesting a new laptop with enough performance for frontend development and Docker.",
+    reason:
+      "The current laptop is slow and frequently crashes while running development tools.",
+    expectedBenefit:
+      "It will improve development performance and reduce delays in project delivery.",
+    priority: REQUEST_PRIORITIES.HIGH,
+    requiredDate: "30-06-2026",
+    estimatedCost: 1200,
+    currency: "USD",
+    status: GENERAL_REQUEST_STATUSES.PENDING,
+  },
+  {
+    id: 2,
+    requestType: GENERAL_REQUEST_TYPES.LANGUAGE_COURSE,
+    title: "Request to attend an English course",
+    description:
+      "Requesting support to attend an English communication course.",
+    reason:
+      "English communication is important for technical documentation and international collaboration.",
+    expectedBenefit:
+      "It will improve communication with stakeholders and understanding of technical resources.",
+    priority: REQUEST_PRIORITIES.LOW,
+    requiredDate: "15-07-2026",
+    estimatedCost: 350,
+    currency: "USD",
+    status: GENERAL_REQUEST_STATUSES.UNDER_REVIEW,
   },
 ];
