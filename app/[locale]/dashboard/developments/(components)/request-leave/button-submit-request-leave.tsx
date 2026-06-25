@@ -14,7 +14,7 @@ export function ButtonSubmitRequestLeave() {
         className="flex items-center gap-2"
       >
         <Plus className="h-4 w-4 rounded-full bg-white p-0.5 text-green-600" />
-        <span>Request New</span>
+        <span>Request</span>
       </Link>
     </Button>
   );

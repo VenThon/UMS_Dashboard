@@ -54,3 +54,18 @@ export const REQUEST_LEAVE_STATUS_LABELS: Record<RequestLeaveStatus, string> = {
   [REQUEST_LEAVE_STATUS.REJECTED]: "Rejected",
   [REQUEST_LEAVE_STATUS.CANCEL]: "Cancel",
 };
+
+export const LEAVE_DURATION_TYPES = {
+  FULL_DAY: "full_day",
+  HALF_DAY_MORNING: "half_day_morning",
+  HALF_DAY_AFTERNOON: "half_day_afternoon",
+} as const;
+
+export type LeaveDurationType =
+  (typeof LEAVE_DURATION_TYPES)[keyof typeof LEAVE_DURATION_TYPES];
+
+export const LEAVE_DURATION_LABELS: Record<LeaveDurationType, string> = {
+  [LEAVE_DURATION_TYPES.FULL_DAY]: "Full day",
+  [LEAVE_DURATION_TYPES.HALF_DAY_MORNING]: "Half-day morning",
+  [LEAVE_DURATION_TYPES.HALF_DAY_AFTERNOON]: "Half-day afternoon",
+};

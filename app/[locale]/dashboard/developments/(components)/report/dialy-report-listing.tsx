@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
 
-import { ButtonCreateUser } from "../../../admin/(components)/button-create-user";
+import { ButtonCreateDailyReport } from "./button-daily-report";
 import { columnsDataTableDevelopmentTeam } from "./data-table-developement";
 import { FilterReportDevelopmentTeam } from "./filter-report";
 
@@ -36,7 +36,7 @@ export function DialyReportListingPage() {
         </CardHeader>
         <CardContent className="mt-4 flex gap-2">
           <FilterReportDevelopmentTeam />
-          <ButtonCreateUser />
+          <ButtonCreateDailyReport />
         </CardContent>
       </Card>
       <div className="mt-8">

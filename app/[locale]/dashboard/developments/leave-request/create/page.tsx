@@ -1,3 +1,5 @@
+import { RequestLeaveForm } from "../../(components)/request-leave/request-leave-form";
+
 export default function Page() {
-  return <div>Request Page form</div>;
+  return <RequestLeaveForm />;
 }
