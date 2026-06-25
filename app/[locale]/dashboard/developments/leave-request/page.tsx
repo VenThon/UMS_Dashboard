@@ -1,3 +1,5 @@
+import { RequestLeaveListing } from "../(components)/request-leave/request-leave-listing";
+
 export default function Page() {
-  return <div>Leave request page</div>;
+  return <RequestLeaveListing />;
 }

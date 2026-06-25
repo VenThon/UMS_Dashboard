@@ -1,9 +1,5 @@
-import React from "react";
+import { DialyReportListingPage } from "../(components)/report/dialy-report-listing";
 
-export default function page() {
-  return (
-    <div>
-      <p>Dialy Report Page</p>
-    </div>
-  );
+export default function Page() {
+  return <DialyReportListingPage />;
 }
