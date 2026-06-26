@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
+import { Form } from "@/components/ui/form";
 import {
   CreateDailyReportFormValues,
   createDailyReportSchema,
@@ -19,8 +19,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { Save, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
+
 import { DailyReportFields } from "./daily-report-fields";
-import { Form } from "@/components/ui/form";
 
 export function CreateDailyReportForm() {
   const router = useRouter();

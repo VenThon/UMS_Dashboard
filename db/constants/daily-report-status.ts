@@ -20,3 +20,20 @@ export const DAILY_REPORT_STATUS_LABELS: Record<DailyReportTypes, string> = {
   [DAILY_REPORT_STATUS.APPROVED]: "Approved",
   [DAILY_REPORT_STATUS.REJECTED]: "Rejected",
 };
+
+export const REVIEW_REPORT_STATUS = {
+  APPROVED: "approved",
+  REJECTED: "rejected",
+} as const;
+export type ReviewReportTypes =
+  (typeof REVIEW_REPORT_STATUS)[keyof typeof REVIEW_REPORT_STATUS];
+
+export const ReviewDailyReportStatusSchema = z.enum([
+  REVIEW_REPORT_STATUS.APPROVED,
+  REVIEW_REPORT_STATUS.REJECTED,
+]);
+
+export const REVIEW_REPORT_STATUS_LABELS: Record<ReviewReportTypes, string> = {
+  [REVIEW_REPORT_STATUS.APPROVED]: "Approved",
+  [REVIEW_REPORT_STATUS.REJECTED]: "Rejected",
+};
