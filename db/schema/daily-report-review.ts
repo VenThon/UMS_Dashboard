@@ -7,14 +7,15 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { dailyReportTable } from "./daily-report";
-import { usersTable } from "./users";
+import { createInsertSchema } from "drizzle-zod";
+import z from "zod";
+
 import {
   REVIEW_REPORT_STATUS,
   ReviewReportTypes,
 } from "../constants/daily-report-status";
-import z from "zod";
-import { createInsertSchema } from "drizzle-zod";
+import { dailyReportTable } from "./daily-report";
+import { usersTable } from "./users";
 
 export const reviewDailyReportTable = pgTable(
   "daily_report_reviews",
