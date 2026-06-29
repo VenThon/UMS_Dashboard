@@ -1,9 +1,9 @@
-import React from "react";
+import { GeneralRequestListing } from "../(components)/general-request/general-request-listing";
 
 export default function page() {
   return (
     <div>
-      <p>General Request Page</p>
+      <GeneralRequestListing />
     </div>
   );
 }
