@@ -1,102 +1,44 @@
-"use client";
+// import { useState } from "react";
 
-import { useState } from "react";
+// import { DAILY_REPORT_STATUS } from "@/db/constants/daily-report-status";
+// import { ReviewDailyReportDialog } from "../(components)/review-daily-report-dailog";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+// type DailyReportActionsProps = {
+//   item: {
+//     id: number;
+//     status: string;
+//   };
+//   canReview: boolean;
+// };
 
-import { CheckCircle2, XCircle } from "lucide-react";
+// export default function DailyReportActions({
+//   item,
+//   canReview,
+// }: DailyReportActionsProps) {
+//   const [openReview, setOpenReview] = useState(false);
 
-import { ReviewStatusDialog } from "../(components)/review-daily-report-dailog";
+//   const isPending = item.status === DAILY_REPORT_STATUS.PENDING;
 
-type ReviewStatus = "approved" | "rejected";
+//   return (
+//     <>
+//       <div className="flex gap-2">
+//         <button className="rounded-md border px-3 py-2">View</button>
 
-export default function RequestReviewActions() {
-  const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState<ReviewStatus>("approved");
-  const [isPending, setIsPending] = useState(false);
+//         {canReview && isPending && (
+//           <button
+//             className="bg-primary text-primary-foreground rounded-md px-3 py-2"
+//             onClick={() => setOpenReview(true)}
+//           >
+//             Review
+//           </button>
+//         )}
+//       </div>
 
-  const openDialog = (reviewStatus: ReviewStatus) => {
-    setStatus(reviewStatus);
-    setOpen(true);
-  };
-
-  const handleConfirm = async ({
-    status,
-    reason,
-  }: {
-    status: ReviewStatus;
-    reason?: string;
-  }) => {
-    try {
-      setIsPending(true);
-
-      console.log({
-        status,
-        reason,
-      });
-
-      // Example API request:
-      // await reviewRequestMutation.mutateAsync({
-      //   requestId: "request-id",
-      //   status,
-      //   reason,
-      // });
-    } finally {
-      setIsPending(false);
-    }
-  };
-
-  return (
-    <>
-      <Card className="mx-auto w-full max-w-3xl space-y-5">
-        <CardHeader className="flex items-center justify-between">
-          <div>
-            <CardTitle>Daily Report Review</CardTitle>
-            <CardDescription>
-              Daily report submitted for June 26, 2026. Please verify the report
-              before making your final decision.
-            </CardDescription>
-          </div>
-          <p className="mt-1 font-medium text-amber-600">Pending review</p>
-        </CardHeader>
-
-        <CardContent className="grid grid-cols-2 gap-2">
-          <Button
-            type="button"
-            variant="destructive"
-            className="w-full sm:w-auto"
-            onClick={() => openDialog("rejected")}
-          >
-            <XCircle />
-            Reject Request
-          </Button>
-
-          <Button
-            type="button"
-            className="w-full bg-green-100 text-green-700 sm:w-auto"
-            onClick={() => openDialog("approved")}
-          >
-            <CheckCircle2 />
-            Approve Request
-          </Button>
-        </CardContent>
-      </Card>
-
-      <ReviewStatusDialog
-        open={open}
-        onOpenChange={setOpen}
-        status={status}
-        requestTitle="Daily report for June 26, 2026"
-        isPending={isPending}
-        onConfirm={handleConfirm}
-      />
-    </>
-  );
-}
+//       <ReviewDailyReportDialog
+//         reportId={item.id}
+//         open={openReview}
+//         onOpenChange={setOpenReview}
+//       />
+//     </>
+//   );
+// }

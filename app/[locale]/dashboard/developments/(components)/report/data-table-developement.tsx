@@ -1,124 +1,171 @@
 "use client";
 
-import { dataProps } from "@/app/[locale]/mock/development-team";
 import { ReportTypesStatusBadge } from "@/components/badge/status-report";
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { DAILY_REPORT_STATUS } from "@/db/constants/daily-report-status";
+import { USER_ROLE, UserRole } from "@/db/types/user.type";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, SquarePen } from "lucide-react";
 
-export const columnsDataTableDevelopmentTeam: ColumnDef<dataProps>[] = [
-  {
-    accessorKey: "id",
-    header: () => <div className="ml-2">Nº</div>,
-    enableHiding: false,
-    cell: ({ row, table }) => {
-      return (
-        <div className="ml-2">
-          {(table
+import { ApproveDailyReportButton } from "./approve-button";
+import { DailyReportItem } from "./daily-report.type";
+import { DeleteDailyReportDialog } from "./delete-daily-report-button";
+import { UpdateDailyReportDialog } from "./edit-daily-report";
+import { RejectDailyReportDialog } from "./reject-button";
+import { SubmitDailyReportButton } from "./submit-resubmit-button";
+import { ViewDailyReportDetailDialog } from "./view-daily-report-detail-dialog";
+
+const REVIEW_ROLES: readonly UserRole[] = [
+  USER_ROLE.LEAD_FRONTEND,
+  USER_ROLE.LEAD_BACKEND,
+];
+export function getColumnsDataTableDevelopmentTeam({
+  currentUserId,
+  currentUserRole,
+}: {
+  currentUserId: string;
+  currentUserRole: UserRole;
+}): ColumnDef<DailyReportItem>[] {
+  return [
+    {
+      accessorKey: "id",
+      header: () => <div className="ml-2">Nº</div>,
+      enableHiding: false,
+      cell: ({ row, table }) => {
+        const rowNumber =
+          table
             .getSortedRowModel()
-            ?.flatRows?.findIndex((flatRow) => flatRow.id === row.id) || 0) + 1}
-        </div>
-      );
+            .flatRows.findIndex((flatRow) => flatRow.id === row.id) + 1;
+
+        return <div className="ml-2">{rowNumber}</div>;
+      },
     },
-  },
-  {
-    accessorKey: "projectName",
-    header: "Project Name",
-    cell: ({ row }) => {
-      return <section>{row.original.projectName}</section>;
+    {
+      accessorKey: "projectName",
+      header: "Project Name",
+      cell: ({ row }) => <section>{row.original.projectName}</section>,
     },
-  },
-  {
-    accessorKey: "reportDate",
-    header: "Report Date",
-    cell: ({ row }) => {
-      return <section>{row.original.reportDate}</section>;
+    {
+      accessorKey: "reportDate",
+      header: "Report Date",
+      cell: ({ row }) => <section>{row.original.reportDate}</section>,
     },
-  },
-  {
-    accessorKey: "previousTasks",
-    header: "Previous Task",
-    cell: ({ row }) => {
-      return <section>{row.original.previousTasks}</section>;
+    {
+      accessorKey: "previousTasks",
+      header: "Previous Tasks",
+      cell: ({ row }) => (
+        <section className="max-w-55 truncate">
+          {row.original.previousTasks}
+        </section>
+      ),
     },
-  },
-  {
-    accessorKey: "completedTasks",
-    header: "Commpleted Task",
-    cell: ({ row }) => {
-      return <section>{row.original.completedTasks}</section>;
+    {
+      accessorKey: "completedTasks",
+      header: "Completed Tasks",
+      cell: ({ row }) => (
+        <section className="max-w-55 truncate">
+          {row.original.completedTasks}
+        </section>
+      ),
     },
-  },
-  {
-    accessorKey: "inProgressTasks",
-    header: "In Progess Task",
-    cell: ({ row }) => {
-      return <section>{row.original.inProgressTasks}</section>;
+    {
+      accessorKey: "inProgressTasks",
+      header: "In-progress Tasks",
+      cell: ({ row }) => (
+        <section className="max-w-55 truncate">
+          {row.original.inProgressTasks}
+        </section>
+      ),
     },
-  },
-  {
-    accessorKey: "blockers",
-    header: "Bloacked Task",
-    cell: ({ row }) => {
-      return <section>{row.original.blockers}</section>;
+    {
+      accessorKey: "blockers",
+      header: "Blockers",
+      cell: ({ row }) => (
+        <section className="max-w-55 truncate">
+          {row.original.blockers || "No blockers"}
+        </section>
+      ),
     },
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      return (
+    {
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => (
         <section>
           <ReportTypesStatusBadge status={row.original.status} />
         </section>
-      );
+      ),
     },
-  },
-  {
-    id: "actions",
-    header: () => <span className="flex justify-center">Actions</span>,
-    enableHiding: false,
-    cell: ({ row }) => {
-      return (
-        <section className="flex items-center justify-center gap-1.5">
-          <>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  aria-label="View Report"
-                  className="bg-blue-600 p-2 text-white hover:bg-blue-500"
-                >
-                  <Eye className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>View Report</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  aria-label="Edit Report"
-                  className="bg-[#058248] text-white hover:bg-green-600"
-                >
-                  <SquarePen className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Edit Report</p>
-              </TooltipContent>
-            </Tooltip>
-          </>
-        </section>
-      );
+    {
+      id: "actions",
+      header: () => <span className="flex justify-center">Actions</span>,
+      enableHiding: false,
+      cell: ({ row }) => {
+        const item = row.original;
+
+        // const isDraft = item.status === DAILY_REPORT_STATUS.DRAFT;
+        // const isPending = item.status === DAILY_REPORT_STATUS.PENDING;
+        // const isRejected = item.status === DAILY_REPORT_STATUS.REJECTED;
+        // const isApproved = item.status === DAILY_REPORT_STATUS.APPROVED;
+        // const canView = isPending || isApproved;
+        // const canEdit = isDraft || isPending || isRejected;
+        // const canSubmit = isDraft;
+        // const canResubmit = isRejected;
+        // const canDelete = item.status === DAILY_REPORT_STATUS.DRAFT;
+        // const canReview = isPending && REVIEW_ROLES.includes(currentUserRole);
+
+        // console.log({
+        //   currentUserRole,
+        //   status: item.status,
+        //   isPending,
+        //   canReview,
+        // });
+        const isOwner = item.userId === currentUserId;
+
+        const isDraft = item.status === DAILY_REPORT_STATUS.DRAFT;
+        const isPending = item.status === DAILY_REPORT_STATUS.PENDING;
+        const isRejected = item.status === DAILY_REPORT_STATUS.REJECTED;
+        const isApproved = item.status === DAILY_REPORT_STATUS.APPROVED;
+
+        const isReviewer = REVIEW_ROLES.includes(currentUserRole);
+
+        const canReview = isReviewer && !isOwner && isPending;
+
+        const canView = isPending || isApproved || canReview || isRejected;
+
+        const canEdit = isOwner && (isDraft || isPending || isRejected);
+
+        const canSubmit = isOwner && isDraft;
+
+        const canResubmit = isOwner && isRejected;
+
+        const canDelete = isOwner && isDraft;
+
+        return (
+          <section className="flex items-center justify-center gap-1.5">
+            <div className="flex items-center justify-end gap-2">
+              {canView && <ViewDailyReportDetailDialog item={item} />}
+
+              {canEdit && <UpdateDailyReportDialog item={item} />}
+
+              {canSubmit && (
+                <SubmitDailyReportButton id={item.id} type="submit" />
+              )}
+
+              {canResubmit && (
+                <SubmitDailyReportButton id={item.id} type="resubmit" />
+              )}
+
+              {canDelete && <DeleteDailyReportDialog id={item.id} />}
+
+              {canReview && (
+                <>
+                  <ApproveDailyReportButton id={item.id} />
+                  <RejectDailyReportDialog id={item.id} />
+                </>
+              )}
+            </div>
+          </section>
+        );
+      },
     },
-  },
-];
+  ];
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "daily_reports" ALTER COLUMN "user_id" SET DATA TYPE uuid;

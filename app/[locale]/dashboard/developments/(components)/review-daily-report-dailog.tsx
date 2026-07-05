@@ -1,169 +1,112 @@
-"use client";
+// "use client";
 
-import { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { useReviewDailyReport } from "@/hooks/report/use-daily-report";
+// import {
+//   ReviewDailyReportFormValues,
+//   reviewDailyReportSchema,
+// } from "@/db/schema/daily-report-review";
+// import { REVIEW_REPORT_STATUS } from "@/db/constants/daily-report-status";
 
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+// type ReviewDailyReportDialogProps = {
+//   reportId: number;
+//   open: boolean;
+//   onOpenChange: (open: boolean) => void;
+// };
 
-import { CheckCircle2, XCircle } from "lucide-react";
+// export function ReviewDailyReportDialog({
+//   reportId,
+//   open,
+//   onOpenChange,
+// }: ReviewDailyReportDialogProps) {
+//   const reviewDailyReport = useReviewDailyReport();
 
-type ReviewStatus = "approved" | "rejected";
+//   const form = useForm<ReviewDailyReportFormValues>({
+//     resolver: zodResolver(reviewDailyReportSchema),
+//     defaultValues: {
+//       status: REVIEW_REPORT_STATUS.APPROVED,
+//       comment: "",
+//     },
+//   });
 
-interface ReviewStatusDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  status: ReviewStatus;
-  requestTitle?: string;
-  isPending?: boolean;
-  onConfirm: (data: {
-    status: ReviewStatus;
-    reason?: string;
-  }) => Promise<void> | void;
-}
+//   function onSubmit(values: ReviewDailyReportFormValues) {
+//     reviewDailyReport.mutate(
+//       {
+//         id: reportId,
+//         values,
+//       },
+//       {
+//         onSuccess: () => {
+//           form.reset();
+//           onOpenChange(false);
+//         },
+//       },
+//     );
+//   }
 
-export function ReviewStatusDialog({
-  open,
-  onOpenChange,
-  status,
-  requestTitle,
-  isPending = false,
-  onConfirm,
-}: ReviewStatusDialogProps) {
-  const [reason, setReason] = useState("");
-  const [error, setError] = useState("");
+//   if (!open) return null;
 
-  const isApproved = status === "approved";
+//   return (
+//     <div className="bg-background rounded-lg border p-4 shadow-sm">
+//       <h2 className="text-lg font-semibold">Review Daily Report</h2>
+//       <p className="text-muted-foreground text-sm">
+//         Approve or reject this daily report.
+//       </p>
 
-  const handleConfirm = async () => {
-    if (!isApproved && !reason.trim()) {
-      setError("Please provide a reason for rejecting this request.");
-      return;
-    }
+//       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4 space-y-4">
+//         <div className="space-y-2">
+//           <label>Status</label>
 
-    await onConfirm({
-      status,
-      reason: isApproved ? undefined : reason.trim(),
-    });
+//           <select
+//             {...form.register("status")}
+//             className="w-full rounded-md border px-3 py-2"
+//           >
+//             <option value={REVIEW_REPORT_STATUS.APPROVED}>Approved</option>
+//             <option value={REVIEW_REPORT_STATUS.REJECTED}>Rejected</option>
+//           </select>
 
-    setReason("");
-    setError("");
-    onOpenChange(false);
-  };
+//           {form.formState.errors.status && (
+//             <p className="text-sm text-red-500">
+//               {form.formState.errors.status.message}
+//             </p>
+//           )}
+//         </div>
 
-  const handleOpenChange = (value: boolean) => {
-    if (!value) {
-      setReason("");
-      setError("");
-    }
+//         <div className="space-y-2">
+//           <label>Comment</label>
 
-    onOpenChange(value);
-  };
+//           <textarea
+//             {...form.register("comment")}
+//             className="min-h-24 w-full rounded-md border px-3 py-2"
+//             placeholder="Write review comment..."
+//           />
 
-  return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader className="flex items-center justify-center">
-          <div
-            className={`mb-3 flex size-16 items-center justify-center rounded-full ${
-              isApproved
-                ? "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400"
-                : "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400"
-            }`}
-          >
-            {isApproved ? (
-              <CheckCircle2 className="size-6" />
-            ) : (
-              <XCircle className="size-6" />
-            )}
-          </div>
+//           {form.formState.errors.comment && (
+//             <p className="text-sm text-red-500">
+//               {form.formState.errors.comment.message}
+//             </p>
+//           )}
+//         </div>
 
-          <DialogTitle>
-            {isApproved ? "Approve request" : "Reject request"}
-          </DialogTitle>
+//         <div className="flex justify-end gap-2">
+//           <button
+//             type="button"
+//             onClick={() => onOpenChange(false)}
+//             className="rounded-md border px-4 py-2"
+//           >
+//             Cancel
+//           </button>
 
-          <DialogDescription>
-            {isApproved
-              ? "Are you sure you want to approve this request?"
-              : "Please provide a reason before rejecting this request."}
-          </DialogDescription>
-        </DialogHeader>
-
-        {requestTitle && (
-          <div className="bg-muted/40 rounded-lg border p-3">
-            <p className="text-muted-foreground text-xs">Request</p>
-            <p className="mt-1 text-sm font-medium">{requestTitle}</p>
-          </div>
-        )}
-
-        {!isApproved && (
-          <div className="space-y-2">
-            <Label htmlFor="rejection-reason">
-              Rejection reason <span className="text-destructive">*</span>
-            </Label>
-
-            <Textarea
-              id="rejection-reason"
-              value={reason}
-              onChange={(event) => {
-                setReason(event.target.value);
-
-                if (error) {
-                  setError("");
-                }
-              }}
-              placeholder="Explain why this request is being rejected..."
-              rows={5}
-              disabled={isPending}
-              aria-invalid={Boolean(error)}
-            />
-
-            <div className="flex items-center justify-between">
-              {error ? (
-                <p className="text-destructive text-sm">{error}</p>
-              ) : (
-                <span />
-              )}
-
-              <p className="text-muted-foreground text-xs">
-                {reason.length}/500
-              </p>
-            </div>
-          </div>
-        )}
-
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline" disabled={isPending}>
-              Cancel
-            </Button>
-          </DialogClose>
-
-          <Button
-            type="button"
-            variant={isApproved ? "default" : "destructive"}
-            disabled={isPending}
-            onClick={handleConfirm}
-          >
-            {isPending
-              ? isApproved
-                ? "Approving..."
-                : "Rejecting..."
-              : isApproved
-                ? "Confirm approval"
-                : "Confirm rejection"}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
+//           <button
+//             type="submit"
+//             disabled={reviewDailyReport.isPending}
+//             className="bg-primary text-primary-foreground rounded-md px-4 py-2"
+//           >
+//             {reviewDailyReport.isPending ? "Reviewing..." : "Submit Review"}
+//           </button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// }

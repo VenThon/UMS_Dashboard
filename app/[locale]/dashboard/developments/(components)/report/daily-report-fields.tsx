@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -102,7 +101,9 @@ export function DailyReportFields() {
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                       mode="single"
-                      selected={field.value}
+                      selected={
+                        field.value instanceof Date ? field.value : undefined
+                      }
                       onSelect={field.onChange}
                       disabled={(date) => date > new Date()}
                       autoFocus
@@ -143,11 +144,6 @@ export function DailyReportFields() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormDescription>
-                  Include tasks planned or assigned before this report.
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -170,11 +166,6 @@ export function DailyReportFields() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormDescription>
-                  Mention completed features, bug fixes, or code reviews.
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -197,11 +188,6 @@ export function DailyReportFields() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormDescription>
-                  Include the current progress or completion percentage.
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -224,11 +210,6 @@ export function DailyReportFields() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormDescription>
-                  Leave this empty when there are no blockers.
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -262,11 +243,6 @@ export function DailyReportFields() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormDescription>
-                  List the tasks you expect to continue or begin.
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -289,9 +265,6 @@ export function DailyReportFields() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormDescription>This field is optional.</FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
