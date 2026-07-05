@@ -10,6 +10,7 @@ import { cva } from "class-variance-authority";
 const reportStatusBadgeTone = cva("", {
   variants: {
     tone: {
+      draft: "bg-gray-100 text-gray-500",
       pending: "bg-red-50 text-red-700",
       approved: "bg-blue-50 text-blue-700",
       rejected: "bg-yellow-50 text-yellow-700",
