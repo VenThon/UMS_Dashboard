@@ -1,66 +1,39 @@
-import z from "zod";
+import { z } from "zod";
 
-export const dialyReportSchema = z.object({
-  title: z
-    .string()
-    .min(5, "Bug title must be at least 5 characters.")
-    .max(32, "Bug title must be at most 32 characters."),
-  description: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-});
+import { DAILY_REPORT_STATUS } from "../constants/daily-report-status";
 
-export type DailyReportInput = z.infer<typeof dialyReportSchema>;
-
-export const createDailyReportSchema = z.object({
-  projectName: z
-    .string()
-    .trim()
-    .min(1, "Project name is required.")
-    .max(150, "Project name must not exceed 150 characters."),
-
+export const createDailyReportFormSchema = z.object({
+  projectName: z.string().min(1, "Project name is required."),
   reportDate: z.date({
     message: "Report date is required.",
   }),
+  previousTasks: z.string().min(1, "Previous tasks are required."),
+  completedTasks: z.string().min(1, "Completed tasks are required."),
+  inProgressTasks: z.string().min(1, "Tasks in progress are required."),
+  blockers: z.string().optional(),
+  tomorrowPlan: z.string().min(1, "Tomorrow's plan is required."),
+  remarks: z.string().optional(),
+});
 
-  previousTasks: z
-    .string()
-    .trim()
-    .min(1, "Previous tasks are required.")
-    .max(2000, "Previous tasks must not exceed 2,000 characters."),
-
-  completedTasks: z
-    .string()
-    .trim()
-    .min(1, "Completed tasks are required.")
-    .max(2000, "Completed tasks must not exceed 2,000 characters."),
-
-  inProgressTasks: z
-    .string()
-    .trim()
-    .min(1, "In-progress tasks are required.")
-    .max(2000, "In-progress tasks must not exceed 2,000 characters."),
-
-  blockers: z
-    .string()
-    .trim()
-    .max(2000, "Blockers must not exceed 2,000 characters.")
-    .optional(),
-
-  tomorrowPlan: z
-    .string()
-    .trim()
-    .min(1, "Tomorrow's plan is required.")
-    .max(2000, "Tomorrow's plan must not exceed 2,000 characters."),
-
-  remarks: z
-    .string()
-    .trim()
-    .max(2000, "Remarks must not exceed 2,000 characters.")
-    .optional(),
+export const createDailyReportSchema = z.object({
+  projectName: z.string().min(1, "Project name is required."),
+  reportDate: z.coerce.date({
+    message: "Report date is required.",
+  }),
+  previousTasks: z.string().min(1, "Previous tasks are required."),
+  completedTasks: z.string().min(1, "Completed tasks are required."),
+  inProgressTasks: z.string().min(1, "Tasks in progress are required."),
+  blockers: z.string().optional(),
+  tomorrowPlan: z.string().min(1, "Tomorrow's plan is required."),
+  remarks: z.string().optional(),
+  status: z
+    .enum([DAILY_REPORT_STATUS.DRAFT, DAILY_REPORT_STATUS.PENDING])
+    .default(DAILY_REPORT_STATUS.PENDING),
 });
 
 export type CreateDailyReportFormValues = z.infer<
-  typeof createDailyReportSchema
+  typeof createDailyReportFormSchema
 >;
+
+export type CreateDailyReportValues = z.infer<typeof createDailyReportSchema>;
+export type UpdateDailyReportValues = z.infer<typeof createDailyReportSchema>;

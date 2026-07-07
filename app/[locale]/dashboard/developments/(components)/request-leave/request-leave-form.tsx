@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
-
 import {
   LEAVE_DURATION_TYPES,
   LEAVE_TYPES,
@@ -23,9 +22,10 @@ import { useRouter } from "@/i18n/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send } from "lucide-react";
 import { useForm, useWatch } from "react-hook-form";
+
 import {
-  calculateTotalLeaveDays,
   RequestLeaveFields,
+  calculateTotalLeaveDays,
 } from "./request-leave-fields";
 
 export function RequestLeaveForm() {
