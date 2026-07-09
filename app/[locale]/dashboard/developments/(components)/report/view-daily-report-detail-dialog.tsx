@@ -30,7 +30,6 @@ type ViewDailyReportDetailDialogProps = {
 export function ViewDailyReportDetailDialog({
   item,
 }: ViewDailyReportDetailDialogProps) {
-  // const reviews = item.reviews ?? [];
   const reviews = Array.isArray(item.reviews) ? item.reviews : [];
 
   return (
