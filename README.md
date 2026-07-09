@@ -69,6 +69,7 @@ grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
 
 npx drizzle-kit generate
 npx drizzle-kit migrate
+npx drizzle-kit push
 
 ### Show alert message using sonner
 

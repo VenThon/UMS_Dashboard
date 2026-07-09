@@ -10,8 +10,6 @@ import {
 import { UNDER_TEAM } from "../types/team.type";
 import { USER_ROLE } from "../types/user.type";
 
-// import { createInsertSchema } from "drizzle-zod";
-
 export const usersTable = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   username: text("username").notNull().unique(),
@@ -26,7 +24,5 @@ export const usersTable = pgTable("users", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
-
-// export const createUserSchema = createInsertSchema(usersTable);
 
 export type User = typeof usersTable.$inferSelect;

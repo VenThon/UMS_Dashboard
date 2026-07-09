@@ -69,12 +69,8 @@ export function DataTable<TData, TValue>({
           {hideColumn && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-[#058248] hover:bg-green-500"
-                >
-                  <Settings className="font-bold text-white" />
+                <Button variant="outline" size="sm" className="bg-gray-200">
+                  <Settings className="font-bold text-gray-600" />
                 </Button>
               </DropdownMenuTrigger>
 
@@ -135,14 +131,11 @@ export function DataTable<TData, TValue>({
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow
                   key={headerGroup.id}
-                  className="bg-[#058248] hover:bg-[#058248]"
+                  className="bg-gray-100 text-gray-300"
                 >
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead
-                        key={header.id}
-                        className="h-12 font-bold text-white"
-                      >
+                      <TableHead key={header.id} className="h-12 font-semibold">
                         {header.isPlaceholder
                           ? null
                           : flexRender(
