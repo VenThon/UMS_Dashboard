@@ -20,7 +20,7 @@ export function RichTextEditor({
   const editor = useEditor({
     extensions: [StarterKit],
     content: value || "",
-    immediatelyRender: false, // important for Next.js SSR
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class:
