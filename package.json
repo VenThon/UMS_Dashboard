@@ -39,6 +39,7 @@
     "drizzle-orm": "^0.45.2",
     "drizzle-zod": "^0.8.3",
     "input-otp": "^1.4.2",
+    "isomorphic-dompurify": "^3.18.0",
     "jsonwebtoken": "^9.0.3",
     "libphonenumber-js": "^1.13.6",
     "lucide-react": "^0.562.0",

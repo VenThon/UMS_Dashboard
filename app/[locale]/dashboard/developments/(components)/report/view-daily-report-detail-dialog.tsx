@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import DOMPurify from "isomorphic-dompurify";
 
 import { format } from "date-fns";
 import {
@@ -82,7 +83,11 @@ export function ViewDailyReportDetailDialog({
             <SectionTitle title="Task Information" />
 
             <div className="grid gap-4">
-              <DetailItem label="Previous tasks" value={item.previousTasks} />
+              <DetailItemText
+                label="Previous tasks"
+                value={item.previousTasks}
+                richText
+              />
               <DetailItem label="Completed tasks" value={item.completedTasks} />
               <DetailItem
                 label="Tasks in progress"
@@ -215,6 +220,52 @@ function DetailItem({
       <p className="text-foreground text-sm font-medium wrap-break-word whitespace-pre-wrap">
         {value ? String(value) : "-"}
       </p>
+    </div>
+  );
+}
+
+function DetailItemText({
+  label,
+  value,
+  icon,
+  richText = false,
+}: {
+  label: string;
+  value?: string | number | Date | null;
+  icon?: React.ReactNode;
+  richText?: boolean;
+}) {
+  const content = value ? String(value).trim() : "";
+
+  return (
+    <div className="bg-background space-y-1 rounded-lg border p-3">
+      <div className="text-muted-foreground flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase">
+        {icon}
+        <span>{label}</span>
+      </div>
+
+      {!content ? (
+        <p className="text-foreground text-sm font-medium">-</p>
+      ) : richText ? (
+        <div
+          className={[
+            "text-foreground text-sm",
+            "wrap-break-word",
+            "[&_p]:my-1",
+            "[&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5",
+            "[&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5",
+            "[&_li]:my-1",
+            "[&_strong]:font-semibold",
+          ].join(" ")}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(content),
+          }}
+        />
+      ) : (
+        <p className="text-foreground text-sm font-medium wrap-break-word whitespace-pre-wrap">
+          {content}
+        </p>
+      )}
     </div>
   );
 }
