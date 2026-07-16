@@ -91,11 +91,13 @@ export const columnsDataTableRequestLeaveDevelopmentTeam: ColumnDef<RequestLeave
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
+                    type="button"
                     size="icon"
-                    aria-label="View Report"
-                    className="bg-blue-600 p-2 text-white hover:bg-blue-500"
+                    variant="outline"
+                    aria-label="View report details"
+                    className="text-muted-foreground hover:bg-muted hover:text-foreground size-8"
                   >
-                    <Eye className="h-4 w-4" />
+                    <Eye className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -105,11 +107,13 @@ export const columnsDataTableRequestLeaveDevelopmentTeam: ColumnDef<RequestLeave
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
+                    type="button"
                     size="icon"
-                    aria-label="Edit Report"
-                    className="bg-[#058248] text-white hover:bg-green-600"
+                    variant="outline"
+                    aria-label="Update report"
+                    className="size-8 border-amber-200 text-amber-700 hover:bg-amber-50 hover:text-amber-800 dark:border-amber-900/60 dark:text-amber-400 dark:hover:bg-amber-950/50"
                   >
-                    <SquarePen className="h-4 w-4" />
+                    <SquarePen className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>

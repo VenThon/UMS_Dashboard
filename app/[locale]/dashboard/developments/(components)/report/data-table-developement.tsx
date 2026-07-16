@@ -13,6 +13,7 @@ import { UpdateDailyReportDialog } from "./edit-daily-report";
 import { RejectDailyReportDialog } from "./reject-button";
 import { SubmitDailyReportButton } from "./submit-resubmit-button";
 import { ViewDailyReportDetailDialog } from "./view-daily-report-detail-dialog";
+import { formatDate } from "@/lib/utils";
 
 const REVIEW_ROLES: readonly UserRole[] = [
   USER_ROLE.LEAD_FRONTEND,
@@ -21,8 +22,10 @@ const REVIEW_ROLES: readonly UserRole[] = [
 export function getColumnsDataTableDevelopmentTeam({
   currentUserId,
   currentUserRole,
+  locale,
 }: {
   currentUserId: string;
+  locale: string;
   currentUserRole: UserRole;
 }): ColumnDef<DailyReportItem>[] {
   return [
@@ -47,41 +50,12 @@ export function getColumnsDataTableDevelopmentTeam({
     {
       accessorKey: "reportDate",
       header: "Report Date",
-      cell: ({ row }) => <section>{row.original.reportDate}</section>,
-    },
-    {
-      accessorKey: "previousTasks",
-      header: "Previous Tasks",
       cell: ({ row }) => (
-        <section className="max-w-55 truncate">
-          {row.original.previousTasks}
-        </section>
-      ),
-    },
-    {
-      accessorKey: "completedTasks",
-      header: "Completed Tasks",
-      cell: ({ row }) => (
-        <section className="max-w-55 truncate">
-          {row.original.completedTasks}
-        </section>
-      ),
-    },
-    {
-      accessorKey: "inProgressTasks",
-      header: "In-progress Tasks",
-      cell: ({ row }) => (
-        <section className="max-w-55 truncate">
-          {row.original.inProgressTasks}
-        </section>
-      ),
-    },
-    {
-      accessorKey: "blockers",
-      header: "Blockers",
-      cell: ({ row }) => (
-        <section className="max-w-55 truncate">
-          {row.original.blockers || "No blockers"}
+        <section>
+          {formatDate(new Date(row.original.reportDate), {
+            formatStr: "dd-LLL-yyyy pp",
+            localeCode: locale,
+          })}
         </section>
       ),
     },
