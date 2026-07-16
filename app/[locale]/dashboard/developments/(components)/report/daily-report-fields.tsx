@@ -37,7 +37,7 @@ export function DailyReportFields() {
   const form = useFormContext<CreateDailyReportFormValues>();
   return (
     <>
-      <section className="space-y-5">
+      <section className="space-y-3">
         <div>
           <h2 className="text-base font-semibold">General information</h2>
 
