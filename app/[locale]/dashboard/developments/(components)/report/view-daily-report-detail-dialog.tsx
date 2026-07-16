@@ -43,7 +43,7 @@ export function ViewDailyReportDetailDialog({
           aria-label="View report details"
           className="text-muted-foreground hover:bg-muted hover:text-foreground size-8"
         >
-          <Eye className="size-4" />
+          <Eye className="size-4 dark:text-white" />
         </Button>
       </DialogTrigger>
 
