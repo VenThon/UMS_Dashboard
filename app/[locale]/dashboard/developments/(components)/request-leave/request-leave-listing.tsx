@@ -5,7 +5,6 @@ import { MockDataRequestLeave } from "@/app/[locale]/mock/development-team";
 import { DataTable } from "@/components/data-table";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -25,18 +24,22 @@ export function RequestLeaveListing() {
   const totalItems = 10;
   return (
     <section>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Request Leave</CardTitle>
-          <CardDescription>
-            Monitor, review, and manage daily reports submitted by developers to
-            ensure project progress and team alignment.
-          </CardDescription>
+      <Card className="border-border/60 shadow-sm">
+        <CardHeader className="flex flex-col gap-4 pb-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-1.5">
+            <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
+              Request Leave
+            </CardTitle>
+            <CardDescription className="text-muted-foreground max-w-2xl text-sm leading-6">
+              Monitor, review, and manage daily reports submitted by developers
+              to ensure project progress and team alignment.
+            </CardDescription>
+          </div>
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+            <FilterRequestLeaveDevelopmentTeam />
+            <ButtonSubmitRequestLeave />
+          </div>
         </CardHeader>
-        <CardContent className="mt-4 flex gap-2">
-          <FilterRequestLeaveDevelopmentTeam />
-          <ButtonSubmitRequestLeave />
-        </CardContent>
       </Card>
       <div className="mt-8">
         <div>

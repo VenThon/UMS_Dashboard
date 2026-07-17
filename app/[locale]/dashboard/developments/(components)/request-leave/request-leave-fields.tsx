@@ -32,6 +32,7 @@ import {
   FileText,
   Tag,
 } from "lucide-react";
+import { useEffect } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 
 import { calculateTotalLeaveDays, getTodayDate } from "../lib";
@@ -61,8 +62,21 @@ export function RequestLeaveFields() {
     durationType: durationDays,
   });
 
+  const isHalfDay =
+    durationDays === LEAVE_DURATION_TYPES.HALF_DAY_MORNING ||
+    durationDays === LEAVE_DURATION_TYPES.HALF_DAY_AFTERNOON;
+
+  useEffect(() => {
+    if (isHalfDay && startDate && endDate !== startDate) {
+      form.setValue("endDate", startDate, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    }
+  }, [endDate, form, isHalfDay, startDate]);
+
   return (
-    <div>
+    <div className="space-y-6">
       <FormField
         control={form.control}
         name="leaveType"
@@ -73,7 +87,11 @@ export function RequestLeaveFields() {
               <FormLabel>Leave type</FormLabel>
             </div>
 
-            <Select value={field.value} onValueChange={field.onChange}>
+            <Select
+              value={field.value}
+              onValueChange={field.onChange}
+              disabled={form.formState.isSubmitting}
+            >
               <FormControl>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select leave type" />
@@ -109,15 +127,34 @@ export function RequestLeaveFields() {
                 <Input
                   type="date"
                   min={today}
-                  {...field}
+                  value={field.value ?? ""}
+                  disabled={form.formState.isSubmitting}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                  ref={field.ref}
                   onChange={(event) => {
-                    field.onChange(event);
-
                     const selectedStartDate = event.target.value;
+
+                    field.onChange(selectedStartDate);
+
+                    if (!selectedStartDate) {
+                      form.setValue("endDate", "", {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+
+                      return;
+                    }
+
                     const currentEndDate = form.getValues("endDate");
 
-                    if (currentEndDate && currentEndDate < selectedStartDate) {
+                    if (
+                      !currentEndDate ||
+                      currentEndDate < selectedStartDate ||
+                      isHalfDay
+                    ) {
                       form.setValue("endDate", selectedStartDate, {
+                        shouldDirty: true,
                         shouldValidate: true,
                       });
                     }
@@ -144,10 +181,23 @@ export function RequestLeaveFields() {
                 <Input
                   type="date"
                   min={startDate || today}
-                  disabled={!startDate}
-                  {...field}
+                  value={field.value ?? ""}
+                  disabled={
+                    !startDate || isHalfDay || form.formState.isSubmitting
+                  }
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                  ref={field.ref}
                 />
               </FormControl>
+
+              {isHalfDay && (
+                <FormDescription>
+                  Half-day leave applies only to the selected start date.
+                </FormDescription>
+              )}
+
               <FormMessage />
             </FormItem>
           )}
@@ -164,7 +214,11 @@ export function RequestLeaveFields() {
               <FormLabel>Leave duration</FormLabel>
             </div>
 
-            <Select value={field.value} onValueChange={field.onChange}>
+            <Select
+              value={field.value}
+              onValueChange={field.onChange}
+              disabled={form.formState.isSubmitting}
+            >
               <FormControl>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select leave duration" />
@@ -189,10 +243,10 @@ export function RequestLeaveFields() {
         )}
       />
 
-      <div className="bg-muted/40 rounded-lg border p-4">
+      <div className="bg-muted/40 rounded-xl border p-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="rounded-md bg-green-100 p-2 text-green-700 dark:bg-green-950 dark:text-green-300">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300">
               <CalendarClock className="size-5" />
             </div>
 
@@ -231,12 +285,15 @@ export function RequestLeaveFields() {
               <Textarea
                 placeholder="Explain the reason for your leave request..."
                 className="min-h-32 resize-y"
+                disabled={form.formState.isSubmitting}
                 {...field}
+                value={field.value ?? ""}
               />
             </FormControl>
 
             <FormDescription>
-              Provide enough information for the reviewer.
+              Provide enough information for the reviewer to understand your
+              request.
             </FormDescription>
 
             <FormMessage />

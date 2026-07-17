@@ -16,6 +16,8 @@ import { useGetDailyReports } from "@/hooks/report/use-daily-report";
 import { ButtonCreateDailyReport } from "./button-daily-report";
 import { getColumnsDataTableDevelopmentTeam } from "./data-table-developement";
 import { FilterReportDevelopmentTeam } from "./filter-report";
+import { useLocale } from "next-intl";
+import { TableLoadingSkeleton } from "../tableLoadingSkeleton";
 
 type DailyReportListingPageProps = {
   currentUserId: string;
@@ -26,6 +28,7 @@ export function DailyReportListingPage({
   currentUserId,
   currentUserRole,
 }: DailyReportListingPageProps) {
+  const locale = useLocale();
   const searchParam = useSearchParams();
 
   const page = Number.parseInt(searchParam.get("page") || "1");
@@ -44,14 +47,13 @@ export function DailyReportListingPage({
   const columns = getColumnsDataTableDevelopmentTeam({
     currentUserId,
     currentUserRole,
+    locale,
   });
 
   if (isLoading) {
     return (
-      <section>
-        <p className="text-muted-foreground text-sm">
-          Loading daily reports...
-        </p>
+      <section className="space-y-4">
+        <TableLoadingSkeleton rows={10} columns={5} />
       </section>
     );
   }
@@ -73,7 +75,7 @@ export function DailyReportListingPage({
       <Card className="border-border/60 shadow-sm">
         <CardHeader className="flex flex-col gap-4 pb-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-1.5">
-            <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
+            <CardTitle className="text-xl font-semibold tracking-tight sm:text-xl">
               Daily Development Reports
             </CardTitle>
 

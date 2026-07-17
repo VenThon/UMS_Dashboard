@@ -5,15 +5,15 @@ import { Plus } from "lucide-react";
 
 export function ButtonSubmitGeneralRequest() {
   return (
-    <Button
-      asChild
-      className="w-full bg-green-600 text-white hover:bg-green-600 sm:w-auto"
-    >
+    <Button asChild variant="outline" className="w-full sm:w-auto">
       <Link
         href="/dashboard/developments/general-request/create"
         className="flex items-center gap-2"
       >
-        <Plus className="h-4 w-4 rounded-full bg-white p-0.5 text-green-600" />
+        <Plus
+          className="size-4 rounded-full bg-gray-200 p-0.5 text-gray-800"
+          aria-hidden="true"
+        />
         <span>Request</span>
       </Link>
     </Button>
