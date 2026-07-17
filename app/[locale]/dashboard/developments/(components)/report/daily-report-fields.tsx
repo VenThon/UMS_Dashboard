@@ -15,6 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { RichTextEditor } from "@/components/ui/richtextEditor";
 import { Textarea } from "@/components/ui/textarea";
 import { CreateDailyReportFormValues } from "@/db/validation/dialyreport";
 import { cn } from "@/lib/utils";
@@ -36,7 +37,7 @@ export function DailyReportFields() {
   const form = useFormContext<CreateDailyReportFormValues>();
   return (
     <>
-      <section className="space-y-5">
+      <section className="space-y-3">
         <div>
           <h2 className="text-base font-semibold">General information</h2>
 
@@ -138,12 +139,13 @@ export function DailyReportFields() {
                 </div>
 
                 <FormControl>
-                  <Textarea
+                  <RichTextEditor
+                    value={field.value}
+                    onChange={field.onChange}
                     placeholder="Describe the tasks assigned previously..."
-                    className="min-h-32 resize-y"
-                    {...field}
                   />
                 </FormControl>
+
                 <FormMessage />
               </FormItem>
             )}

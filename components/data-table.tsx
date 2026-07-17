@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow
                   key={headerGroup.id}
-                  className="bg-gray-100 text-gray-300"
+                  className="dark:bg-background bg-gray-100 text-gray-300"
                 >
                   {headerGroup.headers.map((header) => {
                     return (
