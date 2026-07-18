@@ -1,27 +1,3 @@
-// import { desc, eq } from "drizzle-orm";
-// import { db } from "@/db";
-// import { dailyReportTable } from "@/db/schema/daily-report";
-// import { UserRole } from "@/db/types/user.type";
-// import { VIEW_DAILY_REPORT_ROLES } from "@/utils/daily-report/daily-report-permission";
-// type GetDailyReportsServiceParams = {
-//   userId: string;
-//   role: UserRole;
-// };
-// export async function getDailyReportsService({
-//   userId,
-//   role,
-// }: GetDailyReportsServiceParams) {
-//   const canViewAllReports = VIEW_DAILY_REPORT_ROLES.includes(role as UserRole);
-//   if (canViewAllReports) {
-//     return db.query.dailyReportTable.findMany({
-//       orderBy: [desc(dailyReportTable.createdAt)],
-//     });
-//   }
-//   return db.query.dailyReportTable.findMany({
-//     where: eq(dailyReportTable.userId, userId),
-//     orderBy: [desc(dailyReportTable.createdAt)],
-//   });
-// }
 import { db } from "@/db";
 import { dailyReportTable } from "@/db/schema/daily-report";
 import { reviewDailyReportTable } from "@/db/schema/daily-report-review";

@@ -6,8 +6,18 @@ import {
 import { cn } from "@/lib/utils";
 
 import { cva } from "class-variance-authority";
+import {
+  Baby,
+  CalendarDays,
+  CircleHelp,
+  HeartPulse,
+  type LucideIcon,
+  PartyPopper,
+  PersonStanding,
+  Siren,
+} from "lucide-react";
 
-const LeaveTypesBadgeTone = cva("", {
+const leaveTypeBadgeTone = cva("inline-flex items-center gap-1.5 border-0", {
   variants: {
     tone: {
       annual_leave: "bg-teal-50 text-teal-700",
@@ -21,7 +31,17 @@ const LeaveTypesBadgeTone = cva("", {
   },
 });
 
-type ReportStatusBadgeProps = React.ComponentProps<typeof Badge> & {
+const LEAVE_TYPE_ICONS: Record<LeaveTypes, LucideIcon> = {
+  annual_leave: CalendarDays,
+  sick_leave: HeartPulse,
+  personal_leave: PersonStanding,
+  emergency_leave: Siren,
+  maternity_leave: Baby,
+  wedding_leave: PartyPopper,
+  other: CircleHelp,
+};
+
+type LeaveTypesBadgeProps = React.ComponentProps<typeof Badge> & {
   status: LeaveTypes;
 };
 
@@ -29,13 +49,16 @@ export function LeaveTypesBadge({
   status,
   className,
   ...props
-}: ReportStatusBadgeProps) {
+}: LeaveTypesBadgeProps) {
+  const Icon = LEAVE_TYPE_ICONS[status];
+
   return (
     <Badge
-      data-slot="report-status-badge"
-      className={cn(LeaveTypesBadgeTone({ tone: status }), className)}
+      data-slot="leave-type-badge"
+      className={cn(leaveTypeBadgeTone({ tone: status }), className)}
       {...props}
     >
+      <Icon className="size-3.5" />
       {LEAVE_TYPES_LABELS[status]}
     </Badge>
   );

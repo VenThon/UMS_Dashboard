@@ -63,13 +63,6 @@ export const columnsDataTableRequestLeaveDevelopmentTeam: ColumnDef<RequestLeave
       },
     },
     {
-      accessorKey: "reason",
-      header: "Reason",
-      cell: ({ row }) => {
-        return <section>{row.original.reason}</section>;
-      },
-    },
-    {
       accessorKey: "status",
       header: "Request Status",
       cell: ({ row }) => {

@@ -15,7 +15,7 @@ import {
 } from "@/db/constants/request-leave-status";
 import {
   RequestLeaveFormValues,
-  requestLeaveSchema,
+  createRequestLeaveFormSchema,
 } from "@/db/validation/leave-request";
 import { useRouter } from "@/i18n/navigation";
 
@@ -32,12 +32,12 @@ export function RequestLeaveForm() {
   const router = useRouter();
 
   const form = useForm<RequestLeaveFormValues>({
-    resolver: zodResolver(requestLeaveSchema),
+    resolver: zodResolver(createRequestLeaveFormSchema),
     defaultValues: {
       leaveType: LEAVE_TYPES.ANNUAL_LEAVE,
       startDate: "",
       endDate: "",
-      durationDays: LEAVE_DURATION_TYPES.FULL_DAY,
+      durationType: LEAVE_DURATION_TYPES.FULL_DAY,
       reason: "",
     },
   });
@@ -54,7 +54,7 @@ export function RequestLeaveForm() {
 
   const durationDays = useWatch({
     control: form.control,
-    name: "durationDays",
+    name: "durationType",
   });
 
   const totalLeaveDays = calculateTotalLeaveDays({
