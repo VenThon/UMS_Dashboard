@@ -89,29 +89,17 @@ export default function NavBarDashboardManagement() {
 
             <SideBarMenuBtn
               icon={Repeat}
-              href={[
-                "/dashboard/managements/general-request",
-                "/dashboard/managements/general-request/create",
-                "/dashboard/managements/general-request/[id]",
-              ]}
+              href={["/dashboard/managements/general-request"]}
               title="General Request"
             />
             <SideBarMenuBtn
               icon={AudioWaveform}
-              href={[
-                "/dashboard/managements/leave-request",
-                "/dashboard/managements/leave-request/create",
-                "/dashboard/managements/leave-request/[id]",
-              ]}
+              href={["/dashboard/managements/leave-request"]}
               title="Leave Requeat"
             />
             <SideBarMenuBtn
               icon={NotebookPen}
-              href={[
-                "/dashboard/managements/report",
-                "/dashboard/managements/report/create",
-                "/dashboard/managements/report/[id]",
-              ]}
+              href={["/dashboard/managements/report"]}
               title="Dialy Rport"
             />
           </SidebarMenuItem>
