@@ -36,6 +36,20 @@
       "when": 1783065860447,
       "tag": "0004_fuzzy_bill_hollister",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1784391284563,
+      "tag": "0005_nappy_adam_destine",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1784404095508,
+      "tag": "0006_empty_archangel",
+      "breakpoints": true
     }
   ]
 }

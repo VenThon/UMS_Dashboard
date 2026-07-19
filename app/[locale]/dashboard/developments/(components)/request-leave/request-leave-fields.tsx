@@ -54,7 +54,7 @@ export function RequestLeaveFields() {
 
   const durationDays = useWatch({
     control: form.control,
-    name: "durationDays",
+    name: "durationType",
   });
 
   const totalLeaveDays = calculateTotalLeaveDays({
@@ -207,7 +207,7 @@ export function RequestLeaveFields() {
 
       <FormField
         control={form.control}
-        name="durationDays"
+        name="durationType"
         render={({ field }) => (
           <FormItem>
             <div className="flex items-center gap-1.5">

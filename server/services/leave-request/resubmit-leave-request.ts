@@ -1,14 +1,14 @@
 import { db } from "@/db";
 import { REQUEST_LEAVE_STATUS } from "@/db/constants/request-leave-status";
-import { requestLeaveApprovalTable, requestLeaveTable } from "@/db/schema";
-import type { CreateRequestLeaveValue } from "@/db/validation/leave-request";
+import { requestLeaveTable } from "@/db/schema";
+import type { ResubmitRequestLeaveValue } from "@/db/validation/leave-request";
 
 import { and, eq, gte, lte, ne } from "drizzle-orm";
 
 type ResubmitRequestLeaveParams = {
   id: string;
   userId: string;
-  values: Omit<CreateRequestLeaveValue, "status">;
+  values: ResubmitRequestLeaveValue;
 };
 
 export async function resubmitRequestLeaveService({
@@ -48,16 +48,10 @@ export async function resubmitRequestLeaveService({
     });
 
     if (overlappingRequest) {
-      throw new Error(
-        "You already have another leave request that overlaps with these dates.",
-      );
+      throw new Error("Another leave request overlaps with these dates.");
     }
 
-    await tx
-      .delete(requestLeaveApprovalTable)
-      .where(eq(requestLeaveApprovalTable.requestLeaveId, id));
-
-    const [updatedRequestLeave] = await tx
+    const [resubmittedRequest] = await tx
       .update(requestLeaveTable)
       .set({
         leaveType: values.leaveType,
@@ -65,7 +59,10 @@ export async function resubmitRequestLeaveService({
         endDate: values.endDate,
         durationType: values.durationType,
         reason: values.reason,
+
+        revision: requestLeave.revision + 1,
         status: REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL,
+
         reviewedAt: null,
         updatedAt: new Date(),
       })
@@ -74,14 +71,17 @@ export async function resubmitRequestLeaveService({
           eq(requestLeaveTable.id, id),
           eq(requestLeaveTable.userId, userId),
           eq(requestLeaveTable.status, REQUEST_LEAVE_STATUS.REJECTED),
+          eq(requestLeaveTable.revision, requestLeave.revision),
         ),
       )
       .returning();
 
-    if (!updatedRequestLeave) {
-      throw new Error("Failed to resubmit the leave request.");
+    if (!resubmittedRequest) {
+      throw new Error(
+        "The leave request changed before it could be resubmitted.",
+      );
     }
 
-    return updatedRequestLeave;
+    return resubmittedRequest;
   });
 }

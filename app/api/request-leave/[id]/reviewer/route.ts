@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 
 import { reviewRequestLeaveSchema } from "@/db/schema";
+import { USER_ROLE } from "@/db/types/user.type";
 import { requireRole } from "@/lib/auth/require-role";
-import {
-  getRequestLeaveReviewHistoryService,
-  reviewRequestLeaveService,
-} from "@/server/services/leave-request/review-request-leave.service";
+import { getRequestLeaveReviewHistoryService } from "@/server/services/leave-request/get-request-leave-review-history.service";
+import { reviewRequestLeaveService } from "@/server/services/leave-request/review-request-leave.service";
 import {
   REVIEW_REQUEST_LEAVE_ROLES,
   VIEW_REQUEST_LEAVE_ROLES,
@@ -21,17 +20,16 @@ type RouteContext = {
   }>;
 };
 
-function getApprovalLevel(role: string): 1 | 2 | null {
-  switch (role) {
-    case "team_lead":
-      return 1;
-
-    case "department_director":
-      return 2;
-
-    default:
-      return null;
+export function getApprovalLevel(role: string): 1 | 2 | null {
+  if (role === USER_ROLE.LEAD_FRONTEND) {
+    return 1;
   }
+
+  if (role === USER_ROLE.PROJECT_MANAGER) {
+    return 2;
+  }
+
+  return null;
 }
 
 export async function POST(request: Request, { params }: RouteContext) {

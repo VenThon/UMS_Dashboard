@@ -88,6 +88,7 @@ export async function rejectRequestLeaveService({
       .values({
         requestLeaveId,
         reviewerId,
+        revision: requestLeave.revision,
         approvalLevel,
         status: "rejected",
         comment: rejectionComment,

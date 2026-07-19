@@ -47,7 +47,8 @@ export async function GET(_request: Request, { params }: RouteContext) {
 
     const leaveRequest = await getRequestLeaveByIdService({
       id: idResult.data,
-      userId: user.id,
+      currentUserId: user.id,
+      currentUserRole: user.role,
     });
 
     return NextResponse.json({

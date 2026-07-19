@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { REQUEST_LEAVE_STATUS } from "@/db/constants/request-leave-status";
 import { requestLeaveTable } from "@/db/schema";
 
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 type DeleteRequestLeaveSParams = {
   id: string;
@@ -28,10 +28,24 @@ export async function deleteRequestLeaveService({
   if (requestLeave.status === REQUEST_LEAVE_STATUS.APPROVED) {
     throw new Error("Approved reports cannot be deleted.");
   }
+  if (requestLeave.status !== REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL) {
+    throw new Error(
+      "Only leave requests waiting for first approval can be deleted.",
+    );
+  }
 
   const [deletedRequestLeave] = await db
     .delete(requestLeaveTable)
-    .where(eq(requestLeaveTable.id, id))
+    .where(
+      and(
+        eq(requestLeaveTable.id, id),
+        eq(requestLeaveTable.userId, userId),
+        eq(
+          requestLeaveTable.status,
+          REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL,
+        ),
+      ),
+    )
     .returning();
 
   return deletedRequestLeave;

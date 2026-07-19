@@ -125,7 +125,7 @@ export const requestLeaveApprovalTable = pgTable(
       }),
 
     approvalLevel: integer("approval_level").notNull(),
-
+    revision: integer("revision").notNull(),
     status: varchar("status", {
       length: 20,
     })
@@ -145,8 +145,9 @@ export const requestLeaveApprovalTable = pgTable(
 
     index("request_leave_approval_reviewer_idx").on(table.reviewerId),
 
-    uniqueIndex("request_leave_approval_level_unique_idx").on(
+    uniqueIndex("request_leave_approval_level_revision_unique_idx").on(
       table.requestLeaveId,
+      table.revision,
       table.approvalLevel,
     ),
   ],

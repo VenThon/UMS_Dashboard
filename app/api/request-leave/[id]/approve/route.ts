@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 
 import { approveRequestLeaveSchema } from "@/db/schema";
-import { USER_ROLE } from "@/db/types/user.type";
+import { USER_ROLE, UserRole } from "@/db/types/user.type";
 import { requireRole } from "@/lib/auth/require-role";
 import { approveRequestLeaveService } from "@/server/services/leave-request/approve-leave-request";
-import { REVIEW_REQUEST_LEAVE_ROLES } from "@/utils/general-request/request-leave-permission";
+import {
+  REVIEW_REQUEST_LEAVE_ROLES,
+  getRequestLeaveApprovalLevel,
+} from "@/utils/general-request/request-leave-permission";
 
 import { z } from "zod";
 
@@ -21,7 +24,7 @@ export function getApprovalLevel(role: string): 1 | 2 | null {
     return 1;
   }
 
-  if (role === USER_ROLE.PROJECT_MANAGER) {
+  if (role === USER_ROLE.IT_MANAGER) {
     return 2;
   }
 
@@ -36,7 +39,7 @@ export async function POST(request: Request, { params }: RouteContext) {
       return error;
     }
 
-    const approvalLevel = getApprovalLevel(user.role);
+    const approvalLevel = getRequestLeaveApprovalLevel(user.role as UserRole);
 
     if (!approvalLevel) {
       return NextResponse.json(

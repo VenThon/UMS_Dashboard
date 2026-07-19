@@ -6,7 +6,6 @@ import {
   requestLeaveApprovalTable,
   requestLeaveTable,
 } from "@/db/schema";
-import { REVIEW_REQUEST_LEAVE_ROLES } from "@/utils/general-request/request-leave-permission";
 
 import { and, eq } from "drizzle-orm";
 
@@ -57,6 +56,7 @@ export async function reviewRequestLeaveService({
     const existingReview = await tx.query.requestLeaveApprovalTable.findFirst({
       where: and(
         eq(requestLeaveApprovalTable.requestLeaveId, requestLeaveId),
+        eq(requestLeaveApprovalTable.revision, requestLeave.revision),
         eq(requestLeaveApprovalTable.approvalLevel, approvalLevel),
       ),
     });
@@ -71,6 +71,7 @@ export async function reviewRequestLeaveService({
       const firstApproval = await tx.query.requestLeaveApprovalTable.findFirst({
         where: and(
           eq(requestLeaveApprovalTable.requestLeaveId, requestLeaveId),
+          eq(requestLeaveApprovalTable.revision, requestLeave.revision),
           eq(requestLeaveApprovalTable.approvalLevel, 1),
           eq(requestLeaveApprovalTable.status, REVIEW_REPORT_STATUS.APPROVED),
         ),
@@ -89,6 +90,7 @@ export async function reviewRequestLeaveService({
         requestLeaveId,
         reviewerId,
         approvalLevel,
+        revision: requestLeave.revision,
         status: values.status,
         comment: values.comment?.trim() || null,
         reviewedAt: new Date(),
@@ -160,40 +162,94 @@ export async function reviewRequestLeaveService({
   });
 }
 
-type GetRequestLeaveReviewHistoryParams = {
-  requestLeaveId: string;
-  currentUserId: string;
-  currentUserRole: string;
-};
+// type GetRequestLeaveReviewHistoryParams = {
+//   requestLeaveId: string;
+//   currentUserId: string;
+//   currentUserRole: string;
+// };
 
-export async function getRequestLeaveReviewHistoryService({
-  requestLeaveId,
-  currentUserId,
-  currentUserRole,
-}: GetRequestLeaveReviewHistoryParams) {
-  const requestLeave = await db.query.requestLeaveTable.findFirst({
-    where: eq(requestLeaveTable.id, requestLeaveId),
-  });
+// export async function getRequestLeaveReviewHistoryService({
+//   requestLeaveId,
+//   currentUserId,
+//   currentUserRole,
+// }: GetRequestLeaveReviewHistoryParams) {
+//   const requestLeave = await db.query.requestLeaveTable.findFirst({
+//     where: eq(requestLeaveTable.id, requestLeaveId),
+//   });
 
-  if (!requestLeave) {
-    throw new Error("Leave request not found.");
-  }
+//   if (!requestLeave) {
+//     throw new Error("Leave request not found.");
+//   }
 
-  const isOwner = requestLeave.userId === currentUserId;
+//   const isOwner = requestLeave.userId === currentUserId;
 
-  const isReviewer = REVIEW_REQUEST_LEAVE_ROLES.includes(
-    currentUserRole as never,
-  );
+//   const isReviewer = REVIEW_REQUEST_LEAVE_ROLES.includes(
+//     currentUserRole as never,
+//   );
 
-  if (!isOwner && !isReviewer) {
-    throw new Error("You do not have permission to view this review history.");
-  }
+//   if (!isOwner && !isReviewer) {
+//     throw new Error("You do not have permission to view this review history.");
+//   }
 
-  return db.query.requestLeaveApprovalTable.findMany({
-    where: eq(requestLeaveApprovalTable.requestLeaveId, requestLeaveId),
-    orderBy: (table, { asc }) => [
-      asc(table.approvalLevel),
-      asc(table.reviewedAt),
-    ],
-  });
-}
+//   return db.query.requestLeaveApprovalTable.findMany({
+//     where: eq(requestLeaveApprovalTable.requestLeaveId, requestLeaveId),
+//     orderBy: (table, { asc }) => [
+//       asc(table.approvalLevel),
+//       asc(table.reviewedAt),
+//     ],
+//   });
+// }
+
+// type GetRequestLeaveReviewHistoryParams = {
+//   requestLeaveId: string;
+//   currentUserId: string;
+//   currentUserRole: string;
+// };
+
+// export async function getRequestLeaveReviewHistoryService({
+//   requestLeaveId,
+//   currentUserId,
+//   currentUserRole,
+// }: GetRequestLeaveReviewHistoryParams) {
+//   const requestLeave = await db.query.requestLeaveTable.findFirst({
+//     where: eq(requestLeaveTable.id, requestLeaveId),
+//   });
+
+//   if (!requestLeave) {
+//     throw new Error("Leave request not found.");
+//   }
+
+//   const isOwner = requestLeave.userId === currentUserId;
+
+//   const isReviewer = REVIEW_REQUEST_LEAVE_ROLES.includes(
+//     currentUserRole as (typeof REVIEW_REQUEST_LEAVE_ROLES)[number],
+//   );
+
+//   if (!isOwner && !isReviewer) {
+//     throw new Error("You do not have permission to view this review history.");
+//   }
+
+//   return db
+//     .select({
+//       id: requestLeaveApprovalTable.id,
+//       requestLeaveId: requestLeaveApprovalTable.requestLeaveId,
+//       reviewerId: requestLeaveApprovalTable.reviewerId,
+//       reviewerName: usersTable.username,
+//       approvalLevel: requestLeaveApprovalTable.approvalLevel,
+//       revision: requestLeaveApprovalTable.revision,
+//       status: requestLeaveApprovalTable.status,
+//       comment: requestLeaveApprovalTable.comment,
+//       reviewedAt: requestLeaveApprovalTable.reviewedAt,
+//     })
+//     .from(requestLeaveApprovalTable)
+//     .leftJoin(
+//       usersTable,
+//       eq(requestLeaveApprovalTable.reviewerId, usersTable.id),
+//     )
+//     .where(eq(requestLeaveApprovalTable.requestLeaveId, requestLeaveId))
+//     .orderBy(
+//       requestLeaveApprovalTable.revision,
+//       requestLeaveApprovalTable.approvalLevel,
+//       requestLeaveApprovalTable.reviewedAt,
+//     );
+// }

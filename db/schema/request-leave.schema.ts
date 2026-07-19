@@ -3,6 +3,7 @@ import {
   check,
   date,
   index,
+  integer,
   pgTable,
   text,
   timestamp,
@@ -48,7 +49,7 @@ export const requestLeaveTable = pgTable(
       .$type<LeaveDurationType>()
       .notNull()
       .default(LEAVE_DURATION_TYPES.FULL_DAY),
-
+    revision: integer("revision").notNull().default(1),
     reason: text("reason").notNull(),
 
     status: varchar("status", {

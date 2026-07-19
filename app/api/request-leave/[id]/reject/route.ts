@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 
 import { rejectRequestLeaveSchema } from "@/db/schema";
+import { USER_ROLE, type UserRole } from "@/db/types/user.type";
 import { requireRole } from "@/lib/auth/require-role";
 import { rejectRequestLeaveService } from "@/server/services/leave-request/reject-leave-request";
-import { REVIEW_REQUEST_LEAVE_ROLES } from "@/utils/general-request/request-leave-permission";
-
-import { z } from "zod";
-
-import { getApprovalLevel } from "../approve/route";
-
-const idSchema = z.string().uuid("Invalid leave request ID.");
+import { getRequestLeaveApprovalLevel } from "@/utils/general-request/request-leave-permission";
 
 type RouteContext = {
   params: Promise<{
@@ -17,88 +12,71 @@ type RouteContext = {
   }>;
 };
 
+const REJECT_REQUEST_LEAVE_ROLES = [
+  USER_ROLE.LEAD_FRONTEND,
+  USER_ROLE.IT_MANAGER,
+] as const;
+
 export async function POST(request: Request, { params }: RouteContext) {
   try {
-    const { user, error } = await requireRole(REVIEW_REQUEST_LEAVE_ROLES);
+    const { user, error } = await requireRole(REJECT_REQUEST_LEAVE_ROLES);
 
     if (error) {
       return error;
     }
 
-    const approvalLevel = getApprovalLevel(user.role);
-
-    if (!approvalLevel) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Your role is not configured as a leave request reviewer.",
-        },
-        {
-          status: 403,
-        },
-      );
-    }
-
     const { id } = await params;
+    const body = await request.json();
 
-    const idResult = idSchema.safeParse(id);
+    const parsedBody = rejectRequestLeaveSchema.safeParse(body);
 
-    if (!idResult.success) {
+    if (!parsedBody.success) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            idResult.error.issues[0]?.message ?? "Invalid leave request ID.",
+          message: "Invalid request data.",
+          errors: parsedBody.error.flatten(),
         },
-        {
-          status: 400,
-        },
+        { status: 400 },
       );
     }
 
-    const body: unknown = await request.json();
+    const approvalLevel = getRequestLeaveApprovalLevel(user.role as UserRole);
 
-    const validationResult = rejectRequestLeaveSchema.safeParse(body);
-
-    if (!validationResult.success) {
+    if (approvalLevel === null) {
       return NextResponse.json(
         {
           success: false,
-          message: "Invalid rejection data.",
-          errors: validationResult.error.flatten(),
+          message: "You do not have permission to reject leave requests.",
         },
-        {
-          status: 400,
-        },
+        { status: 403 },
       );
     }
 
-    const result = await rejectRequestLeaveService({
-      requestLeaveId: idResult.data,
+    const rejectedRequest = await rejectRequestLeaveService({
+      requestLeaveId: id,
       reviewerId: user.id,
       approvalLevel,
-      comment: validationResult.data.comment,
+      comment: parsedBody.data.comment,
     });
 
     return NextResponse.json({
       success: true,
       message: "Leave request rejected successfully.",
-      data: result,
+      data: rejectedRequest,
     });
   } catch (error) {
     const message =
       error instanceof Error
         ? error.message
-        : "Failed to reject the leave request.";
+        : "Failed to reject leave request.";
 
     return NextResponse.json(
       {
         success: false,
         message,
       },
-      {
-        status: 400,
-      },
+      { status: 400 },
     );
   }
 }

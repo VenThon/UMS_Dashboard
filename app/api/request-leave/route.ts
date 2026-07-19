@@ -40,7 +40,8 @@ export async function GET(request: Request) {
     }
 
     const result = await getRequestLeaveListService({
-      userId: user.id,
+      currentUserId: user.id,
+      currentUserRole: user.role,
       page: queryResult.data.page,
       pageSize: queryResult.data.pageSize,
       status: queryResult.data.status,

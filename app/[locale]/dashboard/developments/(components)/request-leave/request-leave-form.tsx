@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, CalendarDays, FileText, Info, Send } from "lucide-react";
 import { useForm, useWatch } from "react-hook-form";
 
+import { useCreateRequestLeave } from "../../leave-request/_hooks/use-request-leave";
 import {
   RequestLeaveFields,
   calculateTotalLeaveDays,
@@ -30,7 +31,7 @@ import {
 
 export function RequestLeaveForm() {
   const router = useRouter();
-
+  const createRequestLeave = useCreateRequestLeave();
   const form = useForm<RequestLeaveFormValues>({
     resolver: zodResolver(createRequestLeaveFormSchema),
     defaultValues: {
@@ -63,13 +64,13 @@ export function RequestLeaveForm() {
     durationType: durationDays,
   });
 
-  async function onSubmit(values: RequestLeaveFormValues) {
-    const payload = {
-      ...values,
-      totalDays: totalLeaveDays,
-    };
-
-    console.log("Leave request payload:", payload);
+  function onSubmit(values: RequestLeaveFormValues) {
+    createRequestLeave.mutate(values, {
+      onSuccess: () => {
+        router.push("/dashboard/developments/leave-request");
+        router.refresh();
+      },
+    });
   }
 
   return (
@@ -157,13 +158,15 @@ export function RequestLeaveForm() {
                 <Button
                   type="submit"
                   className="w-full sm:w-auto"
-                  disabled={form.formState.isSubmitting || totalLeaveDays === 0}
+                  disabled={
+                    createRequestLeave.isPending || totalLeaveDays === 0
+                  }
                 >
                   <Send className="size-4" />
 
-                  {form.formState.isSubmitting
+                  {createRequestLeave.isPending
                     ? "Submitting..."
-                    : "Submit Request"}
+                    : "Submit request"}
                 </Button>
               </div>
             </form>

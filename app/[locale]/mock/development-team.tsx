@@ -7,9 +7,7 @@ import {
   StatusRequestPriority,
 } from "@/db/constants/general-request";
 import {
-  LEAVE_TYPES,
   LeaveTypes,
-  REQUEST_LEAVE_STATUS,
   RequestLeaveStatus,
 } from "@/db/constants/request-leave-status";
 
@@ -37,17 +35,17 @@ export type GeneralRequestProps = {
   status: GeneralRequestStatus;
 };
 
-export const MockDataRequestLeave: RequestLeaveProps[] = [
-  {
-    id: 1,
-    leaveType: LEAVE_TYPES.ANNUAL_LEAVE,
-    startDate: "24-06-2026",
-    endDate: "24-06-2026",
-    durationDays: "1 day",
-    reason: "Sick ",
-    status: REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL,
-  },
-];
+// export const MockDataRequestLeave: RequestLeaveProps[] = [
+//   {
+//     id: 1,
+//     leaveType: LEAVE_TYPES.ANNUAL_LEAVE,
+//     startDate: "24-06-2026",
+//     endDate: "24-06-2026",
+//     durationDays: "1 day",
+//     reason: "Sick ",
+//     status: REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL,
+//   },
+// ];
 
 export const mockDataGeneralRequests: GeneralRequestProps[] = [
   {
