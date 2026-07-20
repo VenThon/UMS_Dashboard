@@ -1,28 +1,28 @@
-import { z } from "zod";
+// src/db/constants/general-request.ts
 
 export const GENERAL_REQUEST_TYPES = {
-  TRAINING: "training",
-  LANGUAGE_COURSE: "language_course",
   EQUIPMENT: "equipment",
   SOFTWARE: "software",
-  WORKPLACE_SUPPORT: "workplace_support",
-  FINANCIAL_SUPPORT: "financial_support",
-  DOCUMENT: "document",
+  TRAINING: "training",
+  BUDGET: "budget",
+  SERVICE: "service",
   OTHER: "other",
 } as const;
 
 export type GeneralRequestType =
   (typeof GENERAL_REQUEST_TYPES)[keyof typeof GENERAL_REQUEST_TYPES];
 
-export const GENERAL_REQUEST_TYPE_LABELS: Record<GeneralRequestType, string> = {
-  training: "Training or short course",
-  language_course: "Language course",
-  equipment: "Equipment request",
-  software: "Software or system access",
-  workplace_support: "Workplace support",
-  financial_support: "Financial support",
-  document: "Document request",
-  other: "Other request",
+export const GENERAL_REQUEST_TYPE_VALUES = Object.values(
+  GENERAL_REQUEST_TYPES,
+) as [GeneralRequestType, ...GeneralRequestType[]];
+
+export const GENERAL_REQUEST_TYPE_LABEL: Record<GeneralRequestType, string> = {
+  [GENERAL_REQUEST_TYPES.EQUIPMENT]: "Equipment",
+  [GENERAL_REQUEST_TYPES.SOFTWARE]: "Software",
+  [GENERAL_REQUEST_TYPES.TRAINING]: "Traning",
+  [GENERAL_REQUEST_TYPES.BUDGET]: "Budget",
+  [GENERAL_REQUEST_TYPES.SERVICE]: "Service",
+  [GENERAL_REQUEST_TYPES.OTHER]: "Others",
 };
 
 export const REQUEST_PRIORITIES = {
@@ -32,58 +32,55 @@ export const REQUEST_PRIORITIES = {
   URGENT: "urgent",
 } as const;
 
-export type StatusRequestPriority =
+export type RequestPriority =
   (typeof REQUEST_PRIORITIES)[keyof typeof REQUEST_PRIORITIES];
 
-export const REQUEST_PRIORITY_LABELS: Record<StatusRequestPriority, string> = {
+export const REQUEST_PRIORITY_VALUES = Object.values(REQUEST_PRIORITIES) as [
+  RequestPriority,
+  ...RequestPriority[],
+];
+export const REQUEST_PRIORITY_LABEL: Record<RequestPriority, string> = {
   [REQUEST_PRIORITIES.LOW]: "Low",
   [REQUEST_PRIORITIES.MEDIUM]: "Medium",
   [REQUEST_PRIORITIES.HIGH]: "High",
   [REQUEST_PRIORITIES.URGENT]: "Urgent",
 };
-
-export const requestPrioritySchema = z.enum([
-  REQUEST_PRIORITIES.LOW,
-  REQUEST_PRIORITIES.MEDIUM,
-  REQUEST_PRIORITIES.HIGH,
-  REQUEST_PRIORITIES.URGENT,
-]);
-
-export const GENERAL_REQUEST_STATUSES = {
+export const GENERAL_REQUEST_STATUS = {
   DRAFT: "draft",
-  PENDING: "pending",
-  UNDER_REVIEW: "under_review",
+  PENDING_FIRST_APPROVAL: "pending_first_approval",
+  PENDING_SECOND_APPROVAL: "pending_second_approval",
   APPROVED: "approved",
   REJECTED: "rejected",
-  PROCESSING: "processing",
-  COMPLETED: "completed",
   CANCELLED: "cancelled",
 } as const;
 
 export type GeneralRequestStatus =
-  (typeof GENERAL_REQUEST_STATUSES)[keyof typeof GENERAL_REQUEST_STATUSES];
+  (typeof GENERAL_REQUEST_STATUS)[keyof typeof GENERAL_REQUEST_STATUS];
+
+export const GENERAL_REQUEST_STATUS_VALUES = Object.values(
+  GENERAL_REQUEST_STATUS,
+) as [GeneralRequestStatus, ...GeneralRequestStatus[]];
+
+export const GENERAL_REQUEST_APPROVAL_STATUS = {
+  APPROVED: "approved",
+  REJECTED: "rejected",
+} as const;
 
 export const GENERAL_REQUEST_STATUS_LABELS: Record<
   GeneralRequestStatus,
   string
 > = {
-  draft: "Draft",
-  pending: "Pending",
-  under_review: "Under review",
-  approved: "Approved",
-  rejected: "Rejected",
-  processing: "Processing",
-  completed: "Completed",
-  cancelled: "Cancelled",
+  [GENERAL_REQUEST_STATUS.DRAFT]: "Draff",
+  [GENERAL_REQUEST_STATUS.PENDING_FIRST_APPROVAL]: "Pending First Approval",
+  [GENERAL_REQUEST_STATUS.PENDING_SECOND_APPROVAL]: "Pending Second Approval",
+  [GENERAL_REQUEST_STATUS.APPROVED]: "Approved",
+  [GENERAL_REQUEST_STATUS.REJECTED]: "Rejected",
+  [GENERAL_REQUEST_STATUS.CANCELLED]: "Cancelled",
 };
 
-export const generalRequestStatusSchema = z.enum([
-  GENERAL_REQUEST_STATUSES.DRAFT,
-  GENERAL_REQUEST_STATUSES.PENDING,
-  GENERAL_REQUEST_STATUSES.UNDER_REVIEW,
-  GENERAL_REQUEST_STATUSES.APPROVED,
-  GENERAL_REQUEST_STATUSES.REJECTED,
-  GENERAL_REQUEST_STATUSES.PROCESSING,
-  GENERAL_REQUEST_STATUSES.COMPLETED,
-  GENERAL_REQUEST_STATUSES.CANCELLED,
-]);
+export type GeneralRequestApprovalStatus =
+  (typeof GENERAL_REQUEST_APPROVAL_STATUS)[keyof typeof GENERAL_REQUEST_APPROVAL_STATUS];
+
+export const GENERAL_REQUEST_APPROVAL_STATUS_VALUES = Object.values(
+  GENERAL_REQUEST_APPROVAL_STATUS,
+) as [GeneralRequestApprovalStatus, ...GeneralRequestApprovalStatus[]];
