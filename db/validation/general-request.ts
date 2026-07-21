@@ -1,85 +1,139 @@
+// src/db/validation/general-request.ts
+import {
+  GENERAL_REQUEST_STATUS,
+  GENERAL_REQUEST_STATUS_VALUES,
+  GENERAL_REQUEST_TYPE_VALUES,
+  REQUEST_PRIORITY_VALUES,
+} from "@/db/constants/general-request";
+
 import { z } from "zod";
 
-import {
-  GENERAL_REQUEST_TYPES,
-  GeneralRequestType,
-  REQUEST_PRIORITIES,
-  StatusRequestPriority,
-} from "../constants/general-request";
+const attachmentSchema = z.object({
+  name: z.string().min(1),
+  url: z.string().url(),
+  key: z.string().optional(),
+  size: z.number().int().nonnegative().optional(),
+  mimeType: z.string().optional(),
+});
 
-const generalRequestTypeValues = Object.values(GENERAL_REQUEST_TYPES) as [
-  GeneralRequestType,
-  ...GeneralRequestType[],
-];
+export const generalRequestBaseSchema = z.object({
+  requestType: z.enum(GENERAL_REQUEST_TYPE_VALUES),
 
-const requestPriorityValues = Object.values(REQUEST_PRIORITIES) as [
-  StatusRequestPriority,
-  ...StatusRequestPriority[],
-];
+  title: z
+    .string()
+    .trim()
+    .min(1, "Title is required.")
+    .max(200, "Title must not exceed 200 characters."),
 
-export const createGeneralRequestSchema = z
-  .object({
-    requestType: z.enum(generalRequestTypeValues, {
-      message: "Request type is required.",
-    }),
+  description: z.string().trim().min(1, "Description is required."),
 
-    title: z
-      .string()
-      .trim()
-      .min(5, "Title must contain at least 5 characters.")
-      .max(150, "Title must not exceed 150 characters."),
+  reason: z.string().trim().min(1, "Reason is required."),
 
-    description: z
-      .string()
-      .trim()
-      .min(10, "Description must contain at least 10 characters.")
-      .max(2000, "Description must not exceed 2,000 characters."),
+  expectedBenefit: z.string().trim().min(1, "Expected benefit is required."),
 
-    reason: z
-      .string()
-      .trim()
-      .min(10, "Reason must contain at least 10 characters.")
-      .max(2000, "Reason must not exceed 2,000 characters."),
+  priority: z.enum(REQUEST_PRIORITY_VALUES),
 
-    expectedBenefit: z
-      .string()
-      .trim()
-      .max(2000, "Expected benefit must not exceed 2,000 characters.")
-      .optional(),
+  requiredDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid required date.")
+    .optional()
+    .or(z.literal("")),
 
-    priority: z.enum(requestPriorityValues, {
-      message: "Priority is required.",
-    }),
+  estimatedCost: z
+    .number()
+    .nonnegative("Estimated cost cannot be negative.")
+    .optional(),
 
-    requiredDate: z.string().optional(),
+  currency: z
+    .string()
+    .trim()
+    .length(3, "Currency must contain three characters.")
+    .transform((value) => value.toUpperCase())
+    .optional(),
 
-    estimatedCost: z
-      .number({
-        message: "Estimated cost must be a number.",
-      })
-      .min(0, "Estimated cost cannot be negative.")
-      .optional(),
+  attachments: z.array(attachmentSchema).default([]),
+});
 
-    currency: z.enum(["USD", "KHR"]).optional(),
+export const createGeneralRequestSchema = generalRequestBaseSchema.extend({
+  status: z
+    .enum([
+      GENERAL_REQUEST_STATUS.DRAFT,
+      GENERAL_REQUEST_STATUS.PENDING_FIRST_APPROVAL,
+    ])
+    .default(GENERAL_REQUEST_STATUS.PENDING_FIRST_APPROVAL),
+});
+
+export const updateGeneralRequestSchema = generalRequestBaseSchema.partial();
+
+export const reviewGeneralRequestSchema = z.object({
+  comment: z
+    .string()
+    .trim()
+    .max(2000, "Comment must not exceed 2,000 characters.")
+    .optional(),
+});
+
+export const rejectGeneralRequestSchema = z.object({
+  comment: z.string().trim().min(1, "Rejection comment is required.").max(2000),
+});
+
+export const resubmitGeneralRequestSchema = generalRequestBaseSchema;
+
+export const generalRequestQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+
+  pageSize: z.coerce.number().int().min(1).max(100).default(10),
+
+  status: z.enum(GENERAL_REQUEST_STATUS_VALUES).optional(),
+
+  priority: z.enum(REQUEST_PRIORITY_VALUES).optional(),
+
+  requestType: z.enum(GENERAL_REQUEST_TYPE_VALUES).optional(),
+
+  search: z.string().trim().optional(),
+});
+
+export type CreateGeneralRequestInput = z.input<
+  typeof createGeneralRequestSchema
+>;
+
+export type CreateGeneralRequestValue = z.output<
+  typeof createGeneralRequestSchema
+>;
+
+export type UpdateGeneralRequestValue = z.output<
+  typeof updateGeneralRequestSchema
+>;
+
+export type ReviewGeneralRequestValue = z.output<
+  typeof reviewGeneralRequestSchema
+>;
+
+export type RejectGeneralRequestValue = z.output<
+  typeof rejectGeneralRequestSchema
+>;
+
+export type ResubmitGeneralRequestValue = z.output<
+  typeof resubmitGeneralRequestSchema
+>;
+
+export type GeneralRequestQueryValue = z.output<
+  typeof generalRequestQuerySchema
+>;
+
+export const generalRequestFormSchema = generalRequestBaseSchema
+  .omit({
+    attachments: true,
   })
-  .superRefine((data, ctx) => {
-    if (data.estimatedCost !== undefined && !data.currency) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["currency"],
-        message: "Currency is required when an estimated cost is entered.",
-      });
-    }
-
-    if (data.currency && data.estimatedCost === undefined) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["estimatedCost"],
-        message: "Estimated cost is required when a currency is selected.",
-      });
-    }
+  .extend({
+    attachments: z
+      .array(z.instanceof(File))
+      .max(5, "You can upload up to five files.")
+      .optional(),
   });
 
-export type CreateGeneralRequestFormValues = z.infer<
-  typeof createGeneralRequestSchema
+export type GeneralRequestFormValues = z.input<typeof generalRequestFormSchema>;
+
+export type ResubmitGeneralRequestInput = z.input<
+  typeof resubmitGeneralRequestSchema
 >;

@@ -50,6 +50,13 @@
       "when": 1784404095508,
       "tag": "0006_empty_archangel",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1784456624385,
+      "tag": "0007_bent_redwing",
+      "breakpoints": true
     }
   ]
 }

@@ -150,6 +150,7 @@ import { type UserRole } from "@/db/types/user.type";
 import { getRequestLeaveApprovalLevel } from "@/utils/general-request/request-leave-permission";
 
 import { useRequestLeaves } from "../../leave-request/_hooks/use-request-leave";
+import { RequestLeaveListingSkeleton } from "./RequestLeaveListingSkeleton";
 import { ButtonSubmitRequestLeave } from "./button-submit-request-leave";
 import { getcolumnsDataTableRequestLeaveDevelopmentTeam } from "./data-table-request-leave-development";
 import { FilterRequestLeaveDevelopmentTeam } from "./filter-request-leave";
@@ -233,9 +234,7 @@ export function RequestLeaveListing({
 
       <div className="mt-8">
         {requestLeavesQuery.isLoading ? (
-          <div className="text-muted-foreground flex min-h-48 items-center justify-center rounded-lg border">
-            Loading leave requests...
-          </div>
+          <RequestLeaveListingSkeleton rows={pageSize} />
         ) : requestLeavesQuery.isError ? (
           <div className="flex min-h-48 items-center justify-center rounded-lg border border-red-200 bg-red-50 px-4 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/30 dark:text-red-300">
             {requestLeavesQuery.error.message}
@@ -267,18 +266,6 @@ export function RequestLeaveListing({
     </section>
   );
 }
-
-// function getApprovalLevel(role: UserRole): 1 | 2 | null {
-//   if (role === USER_ROLE.LEAD_FRONTEND) {
-//     return 1;
-//   }
-
-//   if (role === USER_ROLE.IT_MANAGER) {
-//     return 2;
-//   }
-
-//   return null;
-// }
 
 function getPageContent(approvalLevel: 1 | 2 | null) {
   if (approvalLevel === 1) {
