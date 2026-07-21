@@ -8,76 +8,92 @@ import {
 } from "@/components/ui/card";
 
 import {
-  AudioWaveform,
   BadgeCheck,
-  BookCheck,
-  ClipboardPen,
+  CircleX,
+  ClipboardList,
+  Clock3,
+  type LucideIcon,
 } from "lucide-react";
 
-import { GeneralRequestChartBarByEachRoles } from "./developmet-barchart-general-request";
-import { RequestLeaveChartLineByEachRoles } from "./developmet-linechart-request-leave";
+type DashboardCard = {
+  title: string;
+  value: number | null;
+  subtitle: string;
+  icon: LucideIcon;
+  iconClassName: string;
+};
+
+const dashboardCards: DashboardCard[] = [
+  {
+    title: "Total General Requests",
+    value: null,
+    subtitle: "All submitted requests",
+    icon: ClipboardList,
+    iconClassName: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400",
+  },
+  {
+    title: "Pending Requests",
+    value: null,
+    subtitle: "Waiting for approval",
+    icon: Clock3,
+    iconClassName:
+      "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400",
+  },
+  {
+    title: "Approved Requests",
+    value: null,
+    subtitle: "Successfully approved",
+    icon: BadgeCheck,
+    iconClassName:
+      "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400",
+  },
+  {
+    title: "Rejected Requests",
+    value: null,
+    subtitle: "Requests that were rejected",
+    icon: CircleX,
+    iconClassName: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
+  },
+];
 
 export function SectionCardsDevelopments() {
   return (
-    <div>
-      <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:shadow-xs sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
-        <Card className="@container/card">
-          <CardHeader>
-            <CardDescription>General Request</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              168
-            </CardTitle>
-            <CardAction>
-              <Badge className="bg-sky-100 text-sky-600">
-                <AudioWaveform />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-        </Card>
-        <Card className="@container/card">
-          <CardHeader>
-            <CardDescription>Request Leave</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              100
-            </CardTitle>
-            <CardAction>
-              <Badge className="bg-green-100 text-green-700">
-                <ClipboardPen />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-        </Card>
-        <Card className="@container/card">
-          <CardHeader>
-            <CardDescription>General Request Approved</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              68
-            </CardTitle>
-            <CardAction>
-              <Badge className="bg-blue-100 text-blue-700">
-                <BadgeCheck />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-        </Card>
-        <Card className="@container/card">
-          <CardHeader>
-            <CardDescription>Request Leave Approved</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              7
-            </CardTitle>
-            <CardAction>
-              <Badge className="bg-purple-100 text-purple-700">
-                <BookCheck />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-        </Card>
-      </div>
-      <div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
-        <GeneralRequestChartBarByEachRoles />
-        <RequestLeaveChartLineByEachRoles />
-      </div>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {dashboardCards.map((item) => {
+        const Icon = item.icon;
+
+        return (
+          <Card
+            key={item.title}
+            className="border-border/70 bg-card relative overflow-hidden shadow-sm transition-shadow hover:shadow-md"
+          >
+            <CardHeader className="gap-4">
+              <div className="space-y-1">
+                <CardDescription className="text-sm font-medium">
+                  {item.title}
+                </CardDescription>
+
+                <CardTitle className="text-3xl font-semibold tracking-tight tabular-nums">
+                  {item.value ?? "—"}
+                </CardTitle>
+
+                <p className="text-muted-foreground text-xs">{item.subtitle}</p>
+              </div>
+
+              <CardAction>
+                <Badge
+                  variant="secondary"
+                  className={`flex size-10 items-center justify-center rounded-lg border-0 p-0 ${item.iconClassName}`}
+                >
+                  <Icon className="size-5" />
+                </Badge>
+              </CardAction>
+            </CardHeader>
+
+            <div className="bg-primary/10 absolute inset-x-0 bottom-0 h-0.5" />
+          </Card>
+        );
+      })}
     </div>
   );
 }

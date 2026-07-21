@@ -43,7 +43,6 @@ export function ViewGeneralRequestDialog({
   onOpenChange,
 }: ViewGeneralRequestDialogProps) {
   const id = generalRequestId ?? "";
-
   const requestQuery = useGeneralRequestById(id);
   const reviewsQuery = useGeneralRequestReviews(id);
 
@@ -53,14 +52,22 @@ export function ViewGeneralRequestDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
-        <DialogHeader>
-          <DialogTitle>General Request Details</DialogTitle>
+        <DialogHeader className="flex flex-col gap-3 pr-10 text-left sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0 space-y-1">
+            <DialogTitle>General Request Details</DialogTitle>
 
-          <DialogDescription>
-            View the request information and approval history.
-          </DialogDescription>
+            <DialogDescription>
+              View the request information and approval history.
+            </DialogDescription>
+          </div>
+
+          {request && (
+            <GeneralRequestStatusBadge
+              status={request.status}
+              className="w-fit shrink-0"
+            />
+          )}
         </DialogHeader>
-
         {requestQuery.isLoading ? (
           <div className="flex min-h-52 items-center justify-center">
             <Loader2 className="text-muted-foreground size-6 animate-spin" />
@@ -69,16 +76,32 @@ export function ViewGeneralRequestDialog({
           <ErrorState message={requestQuery.error.message} />
         ) : request ? (
           <div className="space-y-6">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="secondary">
-                {GENERAL_REQUEST_TYPE_LABEL[request.requestType]}
-              </Badge>
+            <div className="bg-muted/30 flex flex-wrap items-center gap-2 rounded-lg border p-3">
+              <div className="bg-background flex items-center gap-2 rounded-md px-2.5 py-1.5">
+                <span className="text-muted-foreground text-xs font-medium">
+                  Request type
+                </span>
 
-              <RequestPriorityBadge priority={request.priority} />
+                <Badge variant="secondary">
+                  {GENERAL_REQUEST_TYPE_LABEL[request.requestType]}
+                </Badge>
+              </div>
 
-              <GeneralRequestStatusBadge status={request.status} />
+              <div className="bg-background flex items-center gap-2 rounded-md px-2.5 py-1.5">
+                <span className="text-muted-foreground text-xs font-medium">
+                  Priority
+                </span>
 
-              <Badge variant="outline">Revision {request.revision}</Badge>
+                <RequestPriorityBadge priority={request.priority} />
+              </div>
+
+              <div className="bg-background flex items-center gap-2 rounded-md px-2.5 py-1.5">
+                <span className="text-muted-foreground text-xs font-medium">
+                  Revision
+                </span>
+
+                <Badge variant="outline">{request.revision}</Badge>
+              </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">

@@ -5,12 +5,6 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { DataTable } from "@/components/data-table";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
 import type { GeneralRequestStatus } from "@/db/constants/general-request";
 import type { UserRole } from "@/db/types/user.type";
@@ -28,6 +22,7 @@ import { EditGeneralRequestDialog } from "./edit-general-request-dialog";
 import { FilterGeneralRequesDevelopmentTeam } from "./filter-general-request";
 import { RejectGeneralRequestDialog } from "./reject-general-request-dialog";
 import { ResubmitGeneralRequestDialog } from "./resubmit-general-request-dialog";
+import { SectionCardsDevelopments } from "../section-card-development";
 
 type GeneralRequestListingProps = {
   currentUserId: string;
@@ -119,16 +114,16 @@ export function GeneralRequestListing({
   return (
     <>
       <section>
-        <Card className="border-border/60 shadow-sm">
-          <CardHeader className="flex flex-col gap-4 pb-4 sm:flex-row sm:items-start sm:justify-between">
-            <div className="space-y-1.5">
-              <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
+        <div className="mt-2 space-y-4">
+          <div className="flex flex-col gap-4 pb-5 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0 space-y-1.5">
+              <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
                 {pageContent.title}
-              </CardTitle>
+              </h1>
 
-              <CardDescription className="text-muted-foreground max-w-2xl text-sm leading-6">
+              <p className="text-muted-foreground max-w-2xl text-sm leading-6">
                 {pageContent.description}
-              </CardDescription>
+              </p>
             </div>
 
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
@@ -136,10 +131,10 @@ export function GeneralRequestListing({
 
               {approvalLevel === null && <ButtonSubmitGeneralRequest />}
             </div>
-          </CardHeader>
-        </Card>
-
-        <div className="mt-8">
+          </div>
+          <SectionCardsDevelopments />
+        </div>
+        <div className="mt-6">
           {generalRequestsQuery.isLoading ? (
             <GeneralRequestTableSkeleton rows={pageSize} />
           ) : generalRequestsQuery.isError ? (
@@ -154,17 +149,27 @@ export function GeneralRequestListing({
             <>
               <DataTable data={generalRequests} columns={columns} />
 
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-4 flex flex-col gap-3 pt-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-muted-foreground text-sm">
-                  Showing {startIndex}-{endIndex} of {totalItems} items
+                  Showing{" "}
+                  <span className="text-foreground font-medium">
+                    {startIndex}-{endIndex}
+                  </span>{" "}
+                  of{" "}
+                  <span className="text-foreground font-medium">
+                    {totalItems}
+                  </span>{" "}
+                  items
                 </p>
 
                 {totalItems > 0 && (
-                  <PaginationWithLinks
-                    page={pagination?.page ?? page}
-                    pageSize={pagination?.pageSize ?? pageSize}
-                    totalCount={totalItems}
-                  />
+                  <div className="flex justify-start sm:justify-end">
+                    <PaginationWithLinks
+                      page={pagination?.page ?? page}
+                      pageSize={pagination?.pageSize ?? pageSize}
+                      totalCount={totalItems}
+                    />
+                  </div>
                 )}
               </div>
             </>
