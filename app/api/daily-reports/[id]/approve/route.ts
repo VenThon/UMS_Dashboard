@@ -1,6 +1,6 @@
-import { approveDailyReportServiceAPI } from "@/app/api/services/daily-report/approve-report";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { requireRole } from "@/lib/auth/require-role";
+import { approveDailyReportServiceAPI } from "@/server/services/daily-report/approve-report";
 import { REVIEW_DAILY_REPORT_ROLES } from "@/utils/daily-report/daily-report-permission";
 
 import { z } from "zod";

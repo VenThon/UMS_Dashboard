@@ -15,7 +15,7 @@ import {
 } from "@/db/constants/request-leave-status";
 import {
   RequestLeaveFormValues,
-  requestLeaveSchema,
+  createRequestLeaveFormSchema,
 } from "@/db/validation/leave-request";
 import { useRouter } from "@/i18n/navigation";
 
@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, CalendarDays, FileText, Info, Send } from "lucide-react";
 import { useForm, useWatch } from "react-hook-form";
 
+import { useCreateRequestLeave } from "../../leave-request/_hooks/use-request-leave";
 import {
   RequestLeaveFields,
   calculateTotalLeaveDays,
@@ -30,14 +31,14 @@ import {
 
 export function RequestLeaveForm() {
   const router = useRouter();
-
+  const createRequestLeave = useCreateRequestLeave();
   const form = useForm<RequestLeaveFormValues>({
-    resolver: zodResolver(requestLeaveSchema),
+    resolver: zodResolver(createRequestLeaveFormSchema),
     defaultValues: {
       leaveType: LEAVE_TYPES.ANNUAL_LEAVE,
       startDate: "",
       endDate: "",
-      durationDays: LEAVE_DURATION_TYPES.FULL_DAY,
+      durationType: LEAVE_DURATION_TYPES.FULL_DAY,
       reason: "",
     },
   });
@@ -54,7 +55,7 @@ export function RequestLeaveForm() {
 
   const durationDays = useWatch({
     control: form.control,
-    name: "durationDays",
+    name: "durationType",
   });
 
   const totalLeaveDays = calculateTotalLeaveDays({
@@ -63,13 +64,13 @@ export function RequestLeaveForm() {
     durationType: durationDays,
   });
 
-  async function onSubmit(values: RequestLeaveFormValues) {
-    const payload = {
-      ...values,
-      totalDays: totalLeaveDays,
-    };
-
-    console.log("Leave request payload:", payload);
+  function onSubmit(values: RequestLeaveFormValues) {
+    createRequestLeave.mutate(values, {
+      onSuccess: () => {
+        router.push("/dashboard/developments/leave-request");
+        router.refresh();
+      },
+    });
   }
 
   return (
@@ -157,13 +158,15 @@ export function RequestLeaveForm() {
                 <Button
                   type="submit"
                   className="w-full sm:w-auto"
-                  disabled={form.formState.isSubmitting || totalLeaveDays === 0}
+                  disabled={
+                    createRequestLeave.isPending || totalLeaveDays === 0
+                  }
                 >
                   <Send className="size-4" />
 
-                  {form.formState.isSubmitting
+                  {createRequestLeave.isPending
                     ? "Submitting..."
-                    : "Submit Request"}
+                    : "Submit request"}
                 </Button>
               </div>
             </form>

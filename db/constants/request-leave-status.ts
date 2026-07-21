@@ -32,27 +32,30 @@ export const LEAVE_TYPES_LABELS: Record<LeaveTypes, string> = {
 };
 
 export const REQUEST_LEAVE_STATUS = {
-  PENDING: "pending",
+  PENDING_FIRST_APPROVAL: "pending_first_approval",
+  PENDING_SECOND_APPROVAL: "pending_second_approval",
   APPROVED: "approved",
   REJECTED: "rejected",
-  CANCEL: "cancel",
+  CANCELLED: "cancelled",
 } as const;
 
 export type RequestLeaveStatus =
   (typeof REQUEST_LEAVE_STATUS)[keyof typeof REQUEST_LEAVE_STATUS];
 
-export const RequestLeaveStatusSchema = z.enum([
-  REQUEST_LEAVE_STATUS.PENDING,
+export const requestLeaveStatusSchema = z.enum([
+  REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL,
+  REQUEST_LEAVE_STATUS.PENDING_SECOND_APPROVAL,
   REQUEST_LEAVE_STATUS.APPROVED,
   REQUEST_LEAVE_STATUS.REJECTED,
-  REQUEST_LEAVE_STATUS.CANCEL,
+  REQUEST_LEAVE_STATUS.CANCELLED,
 ]);
 
 export const REQUEST_LEAVE_STATUS_LABELS: Record<RequestLeaveStatus, string> = {
-  [REQUEST_LEAVE_STATUS.PENDING]: "Pending",
+  [REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL]: "Pending First Approval",
+  [REQUEST_LEAVE_STATUS.PENDING_SECOND_APPROVAL]: "Pending Second Approval",
   [REQUEST_LEAVE_STATUS.APPROVED]: "Approved",
   [REQUEST_LEAVE_STATUS.REJECTED]: "Rejected",
-  [REQUEST_LEAVE_STATUS.CANCEL]: "Cancel",
+  [REQUEST_LEAVE_STATUS.CANCELLED]: "Cancelled",
 };
 
 export const LEAVE_DURATION_TYPES = {
