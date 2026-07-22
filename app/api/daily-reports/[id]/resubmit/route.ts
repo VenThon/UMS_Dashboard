@@ -1,6 +1,6 @@
-import { submitDailyReportService } from "@/app/api/services/daily-report/resubmit-daily-report";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { requireRole } from "@/lib/auth/require-role";
+import { submitDailyReportService } from "@/server/services/daily-report/resubmit-daily-report";
 import { CREATE_DAILY_REPORT_ROLES } from "@/utils/daily-report/daily-report-permission";
 
 import { z } from "zod";

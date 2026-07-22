@@ -10,9 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import DOMPurify from "isomorphic-dompurify";
 
 import { format } from "date-fns";
+import DOMPurify from "isomorphic-dompurify";
 import {
   CalendarClock,
   Clock,

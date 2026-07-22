@@ -1,7 +1,7 @@
-import { reviewDailyReportService } from "@/app/api/services/daily-report/review-daily-report.service";
 import { reviewDailyReportSchema } from "@/db/schema/daily-report-review";
 import { errorResponse, successResponse } from "@/lib/api-response";
 import { requireRole } from "@/lib/auth/require-role";
+import { reviewDailyReportService } from "@/server/services/daily-report/review-daily-report.service";
 import { REVIEW_DAILY_REPORT_ROLES } from "@/utils/daily-report/daily-report-permission";
 
 import { ZodError, z } from "zod";
@@ -45,8 +45,6 @@ export async function POST(request: Request, { params }: RouteParams) {
 
     return successResponse(result, 201);
   } catch (error) {
-    console.error("POST /api/daily-reports/[id]/review error:", error);
-
     if (error instanceof ZodError) {
       return errorResponse(
         error.issues[0]?.message ?? "Validation error.",

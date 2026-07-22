@@ -1,6 +1,5 @@
 import z from "zod";
 
-// Request Status
 export const REQUEST_STATUS = {
   PENDING_LEAD_FRONTEND: "pending_lead_frontend",
   PENDING_LEAD_BACKEND: "pending_lead_backend",
