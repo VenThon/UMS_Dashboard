@@ -12,6 +12,7 @@ import { getGeneralRequestApprovalLevel } from "@/utils/general-request/request-
 
 import { useGeneralRequests } from "../../general-request/_hooks/use-general-request";
 import type { GeneralRequestItem } from "../../general-request/general-request-types";
+import { SectionCardsDevelopments } from "../dashboard/dashboard-general-request";
 import { ApproveGeneralRequestDialog } from "./approve-general-request-dialog";
 import { ButtonSubmitGeneralRequest } from "./button-general-request";
 import { CancelGeneralRequestDialog } from "./cancel-general-request-dialog";
@@ -22,7 +23,6 @@ import { EditGeneralRequestDialog } from "./edit-general-request-dialog";
 import { FilterGeneralRequesDevelopmentTeam } from "./filter-general-request";
 import { RejectGeneralRequestDialog } from "./reject-general-request-dialog";
 import { ResubmitGeneralRequestDialog } from "./resubmit-general-request-dialog";
-import { SectionCardsDevelopments } from "../section-card-development";
 
 type GeneralRequestListingProps = {
   currentUserId: string;
