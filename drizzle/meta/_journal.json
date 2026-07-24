@@ -57,6 +57,13 @@
       "when": 1784456624385,
       "tag": "0007_bent_redwing",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1784823045560,
+      "tag": "0008_new_killraven",
+      "breakpoints": true
     }
   ]
 }

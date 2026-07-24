@@ -3,18 +3,14 @@
 import { useSearchParams } from "next/navigation";
 
 import { DataTable } from "@/components/data-table";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
 import type { UserRole } from "@/db/types/user.type";
 import { useGetDailyReports } from "@/hooks/report/use-daily-report";
 
+import { ClipboardList } from "lucide-react";
 import { useLocale } from "next-intl";
 
+import { SectionCardDailyReport } from "../dashboard/dashboard-daily-report";
 import { TableLoadingSkeleton } from "../tableLoadingSkeleton";
 import { ButtonCreateDailyReport } from "./button-daily-report";
 import { getColumnsDataTableDevelopmentTeam } from "./data-table-developement";
@@ -73,27 +69,36 @@ export function DailyReportListingPage({
 
   return (
     <section>
-      <Card className="border-border/60 shadow-sm">
-        <CardHeader className="flex flex-col gap-4 pb-4 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-1.5">
-            <CardTitle className="text-xl font-semibold tracking-tight sm:text-xl">
-              Daily Development Reports
-            </CardTitle>
+      <div className="space-y-4">
+        <section className="">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-start gap-4">
+              <div className="text-foreground mt-3 flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gray-200">
+                <ClipboardList className="size-6" />
+              </div>
+              <div className="min-w-0">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                  Daily Development Reports
+                </h1>
 
-            <CardDescription className="text-muted-foreground max-w-2xl text-sm leading-6">
-              Monitor, review, and manage daily reports submitted by developers
-              to ensure project progress and team alignment.
-            </CardDescription>
+                <p className="text-muted-foreground mt-1 text-sm leading-6">
+                  Monitor, review, and manage daily reports submitted by
+                  developers to ensure project progress and team alignment.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+              <FilterReportDevelopmentTeam />
+
+              <ButtonCreateDailyReport />
+            </div>
           </div>
+        </section>
 
-          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
-            <FilterReportDevelopmentTeam />
-            <ButtonCreateDailyReport />
-          </div>
-        </CardHeader>
-      </Card>
-
-      <div className="mt-8">
+        <SectionCardDailyReport />
+      </div>
+      <div className="mt-6">
         <DataTable data={paginatedReports} columns={columns} />
 
         <div className="mt-5 flex flex-col gap-3 bg-white px-2 py-3 sm:flex-row sm:items-center sm:justify-between">
