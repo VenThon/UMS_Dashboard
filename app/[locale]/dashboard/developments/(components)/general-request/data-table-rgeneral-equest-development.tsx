@@ -2,6 +2,7 @@
 
 import {
   GeneralRequestStatusBadge,
+  GeneralRequestTypeBadge,
   RequestPriorityBadge,
 } from "@/components/badge/general-request-status";
 import { Button } from "@/components/ui/button";
@@ -10,15 +11,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  GENERAL_REQUEST_STATUS,
-  GENERAL_REQUEST_TYPE_LABEL,
-} from "@/db/constants/general-request";
+import { GENERAL_REQUEST_STATUS } from "@/db/constants/general-request";
 
 import type { ColumnDef } from "@tanstack/react-table";
 import { Ban, Check, Eye, RotateCcw, SquarePen, Trash2, X } from "lucide-react";
 
-import { GeneralRequestItem } from "../../general-request/general-request-types";
+import { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 
 type GeneralRequestColumnOptions = {
   currentUserId: string;
@@ -60,7 +58,9 @@ export function getColumnsDataTableGeneralRequestDevelopmentTeam({
       accessorKey: "requestType",
       header: "Request Type",
       cell: ({ row }) => (
-        <span>{GENERAL_REQUEST_TYPE_LABEL[row.original.requestType]}</span>
+        <span>
+          <GeneralRequestTypeBadge requestType={row.original.requestType} />
+        </span>
       ),
     },
     {

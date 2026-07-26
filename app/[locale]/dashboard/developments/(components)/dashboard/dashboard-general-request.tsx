@@ -1,3 +1,6 @@
+"use client";
+
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -15,48 +18,82 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { useGeneralRequestSummary } from "../../general-request/_hooks/use-general-request";
+import { GeneralRequestSummarySkeleton } from "../general-request/general-request-summary-skeleton";
+
 type DashboardCard = {
   title: string;
-  value: number | null;
+  value: number;
   subtitle: string;
   icon: LucideIcon;
   iconClassName: string;
 };
 
-const dashboardCards: DashboardCard[] = [
-  {
-    title: "Total General Requests",
-    value: null,
-    subtitle: "All submitted requests",
-    icon: ClipboardList,
-    iconClassName: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400",
-  },
-  {
-    title: "Pending Requests",
-    value: null,
-    subtitle: "Waiting for approval",
-    icon: Clock3,
-    iconClassName:
-      "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400",
-  },
-  {
-    title: "Approved Requests",
-    value: null,
-    subtitle: "Successfully approved",
-    icon: BadgeCheck,
-    iconClassName:
-      "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400",
-  },
-  {
-    title: "Rejected Requests",
-    value: null,
-    subtitle: "Requests that were rejected",
-    icon: CircleX,
-    iconClassName: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
-  },
-];
-
 export function SectionCardsDevelopments() {
+  const summaryQuery = useGeneralRequestSummary();
+
+  if (summaryQuery.isLoading) {
+    return <GeneralRequestSummarySkeleton />;
+  }
+
+  if (summaryQuery.isError) {
+    return (
+      <Alert variant="destructive">
+        <AlertDescription>
+          {summaryQuery.error instanceof Error
+            ? summaryQuery.error.message
+            : "Failed to load the general request summary."}
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
+  const summary = summaryQuery.data;
+  if (!summary) {
+    return (
+      <Alert variant="destructive">
+        <AlertDescription>
+          General request summary data is unavailable.
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
+  const dashboardCards: DashboardCard[] = [
+    {
+      title: "Total General Requests",
+      value: summary.totalGeneralRequests ?? 0,
+      subtitle: "All submitted requests",
+      icon: ClipboardList,
+      iconClassName:
+        "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400",
+    },
+    {
+      title: "Pending Requests",
+      value: summary.totalPendingRequests ?? 0,
+      subtitle: "Waiting for first or second approval",
+      icon: Clock3,
+      iconClassName:
+        "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400",
+    },
+    {
+      title: "Approved Requests",
+      value: summary.totalApprovedRequests ?? 0,
+      subtitle: "Successfully approved",
+      icon: BadgeCheck,
+      iconClassName:
+        "bg-green-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400",
+    },
+    {
+      title: "Rejected Requests",
+      value: summary.totalRejectedRequests ?? 0,
+      subtitle: "Requests that were rejected",
+      icon: CircleX,
+      iconClassName:
+        "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {dashboardCards.map((item) => {
@@ -74,7 +111,7 @@ export function SectionCardsDevelopments() {
                 </CardDescription>
 
                 <CardTitle className="text-3xl font-semibold tracking-tight tabular-nums">
-                  {item.value ?? "—"}
+                  {item.value.toLocaleString()}
                 </CardTitle>
 
                 <p className="text-muted-foreground text-xs">{item.subtitle}</p>
@@ -85,12 +122,10 @@ export function SectionCardsDevelopments() {
                   variant="secondary"
                   className={`flex size-10 items-center justify-center rounded-lg border-0 p-0 ${item.iconClassName}`}
                 >
-                  <Icon className="size-5" />
+                  <Icon className="size-5" aria-hidden="true" />
                 </Badge>
               </CardAction>
             </CardHeader>
-
-            <div className="bg-primary/10 absolute inset-x-0 bottom-0 h-0.5" />
           </Card>
         );
       })}

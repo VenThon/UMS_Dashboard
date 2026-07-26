@@ -86,3 +86,10 @@ export type GeneralRequestReviewMutationResponse = {
     review: GeneralRequestReview;
   };
 };
+
+export type GeneralRequestSummary = {
+  totalGeneralRequests: number;
+  totalPendingRequests: number;
+  totalApprovedRequests: number;
+  totalRejectedRequests: number;
+};

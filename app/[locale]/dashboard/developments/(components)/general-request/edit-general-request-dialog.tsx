@@ -22,8 +22,8 @@ import { Loader2, Save } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 import { useUpdateGeneralRequest } from "../../general-request/_hooks/use-general-request";
-import { GeneralRequestItem } from "../../general-request/general-request-types";
 import { GeneralRequestFields } from "./general-request-fields";
 
 type EditGeneralRequestDialogProps = {

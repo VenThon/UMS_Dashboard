@@ -14,8 +14,8 @@ import {
 import { Loader2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
+import { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 import { useDeleteGeneralRequest } from "../../general-request/_hooks/use-general-request";
-import { GeneralRequestItem } from "../../general-request/general-request-types";
 
 // import type { GeneralRequestItem } from "../../_api/general-request-types";
 // import { useDeleteGeneralRequest } from "../../_hooks/use-general-request";

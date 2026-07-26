@@ -31,8 +31,8 @@ import { CircleX, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 import { useRejectGeneralRequest } from "../../general-request/_hooks/use-general-request";
-import { GeneralRequestItem } from "../../general-request/general-request-types";
 
 type RejectGeneralRequestDialogProps = {
   request: GeneralRequestItem | null;

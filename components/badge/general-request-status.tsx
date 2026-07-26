@@ -1,15 +1,36 @@
 import { Badge } from "@/components/ui/badge";
 import {
   GENERAL_REQUEST_STATUS_LABELS,
+  GENERAL_REQUEST_TYPE_LABEL,
   type GeneralRequestStatus,
+  GeneralRequestType,
   REQUEST_PRIORITY_LABEL,
   type RequestPriority,
 } from "@/db/constants/general-request";
 import { cn } from "@/lib/utils";
 
 import { cva } from "class-variance-authority";
+import type { LucideIcon } from "lucide-react";
+import {
+  Ban,
+  Boxes,
+  CheckCircle2,
+  CircleAlert,
+  CircleDashed,
+  CircleEllipsis,
+  CircleX,
+  Clock3,
+  Flame,
+  Gauge,
+  GraduationCap,
+  HandCoins,
+  Laptop,
+  Minus,
+  ShieldAlert,
+  Wrench,
+} from "lucide-react";
 
-const generalRequestStatusBadgeTone = cva("border font-medium", {
+const generalRequestStatusBadgeTone = cva("gap-1.5 border font-medium", {
   variants: {
     tone: {
       draft:
@@ -33,6 +54,15 @@ const generalRequestStatusBadgeTone = cva("border font-medium", {
   },
 });
 
+const GENERAL_REQUEST_STATUS_ICONS: Record<GeneralRequestStatus, LucideIcon> = {
+  draft: CircleDashed,
+  pending_first_approval: Clock3,
+  pending_second_approval: CircleAlert,
+  approved: CheckCircle2,
+  rejected: CircleX,
+  cancelled: Ban,
+};
+
 type GeneralRequestStatusBadgeProps = React.ComponentProps<typeof Badge> & {
   status: GeneralRequestStatus;
 };
@@ -42,6 +72,8 @@ export function GeneralRequestStatusBadge({
   className,
   ...props
 }: GeneralRequestStatusBadgeProps) {
+  const StatusIcon = GENERAL_REQUEST_STATUS_ICONS[status];
+
   return (
     <Badge
       variant="outline"
@@ -54,12 +86,14 @@ export function GeneralRequestStatusBadge({
       )}
       {...props}
     >
-      {GENERAL_REQUEST_STATUS_LABELS[status]}
+      <StatusIcon className="size-3.5 shrink-0" aria-hidden="true" />
+
+      <span>{GENERAL_REQUEST_STATUS_LABELS[status]}</span>
     </Badge>
   );
 }
 
-const requestPriorityBadgeTone = cva("border font-medium", {
+const requestPriorityBadgeTone = cva("gap-1.5 border font-medium", {
   variants: {
     priority: {
       low: "border-slate-200 bg-slate-50 text-slate-700 dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-300",
@@ -75,6 +109,13 @@ const requestPriorityBadgeTone = cva("border font-medium", {
   },
 });
 
+const REQUEST_PRIORITY_ICONS: Record<RequestPriority, LucideIcon> = {
+  low: Minus,
+  medium: Gauge,
+  high: ShieldAlert,
+  urgent: Flame,
+};
+
 type RequestPriorityBadgeProps = React.ComponentProps<typeof Badge> & {
   priority: RequestPriority;
 };
@@ -84,6 +125,8 @@ export function RequestPriorityBadge({
   className,
   ...props
 }: RequestPriorityBadgeProps) {
+  const PriorityIcon = REQUEST_PRIORITY_ICONS[priority];
+
   return (
     <Badge
       variant="outline"
@@ -96,7 +139,46 @@ export function RequestPriorityBadge({
       )}
       {...props}
     >
-      {REQUEST_PRIORITY_LABEL[priority]}
+      <PriorityIcon className="size-3.5 shrink-0" aria-hidden="true" />
+
+      <span>{REQUEST_PRIORITY_LABEL[priority]}</span>
+    </Badge>
+  );
+}
+
+export const GENERAL_REQUEST_TYPE_ICONS: Record<
+  GeneralRequestType,
+  LucideIcon
+> = {
+  equipment: Boxes,
+  software: Laptop,
+  training: GraduationCap,
+  budget: HandCoins,
+  service: Wrench,
+  other: CircleEllipsis,
+};
+
+type GeneralRequestTypeBadgeProps = React.ComponentProps<typeof Badge> & {
+  requestType: GeneralRequestType;
+};
+
+export function GeneralRequestTypeBadge({
+  requestType,
+  className,
+  ...props
+}: GeneralRequestTypeBadgeProps) {
+  const TypeIcon = GENERAL_REQUEST_TYPE_ICONS[requestType];
+
+  return (
+    <Badge
+      variant="secondary"
+      data-slot="general-request-type-badge"
+      className={cn("gap-1.5 font-medium", className)}
+      {...props}
+    >
+      <TypeIcon className="size-3.5 shrink-0" aria-hidden="true" />
+
+      <span>{GENERAL_REQUEST_TYPE_LABEL[requestType]}</span>
     </Badge>
   );
 }

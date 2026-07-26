@@ -11,7 +11,7 @@ import { type UserRole } from "@/db/types/user.type";
 import { getRequestLeaveApprovalLevel } from "@/utils/general-request/request-leave-permission";
 
 import { useRequestLeaves } from "../../leave-request/_hooks/use-request-leave";
-import { SectionCardsLeaveRequest } from "../dashboard/dashboard-leave-request";
+import { SectionCardsRequestLeave } from "../dashboard/dashboard-leave-request";
 import { RequestLeaveListingSkeleton } from "./RequestLeaveListingSkeleton";
 import { ButtonSubmitRequestLeave } from "./button-submit-request-leave";
 import { getcolumnsDataTableRequestLeaveDevelopmentTeam } from "./data-table-request-leave-development";
@@ -74,26 +74,6 @@ export function RequestLeaveListing({
 
   return (
     <section>
-      {/* <Card className="border-border/60 shadow-sm">
-        <CardHeader className="flex flex-col gap-4 pb-4 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-1.5">
-            <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
-              {pageContent.title}
-            </CardTitle>
-
-            <CardDescription className="text-muted-foreground max-w-2xl text-sm leading-6">
-              {pageContent.description}
-            </CardDescription>
-          </div>
-
-          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
-            <FilterRequestLeaveDevelopmentTeam />
-
-            {approvalLevel === null && <ButtonSubmitRequestLeave />}
-          </div>
-          <SectionCardsLeaveRequest />
-        </CardHeader>
-      </Card> */}
       <div className="mt-2 space-y-4">
         <div className="flex flex-col gap-4 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 space-y-1.5">
@@ -112,7 +92,7 @@ export function RequestLeaveListing({
             {approvalLevel === null && <ButtonSubmitRequestLeave />}
           </div>
         </div>
-        <SectionCardsLeaveRequest />
+        <SectionCardsRequestLeave />
       </div>
 
       <div className="mt-6">

@@ -1,3 +1,4 @@
+import { RequestLeaveSummary } from "@/app/[locale]/dashboard/developments/leave-request/_hooks/types";
 import type {
   LeaveDurationType,
   LeaveTypes,
@@ -241,4 +242,22 @@ export async function getRequestLeaveReviewHistory(
   });
 
   return parseResponse<ApiResponse<RequestLeaveReview[]>>(response);
+}
+
+export async function getRequestLeaveSummaryApi() {
+  const response = await fetch("/api/request-leave/summary", {
+    method: "GET",
+    credentials: "include",
+    cache: "no-store",
+  });
+
+  const result = (await response.json()) as ApiResponse<RequestLeaveSummary>;
+
+  if (!response.ok) {
+    throw new Error(
+      result.message ?? "Failed to load the leave request summary.",
+    );
+  }
+
+  return result.data;
 }

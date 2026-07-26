@@ -4,7 +4,8 @@ import {
   GeneralRequestMutationResponse,
   GeneralRequestReviewMutationResponse,
   GeneralRequestReviewsResponse,
-} from "@/app/[locale]/dashboard/developments/general-request/general-request-types";
+  GeneralRequestSummary,
+} from "@/app/[locale]/dashboard/developments/general-request/_hooks/general-request-types";
 import type {
   GeneralRequestStatus,
   GeneralRequestType,
@@ -186,4 +187,28 @@ export async function getGeneralRequestReviews(
   const response = await fetch(`/api/general-request/${id}/reviewer`);
 
   return parseApiResponse<GeneralRequestReviewsResponse>(response);
+}
+
+type ApiResponse<T> = {
+  success: boolean;
+  message?: string;
+  data: T;
+};
+
+export async function getGeneralRequestSummaryApi() {
+  const response = await fetch("/api/general-request/summary", {
+    method: "GET",
+    credentials: "include",
+    cache: "no-store",
+  });
+
+  const result = (await response.json()) as ApiResponse<GeneralRequestSummary>;
+
+  if (!response.ok) {
+    throw new Error(
+      result.message ?? "Failed to load the general request summary.",
+    );
+  }
+
+  return result.data;
 }
