@@ -109,18 +109,31 @@ export function RequestLeaveListing({
         ) : (
           <>
             <DataTable data={requestLeaves} columns={columns} />
-
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-muted-foreground text-sm">
-                Showing {startIndex}-{endIndex} of {totalItems} items
+                Showing{" "}
+                <span className="text-foreground font-medium">
+                  {startIndex}
+                </span>
+                {"–"}
+                <span className="text-foreground font-medium">
+                  {endIndex}
+                </span>{" "}
+                of{" "}
+                <span className="text-foreground font-medium">
+                  {totalItems}
+                </span>{" "}
+                items
               </p>
 
               {totalItems > 0 && (
-                <PaginationWithLinks
-                  page={pagination?.page ?? page}
-                  pageSize={pagination?.pageSize ?? pageSize}
-                  totalCount={totalItems}
-                />
+                <div className="flex justify-start sm:justify-end">
+                  <PaginationWithLinks
+                    page={pagination?.page ?? page}
+                    pageSize={pagination?.pageSize ?? pageSize}
+                    totalCount={totalItems}
+                  />
+                </div>
               )}
             </div>
           </>
