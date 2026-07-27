@@ -18,8 +18,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
+import { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 import { useApproveGeneralRequest } from "../../general-request/_hooks/use-general-request";
-import { GeneralRequestItem } from "../../general-request/general-request-types";
 
 type ApproveGeneralRequestDialogProps = {
   request: GeneralRequestItem | null;

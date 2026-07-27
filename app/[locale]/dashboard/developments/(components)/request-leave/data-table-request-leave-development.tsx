@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { LeaveDurationTypeBadge } from "@/components/badge/duration-types";
 import { LeaveTypesBadge } from "@/components/badge/leave-types";
 import { RequestLeaveStatusBadge } from "@/components/badge/status-request-leave";
 import { Button } from "@/components/ui/button";
@@ -10,10 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  LEAVE_DURATION_LABELS,
-  REQUEST_LEAVE_STATUS,
-} from "@/db/constants/request-leave-status";
+import { REQUEST_LEAVE_STATUS } from "@/db/constants/request-leave-status";
 import { RequestLeaveItem } from "@/service/leave-request/leave-request.service";
 
 import type { ColumnDef } from "@tanstack/react-table";
@@ -291,7 +289,9 @@ export function getcolumnsDataTableRequestLeaveDevelopmentTeam(
       accessorKey: "durationType",
       header: "Duration",
       cell: ({ row }) => (
-        <span>{LEAVE_DURATION_LABELS[row.original.durationType]}</span>
+        <span>
+          <LeaveDurationTypeBadge durationType={row.original.durationType} />
+        </span>
       ),
     },
     {

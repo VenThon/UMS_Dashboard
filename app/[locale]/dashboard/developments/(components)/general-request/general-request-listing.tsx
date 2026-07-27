@@ -10,8 +10,8 @@ import type { GeneralRequestStatus } from "@/db/constants/general-request";
 import type { UserRole } from "@/db/types/user.type";
 import { getGeneralRequestApprovalLevel } from "@/utils/general-request/request-leave-permission";
 
+import type { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 import { useGeneralRequests } from "../../general-request/_hooks/use-general-request";
-import type { GeneralRequestItem } from "../../general-request/general-request-types";
 import { SectionCardsDevelopments } from "../dashboard/dashboard-general-request";
 import { ApproveGeneralRequestDialog } from "./approve-general-request-dialog";
 import { ButtonSubmitGeneralRequest } from "./button-general-request";

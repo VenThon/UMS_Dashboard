@@ -14,4 +14,6 @@ export const generalRequestKeys = {
 
   reviews: (id: string) =>
     [...generalRequestKeys.detail(id), "reviews"] as const,
+
+  summary: () => [...generalRequestKeys.all, "summary"] as const,
 };

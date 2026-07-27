@@ -2,15 +2,15 @@
 
 import { useSearchParams } from "next/navigation";
 
+import { useGetDailyReports } from "@/app/[locale]/dashboard/developments/report/_hooks/use-daily-report";
 import { DataTable } from "@/components/data-table";
 import { PaginationWithLinks } from "@/components/ui/pagination-link";
 import type { UserRole } from "@/db/types/user.type";
-import { useGetDailyReports } from "@/hooks/report/use-daily-report";
 
 import { ClipboardList } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import { SectionCardDailyReport } from "../dashboard/dashboard-daily-report";
+import { SectionCardsDailyReport } from "../dashboard/dashboard-daily-report";
 import { TableLoadingSkeleton } from "../tableLoadingSkeleton";
 import { ButtonCreateDailyReport } from "./button-daily-report";
 import { getColumnsDataTableDevelopmentTeam } from "./data-table-developement";
@@ -96,7 +96,7 @@ export function DailyReportListingPage({
           </div>
         </section>
 
-        <SectionCardDailyReport />
+        <SectionCardsDailyReport />
       </div>
       <div className="mt-6">
         <DataTable data={paginatedReports} columns={columns} />

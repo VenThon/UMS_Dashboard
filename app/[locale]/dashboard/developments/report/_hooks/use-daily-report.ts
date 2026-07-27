@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-import { dailyReportKeys } from "@/constants/daily-report-query-key";
+import { dailyReportKeys } from "@/app/[locale]/dashboard/developments/report/_hooks/daily-report-query-key";
 import {
   CreateDailyReportPayload,
   UpdateDailyReportPayload,
@@ -8,6 +8,7 @@ import {
   createDailyReportService,
   deleteDailyReportService,
   getDailyReportByIdService,
+  getDailyReportSummaryApi,
   getDailyReportsService,
   rejectDailyReportService,
   reviewDailyReportService,
@@ -187,5 +188,13 @@ export function useRejectDailyReport() {
     onError: (error) => {
       toast.error(error.message);
     },
+  });
+}
+
+export function useDailyReportSummary() {
+  return useQuery({
+    queryKey: dailyReportKeys.summary(),
+    queryFn: getDailyReportSummaryApi,
+    staleTime: 30_000,
   });
 }

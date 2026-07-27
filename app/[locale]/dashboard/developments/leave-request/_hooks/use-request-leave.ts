@@ -12,6 +12,7 @@ import {
   deleteRequestLeave,
   getRequestLeaveById,
   getRequestLeaveReviewHistory,
+  getRequestLeaveSummaryApi,
   getRequestLeaves,
   rejectRequestLeave,
   resubmitRequestLeave,
@@ -253,5 +254,13 @@ export function useResubmitRequestLeave() {
     onError: (error) => {
       toast.error(error.message);
     },
+  });
+}
+
+export function useRequestLeaveSummary() {
+  return useQuery({
+    queryKey: requestLeaveKeys.summary(),
+    queryFn: getRequestLeaveSummaryApi,
+    staleTime: 30_000,
   });
 }

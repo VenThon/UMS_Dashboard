@@ -14,6 +14,7 @@ export const requestLeaveKeys = {
   details: () => [...requestLeaveKeys.all, "detail"] as const,
 
   detail: (id: string) => [...requestLeaveKeys.details(), id] as const,
+  summary: () => [...requestLeaveKeys.all, "summary"] as const,
 
   reviews: (id: string) => [...requestLeaveKeys.detail(id), "reviews"] as const,
 };

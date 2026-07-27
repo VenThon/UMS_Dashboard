@@ -15,6 +15,7 @@ import {
   deleteGeneralRequest,
   getGeneralRequestById,
   getGeneralRequestReviews,
+  getGeneralRequestSummaryApi,
   getGeneralRequests,
   rejectGeneralRequest,
   resubmitGeneralRequest,
@@ -169,6 +170,14 @@ export function useResubmitGeneralRequest() {
     onSuccess: async (_, variables) => {
       await invalidateGeneralRequest(queryClient, variables.id);
     },
+  });
+}
+
+export function useGeneralRequestSummary() {
+  return useQuery({
+    queryKey: generalRequestKeys.summary(),
+    queryFn: getGeneralRequestSummaryApi,
+    staleTime: 30_000,
   });
 }
 
