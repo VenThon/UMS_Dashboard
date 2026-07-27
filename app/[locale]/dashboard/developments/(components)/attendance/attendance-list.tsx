@@ -1,5 +1,3 @@
-// src/features/attendance/components/attendance-list.tsx
-
 "use client";
 
 import { useState } from "react";

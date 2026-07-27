@@ -24,7 +24,6 @@ export const Requeststatuslabel: Record<Requeststatus, string> = {
   [REQUEST_STATUS.REJECTED]: "Rejected",
 };
 
-// Review request status
 export const REQUEST_REVIEW_STATUS = {
   APPROVED: "approved",
   REJECTED: "rejected",

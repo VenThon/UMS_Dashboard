@@ -1,4 +1,3 @@
-// lib/auth/require-current-user.ts
 import { AuthenticationError } from "./auth-error";
 import { getUserFromRequest } from "./verify";
 

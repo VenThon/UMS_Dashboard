@@ -99,20 +99,6 @@ export async function getRequestLeaveById(
   return parseResponse<ApiResponse<RequestLeaveItem>>(response);
 }
 
-// export async function createRequestLeave(
-//   values: CreateRequestLeaveValue,
-// ): Promise<ApiResponse<RequestLeaveItem>> {
-//   const response = await fetch("/api/request-leave", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     credentials: "include",
-//     body: JSON.stringify(values),
-//   });
-
-//   return parseResponse<ApiResponse<RequestLeaveItem>>(response);
-// }
 export async function createRequestLeave(
   values: CreateRequestLeaveInput,
 ): Promise<ApiResponse<RequestLeaveItem>> {

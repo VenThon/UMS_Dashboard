@@ -1,5 +1,3 @@
-// src/db/constants/attendance.ts
-
 export const ATTENDANCE_STATUSES = {
   PRESENT: "PRESENT",
   LATE: "LATE",

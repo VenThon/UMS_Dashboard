@@ -1,4 +1,3 @@
-// src/features/attendance/types.ts
 import type {
   AttendanceAction,
   AttendanceStatus,

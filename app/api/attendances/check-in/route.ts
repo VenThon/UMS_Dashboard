@@ -1,4 +1,3 @@
-// app/api/attendances/check-in/route.ts
 import { apiSuccess } from "@/lib/api-response";
 import { requireCurrentUser } from "@/lib/auth/require-current-user";
 import { handleApiError } from "@/lib/handle-api-error";

@@ -1,5 +1,3 @@
-// src/db/constants/general-request.ts
-
 export const GENERAL_REQUEST_TYPES = {
   EQUIPMENT: "equipment",
   SOFTWARE: "software",

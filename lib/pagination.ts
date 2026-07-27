@@ -1,5 +1,3 @@
-// src/lib/pagination.ts
-
 export function getPagination(page: number, pageSize: number) {
   const safePage = Math.max(1, page);
   const safePageSize = Math.min(Math.max(1, pageSize), 100);

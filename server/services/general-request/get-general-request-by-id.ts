@@ -1,4 +1,3 @@
-// src/server/services/general-request/get-general-request-by-id.ts
 import { db } from "@/db";
 import { generalRequestTable } from "@/db/schema";
 import { USER_ROLE, type UserRole } from "@/db/types/user.type";

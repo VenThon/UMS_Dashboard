@@ -1,4 +1,3 @@
-// src/app/api/general-requests/[id]/resubmit/route.ts
 import { NextResponse } from "next/server";
 
 import { resubmitGeneralRequestSchema } from "@/db/validation/general-request";

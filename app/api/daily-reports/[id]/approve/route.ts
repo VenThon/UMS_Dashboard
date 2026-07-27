@@ -40,8 +40,6 @@ export async function PATCH(_request: Request, { params }: RouteParams) {
 
     return successResponse(report);
   } catch (error) {
-    console.error("PATCH /api/daily-reports/[id]/approve error:", error);
-
     const message =
       error instanceof Error ? error.message : "Something went wrong.";
 

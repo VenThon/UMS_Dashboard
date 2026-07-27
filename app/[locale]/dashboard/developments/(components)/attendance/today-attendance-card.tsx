@@ -1,5 +1,3 @@
-// src/features/attendance/components/today-attendance-card.tsx
-
 "use client";
 
 import { Button } from "@/components/ui/button";
