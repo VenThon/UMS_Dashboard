@@ -1,4 +1,3 @@
-// src/app/api/attendances/route.ts
 import { attendanceListQuerySchema } from "@/db/validation/attendance";
 import { apiSuccess } from "@/lib/api-response";
 import { requireCurrentUser } from "@/lib/auth/require-current-user";
@@ -16,13 +15,11 @@ export async function GET(request: Request) {
       pageSize: searchParams.get("pageSize") ?? undefined,
       status: searchParams.get("status") ?? undefined,
 
-      // Always restrict records to the logged-in user.
       userId: currentUser.id,
 
       dateFrom: searchParams.get("dateFrom") ?? undefined,
       dateTo: searchParams.get("dateTo") ?? undefined,
 
-      // A user does not need to search other users.
       search: undefined,
     });
 

@@ -1,4 +1,3 @@
-// src/db/validation/general-request.ts
 import {
   GENERAL_REQUEST_STATUS,
   GENERAL_REQUEST_STATUS_VALUES,

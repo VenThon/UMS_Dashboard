@@ -1,4 +1,3 @@
-// src/features/attendance/components/attendance-pagination.tsx
 import { Button } from "@/components/ui/button";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";

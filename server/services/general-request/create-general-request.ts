@@ -1,4 +1,3 @@
-// src/server/services/general-request/create-general-request.ts
 import { db } from "@/db";
 import { generalRequestTable } from "@/db/schema";
 import type { CreateGeneralRequestValue } from "@/db/validation/general-request";

@@ -1,4 +1,3 @@
-// src/lib/handle-api-error.ts
 import { AttendanceServiceError } from "@/server/services/attendance-service";
 
 import { ZodError } from "zod";

@@ -1,4 +1,3 @@
-// src/app/api/general-requests/[id]/cancel/route.ts
 import { NextResponse } from "next/server";
 
 import { requireRole } from "@/lib/auth/require-role";

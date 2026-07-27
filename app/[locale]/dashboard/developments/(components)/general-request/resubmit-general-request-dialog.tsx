@@ -1,4 +1,3 @@
-// resubmit-general-request-dialog.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -26,8 +25,6 @@ import { toast } from "sonner";
 
 import { GeneralRequestItem } from "../../general-request/_hooks/general-request-types";
 import { useResubmitGeneralRequest } from "../../general-request/_hooks/use-general-request";
-// import type { GeneralRequestItem } from "../../_api/general-request-types";
-// import { useResubmitGeneralRequest } from "../../_hooks/use-general-request";
 import { GeneralRequestFields } from "./general-request-fields";
 
 type ResubmitGeneralRequestDialogProps = {

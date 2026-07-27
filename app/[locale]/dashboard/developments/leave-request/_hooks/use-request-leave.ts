@@ -51,26 +51,6 @@ export function useRequestLeaveReviews(id: string) {
   });
 }
 
-// export function useCreateRequestLeave() {
-//   const queryClient = useQueryClient();
-
-//   return useMutation({
-//     mutationFn: (values: CreateRequestLeaveValue) => createRequestLeave(values),
-
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries({
-//         queryKey: requestLeaveKeys.lists(),
-//       });
-
-//       toast.success(response.message);
-//     },
-
-//     onError: (error) => {
-//       toast.error(error.message);
-//     },
-//   });
-// }
-
 export function useCreateRequestLeave() {
   const queryClient = useQueryClient();
 

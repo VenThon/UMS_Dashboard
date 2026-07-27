@@ -1,4 +1,3 @@
-// src/server/services/general-request/review-general-request.ts
 import { db } from "@/db";
 import {
   GENERAL_REQUEST_APPROVAL_STATUS,

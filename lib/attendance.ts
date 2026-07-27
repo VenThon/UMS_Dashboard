@@ -1,5 +1,3 @@
-// src/lib/attendance.ts
-
 const TIME_ZONE = "Asia/Phnom_Penh";
 
 export function getCambodiaDateString(date = new Date()) {

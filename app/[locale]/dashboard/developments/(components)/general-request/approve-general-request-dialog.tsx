@@ -1,4 +1,3 @@
-// approve-general-request-dialog.tsx
 "use client";
 
 import { useState } from "react";

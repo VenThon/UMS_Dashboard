@@ -1,4 +1,3 @@
-// src/app/api/general-requests/[id]/reject/route.ts
 import { NextResponse } from "next/server";
 
 import { rejectGeneralRequestSchema } from "@/db/validation/general-request";

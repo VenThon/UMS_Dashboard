@@ -57,19 +57,3 @@ export function useConfirmImportUsers() {
     },
   });
 }
-
-// export function useViewDetailsUser() {
-//   const queryClient = useQueryClient();
-//   const viewDetailUsers = useMutation({
-//     mutationFn: (id: string) => GetUserByIdService(id),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({ queryKey: ["user"] });
-//     },
-//     onError: (error) => {
-//       toast.error(
-//         error instanceof Error ? error.message : "Failed to view details user",
-//       );
-//     },
-//   });
-//   return viewDetailUsers;
-// }

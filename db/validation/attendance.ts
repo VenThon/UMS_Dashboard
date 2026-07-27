@@ -1,4 +1,3 @@
-// src/db/validation/attendance.ts
 import {
   ATTENDANCE_STATUS_VALUES,
   type AttendanceStatus,

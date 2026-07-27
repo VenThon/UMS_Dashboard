@@ -1,4 +1,3 @@
-// src/server/services/general-request/delete-general-request.ts
 import { db } from "@/db";
 import { GENERAL_REQUEST_STATUS } from "@/db/constants/general-request";
 import { generalRequestTable } from "@/db/schema";

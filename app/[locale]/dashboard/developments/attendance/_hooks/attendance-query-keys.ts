@@ -1,4 +1,3 @@
-// src/features/attendance/hooks/attendance-query-keys.ts
 import type { AttendanceListQuery } from "@/db/validation/attendance";
 
 export const attendanceKeys = {

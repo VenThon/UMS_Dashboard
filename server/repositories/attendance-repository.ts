@@ -1,4 +1,3 @@
-// src/server/repositories/attendance-repository.ts
 import { db } from "@/db";
 import type {
   AttendanceAction,

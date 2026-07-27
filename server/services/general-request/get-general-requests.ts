@@ -1,4 +1,3 @@
-// src/server/services/general-request/get-general-requests.ts
 import { db } from "@/db";
 import {
   GENERAL_REQUEST_STATUS,

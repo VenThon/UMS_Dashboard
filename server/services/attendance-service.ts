@@ -1,4 +1,3 @@
-// src/server/services/attendance-service.ts
 import {
   ATTENDANCE_ACTIONS,
   ATTENDANCE_STATUSES,

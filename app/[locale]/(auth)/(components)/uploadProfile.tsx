@@ -23,19 +23,16 @@ export default function ImageUpload() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (file: File | null) => {
-    // Reset previous state
     setError(null);
     setUploadResult(null);
 
     if (!file) return;
 
-    // Check if file is an image
     if (!file.type.startsWith("image/")) {
       setError("Please select an image file (JPEG, PNG, GIF, etc.)");
       return;
     }
 
-    // Check file size (5MB max)
     if (file.size > 5 * 1024 * 1024) {
       setError("File size must be less than 5MB");
       return;
@@ -43,7 +40,6 @@ export default function ImageUpload() {
 
     setSelectedFile(file);
 
-    // Create preview
     const reader = new FileReader();
     reader.onload = (e) => {
       setPreviewUrl(e.target?.result as string);
@@ -83,21 +79,13 @@ export default function ImageUpload() {
     setIsUploading(true);
     setError(null);
 
-    // Simulate upload process (in a real app, you would send to a server)
     try {
-      // This is a mock upload - in a real application, you would use:
-      // const formData = new FormData();
-      // formData.append('image', selectedFile);
-      // const response = await fetch('/api/upload', { method: 'POST', body: formData });
-
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate network delay
-
-      // Mock response
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       const mockResponse: UploadResult = {
         message: "File uploaded successfully!",
         filename: selectedFile.name,
         size: selectedFile.size,
-        // In a real app, you would get a URL from the server
+
         url: previewUrl,
       };
 
