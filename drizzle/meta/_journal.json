@@ -64,6 +64,13 @@
       "when": 1784823045560,
       "tag": "0008_new_killraven",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1785127529314,
+      "tag": "0009_unusual_maddog",
+      "breakpoints": true
     }
   ]
 }
