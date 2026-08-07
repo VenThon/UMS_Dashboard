@@ -6,3 +6,4 @@ export * from "./request-leave-approval.schema";
 export * from "./general-request";
 export * from "./general-request-approval";
 export * from "./attendance";
+export * from "./password-reset";
