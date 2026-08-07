@@ -36,13 +36,10 @@ export async function getRequestLeaveListService({
   if (isFirstApprover) {
     conditions.push(
       or(
-        // Requests currently waiting for the first approver
         eq(
           requestLeaveTable.status,
           REQUEST_LEAVE_STATUS.PENDING_FIRST_APPROVAL,
         ),
-
-        // Requests already reviewed by this first approver
         and(
           eq(requestLeaveApprovalTable.reviewerId, currentUserId),
           eq(requestLeaveApprovalTable.approvalLevel, 1),
@@ -52,13 +49,10 @@ export async function getRequestLeaveListService({
   } else if (isSecondApprover) {
     conditions.push(
       or(
-        // Requests currently waiting for the second approver
         eq(
           requestLeaveTable.status,
           REQUEST_LEAVE_STATUS.PENDING_SECOND_APPROVAL,
         ),
-
-        // Requests already reviewed by this second approver
         and(
           eq(requestLeaveApprovalTable.reviewerId, currentUserId),
           eq(requestLeaveApprovalTable.approvalLevel, 2),
@@ -66,7 +60,6 @@ export async function getRequestLeaveListService({
       )!,
     );
   } else {
-    // Normal users see only their own requests
     conditions.push(eq(requestLeaveTable.userId, currentUserId));
   }
 

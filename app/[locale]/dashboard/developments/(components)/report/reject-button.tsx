@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useReviewDailyReport } from "@/app/[locale]/dashboard/developments/report/_hooks/use-daily-report";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,7 +15,6 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { REVIEW_REPORT_STATUS } from "@/db/constants/daily-report-status";
-import { useReviewDailyReport } from "@/hooks/report/use-daily-report";
 
 import { XCircle } from "lucide-react";
 

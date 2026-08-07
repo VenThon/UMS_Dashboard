@@ -12,6 +12,7 @@ import {
   deleteRequestLeave,
   getRequestLeaveById,
   getRequestLeaveReviewHistory,
+  getRequestLeaveSummaryApi,
   getRequestLeaves,
   rejectRequestLeave,
   resubmitRequestLeave,
@@ -49,26 +50,6 @@ export function useRequestLeaveReviews(id: string) {
     enabled: Boolean(id),
   });
 }
-
-// export function useCreateRequestLeave() {
-//   const queryClient = useQueryClient();
-
-//   return useMutation({
-//     mutationFn: (values: CreateRequestLeaveValue) => createRequestLeave(values),
-
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries({
-//         queryKey: requestLeaveKeys.lists(),
-//       });
-
-//       toast.success(response.message);
-//     },
-
-//     onError: (error) => {
-//       toast.error(error.message);
-//     },
-//   });
-// }
 
 export function useCreateRequestLeave() {
   const queryClient = useQueryClient();
@@ -253,5 +234,13 @@ export function useResubmitRequestLeave() {
     onError: (error) => {
       toast.error(error.message);
     },
+  });
+}
+
+export function useRequestLeaveSummary() {
+  return useQuery({
+    queryKey: requestLeaveKeys.summary(),
+    queryFn: getRequestLeaveSummaryApi,
+    staleTime: 30_000,
   });
 }

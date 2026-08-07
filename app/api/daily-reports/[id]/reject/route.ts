@@ -48,8 +48,6 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 
     return successResponse(report);
   } catch (error) {
-    console.error("PATCH /api/daily-reports/[id]/reject error:", error);
-
     if (error instanceof ZodError) {
       return errorResponse(
         error.issues[0]?.message ?? "Validation error.",

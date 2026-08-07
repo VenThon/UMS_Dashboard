@@ -69,7 +69,6 @@ export function UsersListing() {
               <FilterByTeam />
               <FilterUsers />
               <ImportUsersDialog />
-              {/* <ImportUsersExcel /> */}
               <ButtonCreateUser />
             </div>
           </CardContent>
@@ -98,7 +97,6 @@ export function UsersListing() {
             <FilterByTeam />
             <FilterUsers />
             <ImportUsersDialog />
-            {/* <ImportUsersExcel /> */}
             <ButtonCreateUser />
           </div>
         </CardContent>

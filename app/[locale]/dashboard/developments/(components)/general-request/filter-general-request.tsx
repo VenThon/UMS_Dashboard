@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  GENERAL_REQUEST_STATUSES,
+  GENERAL_REQUEST_STATUS,
   GENERAL_REQUEST_STATUS_LABELS,
   GeneralRequestStatus,
 } from "@/db/constants/general-request";
@@ -57,7 +57,7 @@ export function FilterGeneralRequesDevelopmentTeam() {
             <span>All</span>
           </DropdownMenuItem>
 
-          {Object.values(GENERAL_REQUEST_STATUSES).map((status) => {
+          {Object.values(GENERAL_REQUEST_STATUS).map((status) => {
             const labels = GENERAL_REQUEST_STATUS_LABELS[status];
             return (
               <DropdownMenuItem

@@ -19,11 +19,11 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import {
   GENERAL_REQUEST_TYPES,
-  GENERAL_REQUEST_TYPE_LABELS,
+  GENERAL_REQUEST_TYPE_LABEL,
   REQUEST_PRIORITIES,
-  REQUEST_PRIORITY_LABELS,
+  REQUEST_PRIORITY_LABEL,
 } from "@/db/constants/general-request";
-import { CreateGeneralRequestFormValues } from "@/db/validation/general-request";
+import type { GeneralRequestFormValues } from "@/db/validation/general-request";
 
 import {
   Banknote,
@@ -32,6 +32,7 @@ import {
   Gift,
   ListChecks,
   MessageSquareText,
+  Paperclip,
   Tag,
 } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -40,7 +41,9 @@ import { getTodayDate } from "../lib";
 
 export function GeneralRequestFields() {
   const today = getTodayDate();
-  const form = useFormContext<CreateGeneralRequestFormValues>();
+
+  const form = useFormContext<GeneralRequestFormValues>();
+
   const estimatedCost = useWatch({
     control: form.control,
     name: "estimatedCost",
@@ -68,7 +71,10 @@ export function GeneralRequestFields() {
                   <FormLabel>Request type</FormLabel>
                 </div>
 
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select
+                  value={field.value ?? ""}
+                  onValueChange={field.onChange}
+                >
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select request type" />
@@ -78,7 +84,7 @@ export function GeneralRequestFields() {
                   <SelectContent>
                     {Object.values(GENERAL_REQUEST_TYPES).map((requestType) => (
                       <SelectItem key={requestType} value={requestType}>
-                        {GENERAL_REQUEST_TYPE_LABELS[requestType]}
+                        {GENERAL_REQUEST_TYPE_LABEL[requestType]}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -99,7 +105,10 @@ export function GeneralRequestFields() {
                   <FormLabel>Priority</FormLabel>
                 </div>
 
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select
+                  value={field.value ?? ""}
+                  onValueChange={field.onChange}
+                >
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select priority" />
@@ -109,7 +118,7 @@ export function GeneralRequestFields() {
                   <SelectContent>
                     {Object.values(REQUEST_PRIORITIES).map((priority) => (
                       <SelectItem key={priority} value={priority}>
-                        {REQUEST_PRIORITY_LABELS[priority]}
+                        {REQUEST_PRIORITY_LABEL[priority]}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -218,10 +227,7 @@ export function GeneralRequestFields() {
             <FormItem>
               <div className="flex items-center gap-1.5">
                 <Gift className="size-4" />
-                <FormLabel>
-                  Expected benefit
-                  <span className="text-muted-foreground ml-1">(optional)</span>
-                </FormLabel>
+                <FormLabel>Expected benefit</FormLabel>
               </div>
 
               <FormControl>
@@ -255,6 +261,7 @@ export function GeneralRequestFields() {
               <FormItem>
                 <div className="flex items-center gap-1.5">
                   <CalendarDays className="size-4" />
+
                   <FormLabel>
                     Required date
                     <span className="text-muted-foreground ml-1">
@@ -264,8 +271,17 @@ export function GeneralRequestFields() {
                 </div>
 
                 <FormControl>
-                  <Input type="date" min={today} {...field} />
+                  <Input
+                    type="date"
+                    min={today}
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                    ref={field.ref}
+                  />
                 </FormControl>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -279,6 +295,7 @@ export function GeneralRequestFields() {
                 <FormItem>
                   <div className="flex items-center gap-1.5">
                     <Banknote className="size-4" />
+
                     <FormLabel>
                       Estimated cost
                       <span className="text-muted-foreground ml-1">
@@ -297,9 +314,17 @@ export function GeneralRequestFields() {
                       onChange={(event) => {
                         const value = event.target.value;
 
-                        field.onChange(
-                          value === "" ? undefined : Number(value),
-                        );
+                        if (value === "") {
+                          field.onChange(undefined);
+
+                          form.setValue("currency", undefined, {
+                            shouldValidate: true,
+                          });
+
+                          return;
+                        }
+
+                        field.onChange(Number(value));
                       }}
                     />
                   </FormControl>
@@ -317,7 +342,7 @@ export function GeneralRequestFields() {
                   <FormLabel>Currency</FormLabel>
 
                   <Select
-                    value={field.value}
+                    value={field.value ?? ""}
                     onValueChange={field.onChange}
                     disabled={estimatedCost === undefined}
                   >
@@ -329,6 +354,7 @@ export function GeneralRequestFields() {
 
                     <SelectContent>
                       <SelectItem value="USD">USD</SelectItem>
+
                       <SelectItem value="KHR">KHR</SelectItem>
                     </SelectContent>
                   </Select>
@@ -339,6 +365,47 @@ export function GeneralRequestFields() {
             />
           </div>
         </div>
+      </section>
+
+      <section className="space-y-5">
+        <div>
+          <h2 className="text-base font-semibold">Attachments</h2>
+
+          <p className="text-muted-foreground text-sm">
+            Add supporting documents when applicable.
+          </p>
+        </div>
+
+        <FormField
+          control={form.control}
+          name="attachments"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center gap-1.5">
+                <Paperclip className="size-4" />
+
+                <FormLabel>
+                  Files
+                  <span className="text-muted-foreground ml-1">(optional)</span>
+                </FormLabel>
+              </div>
+
+              <FormControl>
+                <Input
+                  type="file"
+                  multiple
+                  onChange={(event) => {
+                    field.onChange(Array.from(event.target.files ?? []));
+                  }}
+                />
+              </FormControl>
+
+              <FormDescription>Upload up to five files.</FormDescription>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </section>
     </>
   );
