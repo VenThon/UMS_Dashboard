@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useDeleteDailyReport } from "@/app/[locale]/dashboard/developments/report/_hooks/use-daily-report";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useDeleteDailyReport } from "@/hooks/report/use-daily-report";
 
 import { Trash2, TriangleAlert } from "lucide-react";
 

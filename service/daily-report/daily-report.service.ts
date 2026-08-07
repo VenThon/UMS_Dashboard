@@ -2,6 +2,7 @@ import {
   ApiResponse,
   DailyReportItem,
 } from "@/app/[locale]/dashboard/developments/(components)/report/daily-report.type";
+import { DailyReportSummary } from "@/app/[locale]/dashboard/developments/report/_hooks/types";
 import { ReviewDailyReportFormValues } from "@/db/schema/daily-report-review";
 import { CreateDailyReportFormValues } from "@/db/validation/dialyreport";
 
@@ -104,4 +105,22 @@ export function rejectDailyReportService({
       body: JSON.stringify({ reason }),
     },
   );
+}
+
+export async function getDailyReportSummaryApi() {
+  const response = await fetch("/api/daily-reports/summary", {
+    method: "GET",
+    credentials: "include",
+    cache: "no-store",
+  });
+
+  const result = (await response.json()) as ApiResponse<DailyReportSummary>;
+
+  if (!response.ok) {
+    throw new Error(
+      result.message ?? "Failed to load the daily report summary.",
+    );
+  }
+
+  return result.data;
 }

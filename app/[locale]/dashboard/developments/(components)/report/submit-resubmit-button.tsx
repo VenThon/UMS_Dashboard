@@ -1,5 +1,5 @@
+import { useSubmitDailyReport } from "@/app/[locale]/dashboard/developments/report/_hooks/use-daily-report";
 import { Button } from "@/components/ui/button";
-import { useSubmitDailyReport } from "@/hooks/report/use-daily-report";
 
 import { RefreshCw, Send } from "lucide-react";
 

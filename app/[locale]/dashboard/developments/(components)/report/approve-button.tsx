@@ -1,8 +1,8 @@
 "use client";
 
+import { useReviewDailyReport } from "@/app/[locale]/dashboard/developments/report/_hooks/use-daily-report";
 import { Button } from "@/components/ui/button";
 import { REVIEW_REPORT_STATUS } from "@/db/constants/daily-report-status";
-import { useReviewDailyReport } from "@/hooks/report/use-daily-report";
 
 import { CheckCircle2 } from "lucide-react";
 

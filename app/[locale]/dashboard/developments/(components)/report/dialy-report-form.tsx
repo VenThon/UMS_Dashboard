@@ -1,5 +1,6 @@
 "use client";
 
+import { useCreateDailyReport } from "@/app/[locale]/dashboard/developments/report/_hooks/use-daily-report";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,6 @@ import {
   CreateDailyReportFormValues,
   createDailyReportFormSchema,
 } from "@/db/validation/dialyreport";
-import { useCreateDailyReport } from "@/hooks/report/use-daily-report";
 import { useRouter } from "@/i18n/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";

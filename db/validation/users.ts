@@ -15,8 +15,6 @@ export const createUserSchema = z.object({
     .max(20),
 });
 
-// export const createUsersSchema= createInsertSchema(usersTable)
-
 export const updateUserSchema = z.object({
   username: z.string().min(2).optional(),
   email: z.string().email().optional(),

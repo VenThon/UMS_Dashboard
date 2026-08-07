@@ -75,23 +75,6 @@ export function getColumnsDataTableDevelopmentTeam({
       cell: ({ row }) => {
         const item = row.original;
 
-        // const isDraft = item.status === DAILY_REPORT_STATUS.DRAFT;
-        // const isPending = item.status === DAILY_REPORT_STATUS.PENDING;
-        // const isRejected = item.status === DAILY_REPORT_STATUS.REJECTED;
-        // const isApproved = item.status === DAILY_REPORT_STATUS.APPROVED;
-        // const canView = isPending || isApproved;
-        // const canEdit = isDraft || isPending || isRejected;
-        // const canSubmit = isDraft;
-        // const canResubmit = isRejected;
-        // const canDelete = item.status === DAILY_REPORT_STATUS.DRAFT;
-        // const canReview = isPending && REVIEW_ROLES.includes(currentUserRole);
-
-        // console.log({
-        //   currentUserRole,
-        //   status: item.status,
-        //   isPending,
-        //   canReview,
-        // });
         const isOwner = item.userId === currentUserId;
 
         const isDraft = item.status === DAILY_REPORT_STATUS.DRAFT;

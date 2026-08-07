@@ -91,7 +91,6 @@ export type RequestLeaveFormValues = z.infer<
   typeof createRequestLeaveFormSchema
 >;
 
-// export type CreateRequestLeaveValue = z.infer<typeof createRequestLeaveSchema>;
 export type CreateRequestLeaveInput = z.input<typeof createRequestLeaveSchema>;
 
 export type CreateRequestLeaveValue = z.output<typeof createRequestLeaveSchema>;

@@ -14,6 +14,7 @@ import {
 
 import {
   AudioWaveform,
+  CalendarCheck,
   ChartNoAxesCombined,
   LucideIcon,
   NotebookPen,
@@ -113,6 +114,11 @@ export default function NavBarDashboardDevelopment() {
                 "/dashboard/developments/report/[id]",
               ]}
               title="Daily Rport"
+            />
+            <SideBarMenuBtn
+              icon={CalendarCheck}
+              href={["/dashboard/developments/attendance"]}
+              title="Attendance"
             />
           </SidebarMenuItem>
         </SidebarMenu>

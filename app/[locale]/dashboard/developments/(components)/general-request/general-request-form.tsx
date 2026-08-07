@@ -13,20 +13,22 @@ import {
 import { Form } from "@/components/ui/form";
 import { REQUEST_PRIORITIES } from "@/db/constants/general-request";
 import {
-  CreateGeneralRequestFormValues,
+  CreateGeneralRequestInput,
   createGeneralRequestSchema,
 } from "@/db/validation/general-request";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, ClipboardPlus, FileText, Info, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
+import { useCreateGeneralRequest } from "../../general-request/_hooks/use-general-request";
 import { GeneralRequestFields } from "./general-request-fields";
 
 export function CreateGeneralRequestForm() {
   const router = useRouter();
 
-  const form = useForm<CreateGeneralRequestFormValues>({
+  const form = useForm<CreateGeneralRequestInput>({
     resolver: zodResolver(createGeneralRequestSchema),
     defaultValues: {
       requestType: undefined,
@@ -43,17 +45,23 @@ export function CreateGeneralRequestForm() {
 
   const isSubmitting = form.formState.isSubmitting;
 
-  async function onSubmit(values: CreateGeneralRequestFormValues) {
-    const payload = {
-      ...values,
-      requiredDate: values.requiredDate || undefined,
-      expectedBenefit: values.expectedBenefit || undefined,
-      estimatedCost: values.estimatedCost ?? undefined,
-      currency:
-        values.estimatedCost !== undefined ? values.currency : undefined,
-    };
+  const createRequest = useCreateGeneralRequest();
 
-    console.log("General request payload:", payload);
+  async function onSubmit(values: CreateGeneralRequestInput) {
+    try {
+      await createRequest.mutateAsync(values);
+
+      toast.success("General request created successfully.");
+
+      form.reset();
+      router.push("/dashboard/developments/general-request");
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to create general request.",
+      );
+    }
   }
 
   return (
@@ -150,11 +158,13 @@ export function CreateGeneralRequestForm() {
                   <Button
                     type="submit"
                     className="w-full sm:w-auto"
-                    disabled={isSubmitting}
+                    disabled={createRequest.isPending}
                   >
                     <Send className="size-4" />
 
-                    {isSubmitting ? "Submitting..." : "Submit Request"}
+                    {createRequest.isPending
+                      ? "Submitting..."
+                      : "Submit Request"}
                   </Button>
                 </div>
               </div>
