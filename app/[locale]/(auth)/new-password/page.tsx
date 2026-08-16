@@ -3,8 +3,7 @@ import Image from "next/image";
 import LocaleSwitcher from "@/components/lang/local-switcher";
 import SiteFooter from "@/components/site-footer";
 import { ModeToggle } from "@/components/theme/theme-toggle";
-
-import { NewPasswordOTP } from "../(components)/new-password-otp";
+import ResetPasswordPage from "../(components)/new-password-otp";
 
 export default function CreateNewPassWordPage() {
   return (
@@ -37,7 +36,7 @@ export default function CreateNewPassWordPage() {
           </div>
           <main className="flex flex-1 items-center justify-center">
             <div className="w-full max-w-sm sm:max-w-md">
-              <NewPasswordOTP />
+              <ResetPasswordPage />
             </div>
           </main>
           <footer className="flex justify-center pb-2">

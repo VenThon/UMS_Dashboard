@@ -1,93 +1,82 @@
 "use client";
 
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@/i18n/navigation";
+import { Label } from "@/components/ui/label";
 
-import { ArrowLeft, Mail } from "lucide-react";
-import { useForm } from "react-hook-form";
+export default function ForgotPasswordPage() {
+  const router = useRouter();
 
-export function ForgotPasswordForm() {
-  const form = useForm();
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/forgot-password/request", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message);
+        return;
+      }
+
+      router.push(`/verify-email?requestId=${data.requestId}`);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <section>
-      <Card>
-        <Form {...form}>
-          <form>
-            <CardHeader className="text-center">
-              <CardTitle>Password Recovery</CardTitle>
-              <CardDescription>
-                No worries. Enter your email address and we will help you get
-                back into your account.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="py-6">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <div className="flex gap-1.5">
-                      <Mail size={17} />
-                      <FormLabel className="mt-0.5">Email address</FormLabel>
-                    </div>
-                    <FormControl>
-                      <Input
-                        placeholder="example@gmail.com"
-                        type="text"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-            <CardFooter className="grid grid-cols-1 space-y-6">
-              <Button>
-                <Link href="/verify-email">Reset password</Link>
-              </Button>
-              <div>
-                <Link
-                  href={`/login`}
-                  className="flex items-center justify-center gap-2 text-sm underline-offset-4 hover:underline"
-                >
-                  <ArrowLeft size={17} />
-                  <span>Back to log in</span>
-                </Link>
-              </div>
-            </CardFooter>
-          </form>
-        </Form>
-      </Card>
+    <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-6">
       <div>
-        <p className="mt-6 text-center text-sm">
-          If you are having trouble, please contact our {""}
-          <a
-            href="mailto:example@gmail.com"
-            className="font-medium text-blue-600 hover:underline"
-            target="_blank"
-          >
-            support team.
-          </a>
+        <h1 className="text-2xl font-bold">Forgot Password</h1>
+
+        <p className="text-muted-foreground mt-2 text-sm">
+          Enter your registered email address and we will send you a
+          verification code.
         </p>
       </div>
-    </section>
+
+      <div className="space-y-2">
+        <Label htmlFor="email">Email address</Label>
+
+        <Input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="example@email.com"
+          required
+        />
+      </div>
+
+      {error && <p className="text-destructive text-sm">{error}</p>}
+
+      <Button type="submit" disabled={loading} className="w-full">
+        {loading ? "Sending..." : "Reset Password"}
+      </Button>
+    </form>
   );
 }
