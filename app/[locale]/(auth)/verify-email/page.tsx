@@ -3,8 +3,7 @@ import Image from "next/image";
 import LocaleSwitcher from "@/components/lang/local-switcher";
 import SiteFooter from "@/components/site-footer";
 import { ModeToggle } from "@/components/theme/theme-toggle";
-
-import { VerifyEmailForm } from "../(components)/verify-email-opt-form";
+import VerifyEmailForm from "../(components)/verify-email-opt-form";
 
 export default function VerifyEmailPage() {
   return (

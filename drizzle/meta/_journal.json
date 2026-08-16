@@ -71,6 +71,13 @@
       "when": 1785127529314,
       "tag": "0009_unusual_maddog",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1786786095554,
+      "tag": "0010_lonely_nitro",
+      "breakpoints": true
     }
   ]
 }

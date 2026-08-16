@@ -3,8 +3,7 @@ import Image from "next/image";
 import LocaleSwitcher from "@/components/lang/local-switcher";
 import SiteFooter from "@/components/site-footer";
 import { ModeToggle } from "@/components/theme/theme-toggle";
-
-import { ForgotPasswordForm } from "../(components)/forgot-password-form";
+import ForgotPasswordForm from "../(components)/forgot-password-form";
 
 export default function ForgotPasswordPage() {
   return (
